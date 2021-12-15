@@ -62,10 +62,6 @@ const Post = (sequelize, Sequelize) =>
                 allowNull: false,
                 defaultValue: 0
             },
-            attachment: {
-                type: Sequelize.STRING,
-                allowNull: true,
-            },
             sub: {
                 type: Sequelize.INTEGER,
                 allowNull: true,

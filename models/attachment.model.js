@@ -1,6 +1,6 @@
-const CategoryPost = (sequelize, Sequelize) =>
+const Attachment = (sequelize, Sequelize) =>
     sequelize.define(
-        'category_post',
+        'attachment',
         {
             id: {
                 type: Sequelize.INTEGER,
@@ -13,11 +13,16 @@ const CategoryPost = (sequelize, Sequelize) =>
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
-            category_id: {
-                type: Sequelize.INTEGER,
+            name: {
+                type: Sequelize.STRING,
+                allowNull: false,
+            },
+
+            file: {
+                type: Sequelize.STRING,
                 allowNull: false,
             }
         },
     )
 
-module.exports = CategoryPost
+module.exports = Attachment

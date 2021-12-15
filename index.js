@@ -8,6 +8,7 @@ const compression = require("compression");
 const swagger = require("swagger-ui-express");
 const docs = require("./api-docs.json");
 const seederUser = require('./seeders/user.seeder');
+const seederCategory = require('./seeders/category.seeder');
 
 const app = express();
 
@@ -25,19 +26,21 @@ app.use(express.urlencoded({ extended: true }));
 const GALLERY_DIR = '/public/images'
 app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
 
-db.sequelize
-  .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
-  .then(() => {
-    if (process.env.NODE_ENV !== "production") {
-      (async () => {
-        try {
-          await seederUser.create();
-        } catch (err) {
-          console.log(err);
-        }
-      })();
-    }
-  });
+// db.sequelize
+//   .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
+//   .then(() => {
+//     if (process.env.NODE_ENV !== "production") {
+//       (async () => {
+//         try {
+//           await seederUser.create();
+//           await seederCategory.create();
+
+//         } catch (err) {
+//           console.log(err);
+//         }
+//       })();
+//     }
+//   });
 
 if (process.env.NODE_ENV !== "production") {
   app.use("/api-docs", swagger.serve, swagger.setup(docs));
@@ -48,6 +51,7 @@ app.get("/", (_, res) => {
 });
 
 routes.auth(app);
+routes.post(app);
 
 const port = process.env.PORT || 3009;
 const host = process.env.HOST || "localhost";
