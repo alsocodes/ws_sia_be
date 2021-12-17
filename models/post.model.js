@@ -17,6 +17,9 @@ const Post = (sequelize, Sequelize) =>
                 type: Sequelize.TEXT,
                 allowNull: true,
             },
+            excerpt: {
+                type: Sequelize.STRING(1000),
+            },
             image: {
                 type: Sequelize.STRING,
                 allowNull: true,
