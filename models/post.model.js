@@ -29,7 +29,7 @@ const Post = (sequelize, Sequelize) =>
                 allowNull: false,
             },
             type: {
-                type: Sequelize.ENUM('post', 'page'),
+                type: Sequelize.ENUM('article', 'page', 'agenda', 'news', 'preface'),
                 allowNull: false,
             },
             status: {

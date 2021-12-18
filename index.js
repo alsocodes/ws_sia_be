@@ -26,21 +26,21 @@ app.use(express.urlencoded({ extended: true }));
 const GALLERY_DIR = '/public/images'
 app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
 
-db.sequelize
-  .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
-  .then(() => {
-    if (process.env.NODE_ENV !== "production") {
-      (async () => {
-        try {
-          await seederUser.create();
-          await seederCategory.create();
+// db.sequelize
+//   .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
+//   .then(() => {
+//     if (process.env.NODE_ENV !== "production") {
+//       (async () => {
+//         try {
+//           await seederUser.create();
+//           await seederCategory.create();
 
-        } catch (err) {
-          console.log(err);
-        }
-      })();
-    }
-  });
+//         } catch (err) {
+//           console.log(err);
+//         }
+//       })();
+//     }
+//   });
 
 if (process.env.NODE_ENV !== "production") {
   app.use("/api-docs", swagger.serve, swagger.setup(docs));
