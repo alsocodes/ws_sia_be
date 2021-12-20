@@ -52,6 +52,6 @@ db.category = require('./category.model')(sequelize, Sequelize);
 db.category_post = require('./category_post.model')(sequelize, Sequelize);
 
 db.user.belongsTo(db.role, { foreignKey: 'role_id' })
-
+db.post.belongsTo(db.user, { foreignKey: 'author_id', as: 'author' })
 
 module.exports = db;

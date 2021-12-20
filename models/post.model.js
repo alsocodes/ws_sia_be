@@ -24,7 +24,7 @@ const Post = (sequelize, Sequelize) =>
                 type: Sequelize.STRING,
                 allowNull: true,
             },
-            author: {
+            author_id: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
@@ -46,7 +46,7 @@ const Post = (sequelize, Sequelize) =>
             comment_status: {
                 type: Sequelize.ENUM('open', 'close'),
                 allowNull: false,
-                defaultValue: 'open',
+                defaultValue: 'close',
             },
             slug: {
                 type: Sequelize.STRING,
