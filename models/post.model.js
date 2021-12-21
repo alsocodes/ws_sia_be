@@ -25,7 +25,7 @@ const Post = (sequelize, Sequelize) =>
                 allowNull: true,
             },
             author_id: {
-                type: Sequelize.STRING,
+                type: Sequelize.INTEGER,
                 allowNull: false,
             },
             type: {

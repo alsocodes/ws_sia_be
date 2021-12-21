@@ -50,7 +50,7 @@ exports.create = async (req, res) => {
             comment_status: comment_status,
             tags: tags,
             sub: sub,
-            author: user.id,
+            author_id: user.id,
             created_by: user.id
         }, { transaction: t })
 
