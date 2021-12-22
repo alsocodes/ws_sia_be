@@ -14,6 +14,8 @@ exports.getAll = async (req, res) => {
         const search = !req.query.search ? '' : req.query.search
         const offset = (page - 1) * page_size;
         const limit = page_size;
+        const orderby = !req.query.orderby ? 'id' : req.query.orderby
+        const order = !req.query.order ? 'desc' : req.query.order
 
         const posts = await db.post.findAndCountAll({
             attributes: [
@@ -21,7 +23,7 @@ exports.getAll = async (req, res) => {
                 'image',
                 'type', 'status', 'visibility', 'comment_status',
                 'slug', 'tags',
-                [sequelize.col('posts.created_at'), 'tanggal']
+                'created_at'
             ],
             include: [
                 {
@@ -43,6 +45,9 @@ exports.getAll = async (req, res) => {
             distinct: true,
             offset: offset,
             limit: limit,
+            order: [
+                [orderby, order]
+            ]
         })
 
         const result = {
