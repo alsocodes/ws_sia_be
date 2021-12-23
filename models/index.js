@@ -50,8 +50,18 @@ db.role = require('./role.model')(sequelize, Sequelize);
 db.post = require('./post.model')(sequelize, Sequelize);
 db.category = require('./category.model')(sequelize, Sequelize);
 db.category_post = require('./category_post.model')(sequelize, Sequelize);
+db.slide = require('./slide.model')(sequelize, Sequelize);
+db.album = require('./album.model')(sequelize, Sequelize);
+db.gallery = require('./gallery.model')(sequelize, Sequelize);
+db.album_gallery = require('./album-gallery.model')(sequelize, Sequelize);
 
 db.user.belongsTo(db.role, { foreignKey: 'role_id' })
 db.post.belongsTo(db.user, { foreignKey: 'author_id', as: 'author' })
+
+db.album.hasMany(db.album_gallery, { foreignKey: 'album_id' })
+db.album_gallery.belongsTo(db.album, { foreignKey: 'album_id' })
+db.gallery.hasMany(db.album_gallery, { foreignKey: 'gallery_id' })
+db.album_gallery.belongsTo(db.gallery, { foreignKey: 'gallery_id' })
+
 
 module.exports = db;
