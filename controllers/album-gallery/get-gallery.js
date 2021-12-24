@@ -15,7 +15,7 @@ exports.getGallery = async (req, res) => {
         const order = !req.query.order ? 'desc' : req.query.order
 
         const galleries = await db.gallery.findAndCountAll({
-            attributes: ['id', 'title', 'description', 'image', 'created_at'],
+            attributes: ['id', 'title', 'description', 'image', 'type', 'created_at'],
             distinct: true,
             offset: offset,
             limit: limit,
