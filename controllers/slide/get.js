@@ -7,7 +7,10 @@ const { Op, Sequelize } = require("sequelize");
 exports.get = async (req, res) => {
     try {
         const slides = await db.slide.findAll({
-            attributes: ['id', 'title', 'description', 'link', 'image', 'order']
+            attributes: ['id', 'title', 'description', 'link', 'image', 'order'],
+            order: [
+                ['order', 'asc']
+            ]
         })
         return response.success("Get all slides success", res, slides, 200);
     } catch (err) {

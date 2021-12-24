@@ -7,7 +7,7 @@ const { Op } = require("sequelize");
 exports.updateGallery = async (req, res) => {
     try {
 
-        const { title, description, image } = req.body;
+        const { title, description, image, type_gallery } = req.body;
         const { id } = req.params
         const gallery = await db.gallery.findOne({
             where: { id: id }
@@ -15,6 +15,7 @@ exports.updateGallery = async (req, res) => {
         gallery.title = title;
         gallery.description = description;
         gallery.image = image;
+        gallery.type = type_gallery
         await gallery.save()
 
         return response.success("update gallery success", res, {}, 200);

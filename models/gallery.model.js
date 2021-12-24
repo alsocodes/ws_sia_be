@@ -22,6 +22,10 @@ const Gallery = (sequelize, Sequelize) =>
             image: {
                 type: Sequelize.STRING,
                 allowNull: false
+            },
+            type: {
+                type: Sequelize.ENUM('image', 'video'),
+                defaultValue: 'image'
             }
         },
     )

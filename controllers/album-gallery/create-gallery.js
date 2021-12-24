@@ -7,11 +7,12 @@ const { Op } = require("sequelize");
 exports.createGallery = async (req, res) => {
     try {
 
-        const { title, description, image } = req.body;
+        const { title, description, image, type_gallery } = req.body;
         await db.gallery.create({
             title: title,
             description: description,
-            image: image
+            image: image,
+            type: type_gallery
         })
 
         return response.success("Create gallery success", res, {}, 201);
