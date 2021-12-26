@@ -19,6 +19,7 @@ exports.getAlbum = async (req, res) => {
             include: {
                 model: db.album_gallery,
                 attributes: ['id'],
+                as: 'galleries',
                 include: {
                     model: db.gallery,
                     attributes: ['id', 'title', 'description', 'image']

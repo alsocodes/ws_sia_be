@@ -54,6 +54,9 @@ routes.auth(app);
 routes.post(app);
 routes.slide(app);
 routes.albumGallery(app);
+routes.general(app);
+routes.menu(app);
+routes.public(app);
 
 const port = process.env.PORT || 3009;
 const host = process.env.HOST || "localhost";
