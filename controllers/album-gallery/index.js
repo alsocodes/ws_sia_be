@@ -8,9 +8,9 @@ const { deleteGallery } = require("./delete-gallery");
 
 const { getAlbum } = require("./get-Album");
 const { getOneAlbum } = require("./get-one-album");
-const { createAlbum } = require("./create-Album");
-const { updateAlbum } = require("./update-Album");
-const { deleteAlbum } = require("./delete-Album");
+const { createAlbum } = require("./create-album");
+const { updateAlbum } = require("./update-album");
+const { deleteAlbum } = require("./delete-album");
 
 const { setAlbumGallery } = require("./set-album-gallery");
 const { uploadImage } = require("./upload-image");
