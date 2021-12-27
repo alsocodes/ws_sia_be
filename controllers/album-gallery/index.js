@@ -6,7 +6,7 @@ const { createGallery } = require("./create-gallery");
 const { updateGallery } = require("./update-gallery");
 const { deleteGallery } = require("./delete-gallery");
 
-const { getAlbum } = require("./get-Album");
+const { getAlbum } = require("./get-album");
 const { getOneAlbum } = require("./get-one-album");
 const { createAlbum } = require("./create-album");
 const { updateAlbum } = require("./update-album");
