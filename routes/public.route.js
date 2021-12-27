@@ -1,4 +1,4 @@
-const public = require("../controllers/public/index.js");
+const public = require("../controllers/publics");
 
 module.exports = (app) => {
     app.get("/public/general", public.getGeneral);
