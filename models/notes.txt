@@ -1,0 +1,27 @@
+activity_students
+id, id_activity, student_id
+
+
+ketika naik kelas??
+ubah value classroom_id di table student [X]
+atau buat model student_classroom active/nonactive
+
+model : students
+id, nisn, name, date_entry, date_out, status(enum['graduate', 'active', 'dropout']) dll, dll.
+
+model : classrooms
+id, name, room
+
+model : eduyears
+id, name, semester
+
+model : classroom_activities
+id, classroom_id, eduyear_id
+
+model : classroom_activity_lessons
+id, classroom_activity_id, lesson_id, teacher_id, 
+
+model : classroom_activity_students
+id, no, classroom_id, student_id, eduyear_id, semester(ENUM['ganjil','genap']), status(enum['open','close'])
+
+
