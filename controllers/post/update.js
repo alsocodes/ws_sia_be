@@ -19,7 +19,8 @@ exports.update = async (req, res) => {
             tags,
             attachments,
             sub,
-            categories
+            categories,
+            meta
         } = req.body
 
         const { id } = req.params
@@ -55,6 +56,40 @@ exports.update = async (req, res) => {
         post.sub = sub;
 
         await post.save({ transaction: t })
+
+        if (meta) {
+            await Promise.all(meta.map(async item => {
+                if (item.name.includes('_one')) {
+                    await db.post_meta.destroy({
+                        where: {
+                            [Op.and]: [
+                                { name: item.name },
+                                { post_id: { [Op.ne]: post.id } }
+                            ]
+                        },
+                        transaction: t
+                    })
+                }
+
+                let cek = await db.post_meta.findOne({
+                    where: {
+                        [Op.and]: [{ post_id: post.id }, { name: item.name }]
+                    },
+                    transaction: t
+                })
+                if (cek) {
+                    cek.value = item.value
+                    await cek.save({ transaction: t })
+                } else {
+                    await db.post_meta.create({
+                        post_id: post.id,
+                        name: item.name,
+                        value: item.value
+                    }, { transaction: t })
+                }
+            }))
+        }
+
 
         await t.commit()
 

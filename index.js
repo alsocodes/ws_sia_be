@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 const GALLERY_DIR = '/public/images'
 app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
-// db.sequelize.sync({ force: false })
+db.sequelize.sync({ force: false })
 // db.sequelize
 //   .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
 //   .then(() => {

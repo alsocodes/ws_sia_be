@@ -17,8 +17,8 @@ exports.create = async (req, res) => {
         console.log(req.body)
         await db.menu.create({
             name: name,
-            post_id: post_id,
-            link: link,
+            post_id: post_id === '' ? null : post_id,
+            link: link === '/' ? '' : link,
             type: type
         })
 

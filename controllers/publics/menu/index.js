@@ -6,16 +6,7 @@ const { Op, Sequelize } = require("sequelize");
 
 exports.get = async (req, res) => {
     try {
-        const generals = await db.general.findAll({
-            attributes: ['name', 'value'],
-        })
 
-        let general = {}
-        generals.map(item => {
-            general[item.name] = item.value
-        })
-
-        // menu
         const menus = await db.menu.findAll({
             attributes: ['id', [Sequelize.col('menus.name'), 'text'], 'type', 'link'],
             include: {
@@ -57,33 +48,14 @@ exports.get = async (req, res) => {
             menu[item.type].push(item)
         })
 
-        // slides
-        const slides = await db.slide.findAll({
-            attributes: [
-                [Sequelize.col('title'), 'altText'],
-                // [Sequelize.col('description'), 'caption'],
-                [Sequelize.fn('concat', ''), 'caption'],
-                'link',
-                [Sequelize.fn('concat', helper.imageUrl, '1200-', Sequelize.col('image')), 'src']
-            ],
-            order: [
-                ['order', 'asc']
-            ]
-        })
+        // const menu = {
+        //     top : [],
+        //     main : [],
+        //     bottom1 : [],
+        //     bottom2 : []
+        // }
 
-        const sambutan = await db.post.findOne({
-            attributes: [
-                'title', 'content', 'excerpt', 'slug',
-                [Sequelize.fn('concat', helper.imageUrl, '600-', Sequelize.col('image')), 'image']
-            ],
-            where: { type: 'preface' }
-        })
-
-        const result = {
-            general, menu, slides, sambutan
-        }
-
-        return response.success("Get all generals success", res, result, 200);
+        return response.success("Get all generals success", res, menu, 200);
     } catch (err) {
         console.log(err);
         return response.error(err.message || "Failed get all generals", res);

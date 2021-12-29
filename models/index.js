@@ -48,6 +48,7 @@ db.user = require('./user.model')(sequelize, Sequelize);
 db.role = require('./role.model')(sequelize, Sequelize);
 
 db.post = require('./post.model')(sequelize, Sequelize);
+db.post_meta = require('./post-meta.model')(sequelize, Sequelize);
 db.category = require('./category.model')(sequelize, Sequelize);
 db.category_post = require('./category_post.model')(sequelize, Sequelize);
 db.slide = require('./slide.model')(sequelize, Sequelize);
@@ -66,6 +67,7 @@ db.gallery.hasMany(db.album_gallery, { foreignKey: 'gallery_id' })
 db.album_gallery.belongsTo(db.gallery, { foreignKey: 'gallery_id' })
 
 db.menu.hasMany(db.menu, { foreignKey: 'parent_id', as: 'children' })
+db.post.hasMany(db.post_meta, { foreignKey: 'post_id' })
 
 
 module.exports = db;

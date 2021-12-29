@@ -65,7 +65,12 @@ const slugify = (str) => {
   return str;
 }
 
+const baseUrl = process.env.BASE_URL_API
+const imageUrl = process.env.IMAGE_URL
+
 module.exports = {
+  imageUrl,
+  baseUrl,
   hashPassword,
   validatePassword,
   validateToken,
