@@ -70,6 +70,11 @@ const Post = (sequelize, Sequelize) =>
                 allowNull: true,
             },
 
+            agenda_date: {
+                type: Sequelize.DATE,
+                allowNull: true,
+            },
+
             created_by: {
                 type: Sequelize.INTEGER,
                 allowNull: false,

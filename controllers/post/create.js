@@ -2,6 +2,7 @@ const db = require("../../models");
 const helper = require("../../utils/helper");
 const response = require("../../utils/response");
 const sequelize = require('../../models').sequelize;
+const { Op, Sequelize } = require("sequelize");
 
 exports.create = async (req, res) => {
     const t = await sequelize.transaction();
@@ -18,7 +19,9 @@ exports.create = async (req, res) => {
             tags,
             attachments,
             sub,
-            categories
+            categories,
+            meta,
+            agenda_date
         } = req.body
 
 
@@ -51,16 +54,33 @@ exports.create = async (req, res) => {
             tags: tags,
             sub: sub,
             author_id: user.id,
-            created_by: user.id
+            created_by: user.id,
+            agenda_date: agenda_date || null
         }, { transaction: t })
 
         if (createPost) {
-            // await Promise.all(categories.map(async (cat) => {
-            //     await db.category_post.create({
-            //         category_id: cat,
-            //         post_id: createPost.id
-            //     }, { transaction: t })
-            // }))
+            if (meta) {
+                await Promise.all(meta.map(async item => {
+                    if (item.name.includes('_one')) {
+                        await db.post_meta.destroy({
+                            where: {
+                                [Op.and]: [
+                                    { name: item.name },
+                                    { post_id: { [Op.ne]: createPost.id } }
+                                ]
+                            },
+                            transaction: t
+                        })
+                    }
+
+                    await db.post_meta.create({
+                        post_id: createPost.id,
+                        name: item.name,
+                        value: item.value
+                    }, { transaction: t })
+                }))
+            }
+
         }
 
         await t.commit()

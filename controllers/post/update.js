@@ -20,7 +20,8 @@ exports.update = async (req, res) => {
             attachments,
             sub,
             categories,
-            meta
+            meta,
+            agenda_date
         } = req.body
 
         const { id } = req.params
@@ -54,6 +55,7 @@ exports.update = async (req, res) => {
         post.comment_status = comment_status;
         post.tags = tags;
         post.sub = sub;
+        post.agenda_date = agenda_date || null
 
         await post.save({ transaction: t })
 
@@ -75,7 +77,6 @@ exports.update = async (req, res) => {
                     where: {
                         [Op.and]: [{ post_id: post.id }, { name: item.name }]
                     },
-                    transaction: t
                 })
                 if (cek) {
                     cek.value = item.value

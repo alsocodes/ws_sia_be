@@ -59,7 +59,7 @@ db.general = require('./general.model')(sequelize, Sequelize);
 db.menu = require('./menu.model')(sequelize, Sequelize);
 
 db.user.belongsTo(db.role, { foreignKey: 'role_id' })
-db.post.belongsTo(db.user, { foreignKey: 'author_id', as: 'author' })
+db.post.belongsTo(db.user, { foreignKey: 'author_id' })
 
 db.album.hasMany(db.album_gallery, { foreignKey: 'album_id', as: 'galleries' })
 db.album_gallery.belongsTo(db.album, { foreignKey: 'album_id', as: 'galleries' })
@@ -67,7 +67,9 @@ db.gallery.hasMany(db.album_gallery, { foreignKey: 'gallery_id' })
 db.album_gallery.belongsTo(db.gallery, { foreignKey: 'gallery_id' })
 
 db.menu.hasMany(db.menu, { foreignKey: 'parent_id', as: 'children' })
-db.post.hasMany(db.post_meta, { foreignKey: 'post_id' })
+db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'post_meta' })
+db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'req_post_meta' })
+
 
 
 module.exports = db;

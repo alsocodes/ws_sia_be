@@ -17,21 +17,31 @@ exports.getAll = async (req, res) => {
         const orderby = !req.query.orderby ? 'id' : req.query.orderby
         const order = !req.query.order ? 'desc' : req.query.order
 
+        let ordering = [orderby, order];
+
+        if (orderby.includes('.')) {
+            let od = orderby.split('.')
+            let od0 = od[0];
+            ordering = [db[od0], od[1], order]
+        }
+
         const posts = await db.post.findAndCountAll({
             attributes: [
                 'id', 'title', 'content', 'excerpt',
                 'image',
                 'type', 'status', 'visibility', 'comment_status',
                 'slug', 'tags',
-                'created_at'
+                'created_at',
+                'agenda_date'
             ],
             include: [
                 {
                     model: db.user,
-                    as: 'author',
                     attributes: ['id', 'name']
-                }
+                },
             ],
+
+
             where: {
                 [Op.and]: [
                     { type: type },
@@ -45,9 +55,8 @@ exports.getAll = async (req, res) => {
             distinct: true,
             offset: offset,
             limit: limit,
-            order: [
-                [orderby, order]
-            ]
+            // order: [, 'value', 'desc']
+            order: [ordering]
         })
 
         const result = {
