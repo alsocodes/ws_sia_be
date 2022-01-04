@@ -3,5 +3,6 @@ const { get: getMenus } = require("./menu");
 const { get: getSlides } = require("./slide");
 const { get: getPosts } = require("./posts");
 const { get: getPost } = require("./post");
+const { get: getPostSearch } = require("./posts/search");
 
-module.exports = { getGeneral, getMenus, getSlides, getPosts, getPost };
+module.exports = { getGeneral, getMenus, getSlides, getPosts, getPost, getPostSearch };

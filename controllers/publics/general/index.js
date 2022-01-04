@@ -129,7 +129,7 @@ exports.get = async (req, res) => {
                 ],
                 where: { type: 'agenda' },
                 offset: 0,
-                limit: 8,
+                limit: 4,
                 order: [['agenda_date', 'asc']],
             })
             result['agenda'] = agenda
@@ -149,6 +149,34 @@ exports.get = async (req, res) => {
             result['news'] = news
         }
 
+        if (data.includes("gallery")) {
+            const galleries = await db.gallery.findAll({
+                attributes: [
+                    'id', 'title', 'description',
+                    'type',
+                    [Sequelize.literal(`CASE WHEN type = 'image' THEN CONCAT('${helper.imageUrl}','400-',image) ELSE CONCAT('https://img.youtube.com/vi/',image,'/sddefault.jpg') END`), 'image'],
+                    [Sequelize.literal(`CASE WHEN type = 'image' THEN CONCAT('${helper.imageUrl}',image) ELSE CONCAT('https://www.youtube.com/embed/',image) END`), 'image_large']
+                ],
+                offset: 0,
+                limit: 8,
+                order: [['created_at', 'desc']],
+            })
+            result['galleries'] = galleries
+        }
+
+        if (data.includes('article')) {
+            const articles = await db.post.findAll({
+                attributes: [
+                    'title', 'content', 'excerpt', 'slug',
+                    [Sequelize.fn('concat', helper.imageUrl, '600-', Sequelize.col('image')), 'image']
+                ],
+                where: { type: 'article' },
+                offset: 0,
+                limit: 4,
+                order: [['created_at', 'desc']],
+            })
+            result['articles'] = articles
+        }
 
 
         return response.success("Get all generals success", res, result, 200);

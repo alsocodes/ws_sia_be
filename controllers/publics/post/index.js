@@ -23,12 +23,13 @@ exports.get = async (req, res) => {
             }
         })
 
+        let type = post.type === 'preface' ? 'page' : post.type
         const latest = await db.post.findAll({
             attributes: [
                 'title', 'content', 'excerpt', 'slug', 'created_at',
                 [Sequelize.fn('concat', helper.imageUrl, '600-', Sequelize.col('image')), 'image']
             ],
-            where: { type: post.type },
+            where: { type: type },
             offset: 0,
             limit: 4,
             order: [['created_at', 'desc']],

@@ -1,7 +1,7 @@
-const db = require("../../../models");
-const helper = require("../../../utils/helper");
-const response = require("../../../utils/response");
-const sequelize = require('../../../models').sequelize;
+const db = require("../../../../models");
+const helper = require("../../../../utils/helper");
+const response = require("../../../../utils/response");
+const sequelize = require('../../../../models').sequelize;
 const { Op, Sequelize } = require("sequelize");
 
 exports.get = async (req, res) => {
@@ -15,6 +15,7 @@ exports.get = async (req, res) => {
         const offset = (page - 1) * page_size;
         const limit = page_size;
 
+        console.log('search', search)
         const posts = await db.post.findAndCountAll({
             attributes: [
                 'title', 'excerpt', 'content', 'slug', 'created_at',
@@ -25,35 +26,23 @@ exports.get = async (req, res) => {
                 attributes: ['name', 'id']
             },
             where: {
-                type: type
+                title: { [Op.like]: `%${search}%` },
             },
             distinct: true,
             offset: offset,
             limit: limit,
         })
 
-        if (type === 'preface') type = 'page'
-        const latest = await db.post.findAll({
-            attributes: [
-                'title', 'content', 'excerpt', 'slug', 'created_at',
-                [Sequelize.fn('concat', helper.imageUrl, '300-', Sequelize.col('image')), 'image']
-            ],
-            where: { type: type },
-            offset: 0,
-            limit: 4,
-            order: [['created_at', 'desc']],
-        })
 
         const result = {
             total_count: posts.count,
             total_page: Math.ceil(posts.count / page_size),
             rows: posts.rows,
-            latest: latest
         }
 
-        return response.success("Get all posts success", res, result, 200);
+        return response.success("Search all posts success", res, result, 200);
     } catch (err) {
         console.log(err);
-        return response.error(err.message || "Failed get all posts", res);
+        return response.error(err.message || "Failed Search all posts", res);
     }
 };
