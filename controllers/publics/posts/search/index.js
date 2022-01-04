@@ -18,7 +18,7 @@ exports.get = async (req, res) => {
         console.log('search', search)
         const posts = await db.post.findAndCountAll({
             attributes: [
-                'title', 'excerpt', 'content', 'slug', 'created_at',
+                'title', 'excerpt', 'content', 'slug', 'created_at', 'type',
                 [Sequelize.fn('concat', helper.imageUrl, '900-', Sequelize.col('image')), 'image']
             ],
             include: {

@@ -66,7 +66,7 @@ db.album_gallery.belongsTo(db.album, { foreignKey: 'album_id', as: 'galleries' }
 db.gallery.hasMany(db.album_gallery, { foreignKey: 'gallery_id' })
 db.album_gallery.belongsTo(db.gallery, { foreignKey: 'gallery_id' })
 
-db.menu.hasMany(db.menu, { foreignKey: 'parent_id', as: 'children' })
+db.menu.hasMany(db.menu, { foreignKey: 'parent_id', as: 'children', constraints: false })
 db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'post_meta' })
 db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'req_post_meta' })
 

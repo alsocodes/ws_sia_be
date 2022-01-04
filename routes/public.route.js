@@ -7,4 +7,5 @@ module.exports = (app) => {
     app.get("/public/posts", public.getPosts);
     app.get("/public/post/:slug", public.getPost);
     app.get("/public/posts/search", public.getPostSearch);
+    app.get("/public/galleries", public.getGalleries);
 };

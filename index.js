@@ -8,7 +8,11 @@ const compression = require("compression");
 const swagger = require("swagger-ui-express");
 const docs = require("./api-docs.json");
 const seederUser = require('./seeders/user.seeder');
-const seederCategory = require('./seeders/category.seeder');
+const seederGenral = require('./seeders/general.seeder');
+const seederPost = require('./seeders/post.seeder');
+const seederSlide = require('./seeders/slide.seeder');
+const seederGallery = require('./seeders/galeri.seeder');
+const seederMenu = require('./seeders/menu.seeder');
 
 const app = express();
 
@@ -25,22 +29,28 @@ app.use(express.urlencoded({ extended: true }));
 
 const GALLERY_DIR = '/public/images'
 app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
-db.sequelize.sync({ force: false })
-// db.sequelize
-//   .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
-//   .then(() => {
-//     if (process.env.NODE_ENV !== "production") {
-//       (async () => {
-//         try {
-//           await seederUser.create();
-//           await seederCategory.create();
+// db.sequelize.sync({ force: false })
+if (process.env.RESEED == 1) {
+  db.sequelize
+    .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
+    .then(() => {
+      if (process.env.NODE_ENV !== "production") {
+        (async () => {
+          try {
+            await seederUser.create();
+            await seederGenral.create();
+            await seederPost.create();
+            await seederSlide.create();
+            await seederGallery.create();
+            await seederMenu.create();
+          } catch (err) {
+            console.log(err);
+          }
+        })();
+      }
+    });
 
-//         } catch (err) {
-//           console.log(err);
-//         }
-//       })();
-//     }
-//   });
+}
 
 if (process.env.NODE_ENV !== "production") {
   app.use("/api-docs", swagger.serve, swagger.setup(docs));
