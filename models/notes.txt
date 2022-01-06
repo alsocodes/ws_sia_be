@@ -25,3 +25,17 @@ model : classroom_activity_students
 id, no, classroom_id, student_id, eduyear_id, semester(ENUM['ganjil','genap']), status(enum['open','close'])
 
 
+----------------------
+activities
+- student having class in eduyear               -> SCE (eduyear changes , include semester change)
+- lesson having class in eduyear                -> LCE
+- teacher teaching in LCE                       -> TLCE
+- student studiying in TLCE by SCE              -> SLCE SCE
+- LCE has sub :
+    - class meeting in LCE                          -> CM LCE
+        - student presents in CM LCE
+    - teaching materials in LCE                     -> TM LCE
+    - tasks in LCE                                  -> TS LCE
+        - student collect task in TS LCE            -> SC TS LCE
+
+
