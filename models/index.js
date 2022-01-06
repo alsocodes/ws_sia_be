@@ -71,5 +71,12 @@ db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'post_meta' })
 db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'req_post_meta' })
 
 
+//sia
+db.student = require('./student.model')(sequelize, Sequelize);
+db.teacher = require('./teacher.model')(sequelize, Sequelize);
+db.classroom = require('./classroom.model')(sequelize, Sequelize);
+db.lesson = require('./lesson.model')(sequelize, Sequelize);
+db.eduyear = require('./eduyear.model')(sequelize, Sequelize);
+
 
 module.exports = db;

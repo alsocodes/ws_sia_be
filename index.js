@@ -67,6 +67,12 @@ routes.albumGallery(app);
 routes.general(app);
 routes.menu(app);
 routes.public(app);
+routes.seeder(app);
+routes.lessonmaster(app);
+routes.eduyearmaster(app);
+routes.classroommaster(app);
+routes.teachermaster(app);
+routes.studentmaster(app);
 
 const port = process.env.PORT || 3009;
 const host = process.env.HOST || "localhost";

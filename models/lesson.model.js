@@ -8,15 +8,8 @@ const Lesson = (sequelize, Sequelize) =>
                 autoIncrement: true,
                 allowNull: false,
             },
-        
-            name: {
-                type: Sequelize.STRING,
-                allowNull: false,
-            },
-
-            description: {
-                type: Sequelize.STRING(1000),
-            }
+            code: { type: Sequelize.STRING, allowNull: false },
+            name: { type: Sequelize.STRING, allowNull: false }
         },
     )
 
