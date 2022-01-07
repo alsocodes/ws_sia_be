@@ -9,7 +9,7 @@ exports.getOne = async (req, res) => {
 
         const { id } = req.params
 
-        const lesson = await db.lesson.finOne({
+        const lesson = await db.lesson.findOne({
             attributes: [
                 'id', 'code', 'name', 'created_at'
             ],

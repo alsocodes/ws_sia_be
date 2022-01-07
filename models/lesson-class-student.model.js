@@ -1,6 +1,6 @@
-const LessonClassing = (sequelize, Sequelize) =>
+const LessonClassStudent = (sequelize, Sequelize) =>
     sequelize.define(
-        'lesson_classings',
+        'lesson_class_students',
         {
             id: {
                 type: Sequelize.INTEGER,
@@ -8,45 +8,38 @@ const LessonClassing = (sequelize, Sequelize) =>
                 autoIncrement: true,
                 allowNull: false,
             },
-            classroom_id : {
+            lesson_class_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            eduyear_id : {
+            student_class_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
-            },
-            lesson_id : {
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            teacher_id : {
-                type: Sequelize.INTEGER,
             },
 
-            status : {
+            status: {
                 type: Sequelize.ENUM('active', 'passed'),
                 allowNull: false,
-                defaultValue:'active'
+                defaultValue: 'active'
             },
-            passed_at :{
+            passed_at: {
                 type: Sequelize.DATE
             },
-            passed_by : {
+            passed_by: {
                 type: Sequelize.INTEGER,
             },
-            created_by :{
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            updated_by:{
+            created_by: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            deleted_by:{
+            updated_by: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+            deleted_by: {
                 type: Sequelize.INTEGER,
             }
         },
     )
 
-module.exports = LessonClassing
+module.exports = LessonClassStudent

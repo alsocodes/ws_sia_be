@@ -10,7 +10,8 @@ const Eduyear = (sequelize, Sequelize) =>
             },
 
             name: { type: Sequelize.STRING, allowNull: false },
-            semester: { type: Sequelize.ENUM('ganjil', 'genap') }
+            semester: { type: Sequelize.ENUM('ganjil', 'genap') },
+            status: { type: Sequelize.ENUM('passed', 'active', 'draft'), defaultValue: 'draft' }
         },
     )
 

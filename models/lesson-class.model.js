@@ -1,8 +1,6 @@
-// tidak dipakai dulu, korelasi ini bisa dipakai absensi per pertemuan
-// bisa diajukan untuk modul tambahan saja jika nanti mau.
-const LessonClassMeeting = (sequelize, Sequelize) =>
+const LessonClass = (sequelize, Sequelize) =>
     sequelize.define(
-        'lesson_class_meetings',
+        'lesson_classs',
         {
             id: {
                 type: Sequelize.INTEGER,
@@ -10,26 +8,22 @@ const LessonClassMeeting = (sequelize, Sequelize) =>
                 autoIncrement: true,
                 allowNull: false,
             },
-            lesson_class_id: {
+            classroom_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            no: {
+            eduyear_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            date: {
-                type: Sequelize.DATE,
+            lesson_id: {
+                type: Sequelize.INTEGER,
                 allowNull: false
             },
-            name: {
-                type: Sequelize.STRING,
-                allowNull: false
+            teacher_id: {
+                type: Sequelize.INTEGER,
             },
-            description: {
-                type: Sequelize.STRING(1000),
-                allowNull: false
-            },
+
             status: {
                 type: Sequelize.ENUM('active', 'passed'),
                 allowNull: false,
@@ -55,4 +49,4 @@ const LessonClassMeeting = (sequelize, Sequelize) =>
         },
     )
 
-module.exports = LessonClassMeeting
+module.exports = LessonClass

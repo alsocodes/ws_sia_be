@@ -58,6 +58,13 @@ db.album_gallery = require('./album-gallery.model')(sequelize, Sequelize);
 db.general = require('./general.model')(sequelize, Sequelize);
 db.menu = require('./menu.model')(sequelize, Sequelize);
 
+db.student_class = require('./student-class.model')(sequelize, Sequelize);
+db.lesson_class = require('./lesson-class.model')(sequelize, Sequelize);
+db.lesson_class_task = require('./lesson-class-task.model')(sequelize, Sequelize);
+db.lesson_class_task_submit = require('./lesson-class-task-submit.model')(sequelize, Sequelize);
+db.lesson_class_material = require('./lesson-class-material.model')(sequelize, Sequelize);
+db.lesson_class_student = require('./lesson-class-student.model')(sequelize, Sequelize);
+
 db.user.belongsTo(db.role, { foreignKey: 'role_id' })
 db.post.belongsTo(db.user, { foreignKey: 'author_id' })
 

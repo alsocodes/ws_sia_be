@@ -20,7 +20,7 @@ const User = (sequelize, Sequelize) =>
 
             name: { type: Sequelize.STRING },
             email: { type: Sequelize.STRING, allowNull: false },
-            user_type: { type: Sequelize.ENUM('administrotor', 'teacher', 'student'), allowNull: false },
+            user_type: { type: Sequelize.ENUM('administrator', 'teacher', 'student'), allowNull: false },
             role_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false,

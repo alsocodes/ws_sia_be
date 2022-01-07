@@ -1,6 +1,6 @@
-const LessonClassStudiying = (sequelize, Sequelize) =>
+const LessonClassMaterial = (sequelize, Sequelize) =>
     sequelize.define(
-        'lesson_class_studiyings',
+        'lesson_class_materials',
         {
             id: {
                 type: Sequelize.INTEGER,
@@ -8,38 +8,36 @@ const LessonClassStudiying = (sequelize, Sequelize) =>
                 autoIncrement: true,
                 allowNull: false,
             },
-            lesson_class_id : {
+            lesson_class_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            student_id : {
+
+            name: {
+                type: Sequelize.STRING,
+                allowNull: false
+            },
+
+            description: {
+                type: Sequelize.TEXT,
+            },
+
+            attachment: {
+                type: Sequelize.STRING
+            },
+
+            created_by: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-          
-            status : {
-                type: Sequelize.ENUM('active', 'passed'),
-                allowNull: false,
-                defaultValue:'active'
-            },
-            passed_at :{
-                type: Sequelize.DATE
-            },
-            passed_by : {
-                type: Sequelize.INTEGER,
-            },
-            created_by :{
+            updated_by: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            updated_by:{
-                type: Sequelize.INTEGER,
-                allowNull: false
-            },
-            deleted_by:{
+            deleted_by: {
                 type: Sequelize.INTEGER,
             }
         },
     )
 
-module.exports = LessonClassStudiying
+module.exports = LessonClassMaterial
