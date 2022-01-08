@@ -5,6 +5,7 @@ const teacher = require("../seeders/teacher.seeder");
 const lesson = require("../seeders/lesson.seeder");
 const classroom = require("../seeders/classroom.seeder");
 const eduyear = require("../seeders/eduyear.seeder");
+const semester = require("../seeders/semester.seeder");
 
 module.exports = (app) => {
     app.get("/seed/student", authAccessToken, student.create);
@@ -12,4 +13,5 @@ module.exports = (app) => {
     app.get("/seed/lesson", authAccessToken, lesson.create);
     app.get("/seed/classroom", authAccessToken, classroom.create);
     app.get("/seed/eduyear", authAccessToken, eduyear.create);
+    app.get("/seed/semester", authAccessToken, semester.create);
 };

@@ -24,6 +24,11 @@ const LessonClass = (sequelize, Sequelize) =>
                 type: Sequelize.INTEGER,
             },
 
+            semester_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+
             status: {
                 type: Sequelize.ENUM('active', 'passed'),
                 allowNull: false,

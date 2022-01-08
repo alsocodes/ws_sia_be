@@ -71,6 +71,7 @@ db.teacher = require('./teacher.model')(sequelize, Sequelize);
 db.classroom = require('./classroom.model')(sequelize, Sequelize);
 db.lesson = require('./lesson.model')(sequelize, Sequelize);
 db.eduyear = require('./eduyear.model')(sequelize, Sequelize);
+db.semester = require('./semester.model')(sequelize, Sequelize);
 
 db.user.belongsTo(db.role, { foreignKey: 'role_id' })
 db.post.belongsTo(db.user, { foreignKey: 'author_id' })
@@ -90,5 +91,14 @@ db.classroom.hasMany(db.student_class, { foreignKey: 'classroom_id' })
 db.student_class.belongsTo(db.classroom, { foreignKey: 'classroom_id' })
 db.eduyear.hasMany(db.student_class, { foreignKey: 'eduyear_id' })
 db.student_class.belongsTo(db.eduyear, { foreignKey: 'eduyear_id' })
+
+db.lesson.hasMany(db.lesson_class, { foreignKey: 'lesson_id' })
+db.lesson_class.belongsTo(db.lesson, { foreignKey: 'lesson_id' })
+db.classroom.hasMany(db.lesson_class, { foreignKey: 'classroom_id' })
+db.lesson_class.belongsTo(db.classroom, { foreignKey: 'classroom_id' })
+db.eduyear.hasMany(db.lesson_class, { foreignKey: 'eduyear_id' })
+db.lesson_class.belongsTo(db.eduyear, { foreignKey: 'eduyear_id' })
+db.teacher.hasMany(db.lesson_class, { foreignKey: 'teacher_id' })
+db.lesson_class.belongsTo(db.teacher, { foreignKey: 'teacher_id' })
 
 module.exports = db;
