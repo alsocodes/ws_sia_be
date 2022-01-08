@@ -8,21 +8,21 @@ exports.create = async (req, res) => {
     try {
 
         const {
-            semester,
+            code,
             name
         } = req.body
 
-        let check = await db.eduyear.findOne({ where: { [Op.and]: [{ name: name }, { semester: semester }] } })
+        let check = await db.eduyear.findOne({ where: { [Op.and]: [{ code: code }] } })
         if (check) return response.invalidInput('Tahun ajaran sudah ada', res)
 
         const eduyear = await db.eduyear.create({
-            semester: semester,
+            code: code,
             name: name
         })
 
-        return response.success("Menambahkan pelajaran berhasil", res, { id: eduyear.id }, 201);
+        return response.success("Menambahkan tahun ajaran berhasil", res, { id: eduyear.id }, 201);
     } catch (err) {
         console.log(err);
-        return response.error(err.message || "Gagal menambahkan pelajaran", res);
+        return response.error(err.message || "Gagal menambahkan tahun ajaran", res);
     }
 };

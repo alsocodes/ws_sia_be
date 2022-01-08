@@ -11,7 +11,7 @@ exports.getOne = async (req, res) => {
 
         const classroom = await db.classroom.findOne({
             attributes: [
-                'id', 'room', 'name', 'created_at'
+                'id', 'code', 'room', 'name', 'created_at'
             ],
             where: { id: id },
         })

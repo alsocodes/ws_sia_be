@@ -1,12 +1,10 @@
 const db = require('../models');
 
 const eduyears = [
-    { name: '2019-2020', semester: 'ganjil' },
-    { name: '2019-2020', semester: 'genap' },
-    { name: '2020-2021', semester: 'ganjil' },
-    { name: '2020-2021', semester: 'genap' },
-    { name: '2021-2022', semester: 'ganjil' },
-    { name: '2021-2022', semester: 'genap' },
+    { code: '2019', name: '2019/2020', status: 'passed' },
+    { code: '2020', name: '2020/2021', status: 'passed' },
+    { code: '2021', name: '2021/2022', status: 'active' },
+    { code: '2022', name: '2022/2023', status: 'draft' },
 ]
 
 const create = async (req, res) => {

@@ -12,7 +12,7 @@ exports.get = async (req, res) => {
         const search = !req.query.search ? '' : req.query.search
         const offset = (page - 1) * page_size;
         const limit = page_size;
-        const orderby = !req.query.orderby ? 'id' : req.query.orderby
+        const orderby = !req.query.orderby ? 'code' : req.query.orderby
         const order = !req.query.order ? 'desc' : req.query.order
 
         let ordering = [orderby, order];
@@ -25,13 +25,13 @@ exports.get = async (req, res) => {
 
         const eduyears = await db.eduyear.findAndCountAll({
             attributes: [
-                'id', 'name', 'semester', 'created_at'
+                'id', 'name', 'code', 'status', 'created_at'
             ],
 
             where: {
                 [Op.or]: [
                     { name: { [Op.like]: '%' + search + '%' } },
-                    { semester: { [Op.like]: '%' + search + '%' } },
+                    { code: { [Op.like]: '%' + search + '%' } },
                 ]
             },
             distinct: true,

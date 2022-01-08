@@ -8,6 +8,7 @@ exports.update = async (req, res) => {
     try {
 
         const {
+            code,
             room,
             name
         } = req.body
@@ -16,9 +17,10 @@ exports.update = async (req, res) => {
         const classroom = await db.classroom.findOne({ where: { id: id } })
         if (!classroom) return response.invalidInput('Kelas tidak ditemukan', res)
 
-        let check = await db.classroom.findOne({ where: { [Op.and]: [{ name: name }, { room: room }, { id: { [Op.ne]: id } }] } })
-        if (check) return response.invalidInput('Kelas sudah ada', res)
+        let check = await db.classroom.findOne({ where: { [Op.and]: [{ code: code }, { room: room }, { id: { [Op.ne]: id } }] } })
+        if (check) return response.invalidInput('Kelas sudah ada', res, check)
 
+        classroom.code = code;
         classroom.room = room;
         classroom.name = name;
         await classroom.save()

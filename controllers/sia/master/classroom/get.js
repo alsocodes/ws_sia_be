@@ -25,7 +25,7 @@ exports.get = async (req, res) => {
 
         const classrooms = await db.classroom.findAndCountAll({
             attributes: [
-                'id', 'name', 'room', 'created_at'
+                'id', 'code', 'name', 'room', 'created_at'
             ],
 
             where: {

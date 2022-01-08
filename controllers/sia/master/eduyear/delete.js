@@ -10,6 +10,9 @@ exports.del = async (req, res) => {
         const { id } = req.params
         const eduyear = await db.eduyear.findOne({ where: { id: id } })
         if (!eduyear) return response.invalidInput('Tahun Pelajaran tidak ditemukan', res)
+        if (eduyear.status === 'active' || eduyear.status === 'passed') {
+            return response.invalidInput('Tahun Pelajaran yang sudah/sedang berjalan tidak bisa dihapus', res)
+        }
         await eduyear.destroy()
 
         return response.success("Hapus tahun pelajaran berhasil", res, { id: eduyear.id }, 200);

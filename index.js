@@ -73,6 +73,7 @@ routes.eduyearmaster(app);
 routes.classroommaster(app);
 routes.teachermaster(app);
 routes.studentmaster(app);
+routes.student_class_activity(app);
 
 const port = process.env.PORT || 3009;
 const host = process.env.HOST || "localhost";

@@ -10,7 +10,7 @@ exports.update = async (req, res) => {
         const {
             nis, nisn,
             name, gender, place_birth, day_birth,
-            religion, address, email, entry_year, out_year, out_reason,
+            religion, address, email, phone, entry_year,
             child_no, father_name, mother_name, father_job, mother_job,
             father_education, mother_education, father_address,
             mother_address, father_email, mother_email, father_phone, mother_phone,
@@ -39,9 +39,8 @@ exports.update = async (req, res) => {
         student.religion = religion;
         student.address = address;
         student.email = email;
+        student.phone = phone;
         student.entry_year = entry_year;
-        student.out_year = out_year;
-        student.out_reason = out_reason;
         student.child_no = child_no;
         student.father_name = father_name;
         student.mother_name = mother_name;

@@ -8,14 +8,16 @@ exports.create = async (req, res) => {
     try {
 
         const {
+            code,
             room,
             name
         } = req.body
 
-        let check = await db.classroom.findOne({ where: { [Op.and]: [{ name: name }, { room: room }] } })
+        let check = await db.classroom.findOne({ where: { [Op.and]: [{ code: code }, { room: room }] } })
         if (check) return response.invalidInput('Kelas sudah ada', res)
 
         const classroom = await db.classroom.create({
+            code: code,
             room: room,
             name: name
         })

@@ -8,7 +8,7 @@ exports.update = async (req, res) => {
     try {
 
         const {
-            semester,
+            code,
             name
         } = req.body
 
@@ -16,10 +16,10 @@ exports.update = async (req, res) => {
         const eduyear = await db.eduyear.findOne({ where: { id: id } })
         if (!eduyear) return response.invalidInput('Tahun ajaran tidak ditemukan', res)
 
-        let check = await db.eduyear.findOne({ where: { [Op.and]: [{ name: name }, { semester: semester }, { id: { [Op.ne]: id } }] } })
+        let check = await db.eduyear.findOne({ where: { [Op.and]: [{ code: code }, { id: { [Op.ne]: id } }] } })
         if (check) return response.invalidInput('Tahun pelajaran sudah ada', res)
 
-        eduyear.semester = semester;
+        eduyear.code = code;
         eduyear.name = name;
         await eduyear.save()
 

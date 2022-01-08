@@ -20,6 +20,7 @@ const Student = (sequelize, Sequelize) =>
             religion: { type: Sequelize.ENUM('islam', 'katholik', 'protestan', 'hindu', 'budha', 'konghucu', 'lainnya') },
             address: { type: Sequelize.STRING(1000) },
             email: { type: Sequelize.STRING, allowNull: false },
+            phone: { type: Sequelize.STRING },
             entry_year: { type: Sequelize.DATEONLY },
             out_year: { type: Sequelize.DATEONLY },
             out_reason: { type: Sequelize.STRING },

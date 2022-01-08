@@ -65,6 +65,13 @@ db.lesson_class_task_submit = require('./lesson-class-task-submit.model')(sequel
 db.lesson_class_material = require('./lesson-class-material.model')(sequelize, Sequelize);
 db.lesson_class_student = require('./lesson-class-student.model')(sequelize, Sequelize);
 
+//sia
+db.student = require('./student.model')(sequelize, Sequelize);
+db.teacher = require('./teacher.model')(sequelize, Sequelize);
+db.classroom = require('./classroom.model')(sequelize, Sequelize);
+db.lesson = require('./lesson.model')(sequelize, Sequelize);
+db.eduyear = require('./eduyear.model')(sequelize, Sequelize);
+
 db.user.belongsTo(db.role, { foreignKey: 'role_id' })
 db.post.belongsTo(db.user, { foreignKey: 'author_id' })
 
@@ -77,13 +84,11 @@ db.menu.hasMany(db.menu, { foreignKey: 'parent_id', as: 'children', constraints:
 db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'post_meta' })
 db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'req_post_meta' })
 
-
-//sia
-db.student = require('./student.model')(sequelize, Sequelize);
-db.teacher = require('./teacher.model')(sequelize, Sequelize);
-db.classroom = require('./classroom.model')(sequelize, Sequelize);
-db.lesson = require('./lesson.model')(sequelize, Sequelize);
-db.eduyear = require('./eduyear.model')(sequelize, Sequelize);
-
+db.student.hasMany(db.student_class, { foreignKey: 'student_id' })
+db.student_class.belongsTo(db.student, { foreignKey: 'student_id' })
+db.classroom.hasMany(db.student_class, { foreignKey: 'classroom_id' })
+db.student_class.belongsTo(db.classroom, { foreignKey: 'classroom_id' })
+db.eduyear.hasMany(db.student_class, { foreignKey: 'eduyear_id' })
+db.student_class.belongsTo(db.eduyear, { foreignKey: 'eduyear_id' })
 
 module.exports = db;

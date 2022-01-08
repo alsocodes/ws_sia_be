@@ -9,14 +9,20 @@ const ClassRoom = (sequelize, Sequelize) =>
                 allowNull: false,
             },
 
-            name: {
+            code: {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
 
             room: {
                 type: Sequelize.STRING,
-            }
+                allowNull: false,
+            },
+
+            name: {
+                type: Sequelize.STRING,
+            },
+
         },
     )
 

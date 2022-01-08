@@ -11,7 +11,7 @@ exports.getOne = async (req, res) => {
 
         const eduyear = await db.eduyear.findOne({
             attributes: [
-                'id', 'semester', 'name', 'created_at'
+                'id', 'code', 'name', 'created_at'
             ],
             where: { id: id },
         })

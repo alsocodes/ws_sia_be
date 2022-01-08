@@ -27,7 +27,7 @@ exports.get = async (req, res) => {
             attributes: [
                 'id', 'user_id', 'nis', 'nisn',
                 'name', 'gender', 'place_birth', 'day_birth',
-                'religion', 'address', 'email', 'entry_year', 'out_year', 'out_reason',
+                'religion', 'address', 'email', 'phone', 'entry_year', 'out_year', 'out_reason',
                 'child_no', 'father_name', 'mother_name', 'father_job', 'mother_job',
                 'father_education', 'mother_education', 'father_address',
                 'mother_address', 'father_email', 'mother_email', 'father_phone', 'mother_phone',
