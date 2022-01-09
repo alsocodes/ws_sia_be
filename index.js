@@ -68,6 +68,7 @@ routes.general(app);
 routes.menu(app);
 routes.public(app);
 routes.seeder(app);
+routes.settingmaster(app);
 routes.lessonmaster(app);
 routes.eduyearmaster(app);
 routes.classroommaster(app);

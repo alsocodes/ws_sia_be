@@ -100,5 +100,7 @@ db.eduyear.hasMany(db.lesson_class, { foreignKey: 'eduyear_id' })
 db.lesson_class.belongsTo(db.eduyear, { foreignKey: 'eduyear_id' })
 db.teacher.hasMany(db.lesson_class, { foreignKey: 'teacher_id' })
 db.lesson_class.belongsTo(db.teacher, { foreignKey: 'teacher_id' })
+db.semester.hasMany(db.lesson_class, { foreignKey: 'semester_id' })
+db.lesson_class.belongsTo(db.semester, { foreignKey: 'semester_id' })
 
 module.exports = db;

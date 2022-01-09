@@ -1,7 +1,8 @@
+const { getOpt } = require("./opt");
 const { get } = require("./get");
 const { create } = require("./create");
-// const { update } = require("./update");
+const { getOne } = require("./get-one");
+const { update } = require("./update");
 // const { del } = require("./delete");
-// const { getOne } = require("./get-one");
 
-module.exports = { get, create };
+module.exports = { get, create, getOpt, getOne, update };

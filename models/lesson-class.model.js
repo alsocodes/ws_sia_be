@@ -1,6 +1,6 @@
 const LessonClass = (sequelize, Sequelize) =>
     sequelize.define(
-        'lesson_classs',
+        'lesson_classes',
         {
             id: {
                 type: Sequelize.INTEGER,
