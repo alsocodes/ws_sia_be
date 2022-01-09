@@ -7,5 +7,5 @@ module.exports = (app) => {
     app.get("/sia/activity/lesson-class-opt", authAccessToken, lesson_class.getOpt);
     app.get("/sia/activity/lesson-class/:id", authAccessToken, lesson_class.getOne);
     app.put("/sia/activity/lesson-class/:id", authAccessToken, lesson_class.update);
-    // app.delete("/sia/activity/lesson-class/:id", authAccessToken, lesson_class.del);
+    app.delete("/sia/activity/lesson-class/:id", authAccessToken, lesson_class.del);
 };

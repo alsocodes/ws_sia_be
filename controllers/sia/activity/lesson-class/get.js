@@ -14,6 +14,7 @@ exports.get = async (req, res) => {
         const limit = page_size;
         const orderby = !req.query.orderby ? 'id' : req.query.orderby
         const order = !req.query.order ? 'desc' : req.query.order
+        const filter = !req.query.filter ? {} : JSON.parse(decodeURIComponent(req.query.filter))
 
         let ordering = [orderby, order];
 
@@ -21,6 +22,20 @@ exports.get = async (req, res) => {
             let od = orderby.split('.')
             let od0 = od[0];
             ordering = [db[od0], od[1], order]
+        }
+
+        let filterings = []
+        for(var key in filter){
+            let f = filter[key]
+            if(f.op === 'equal') filterings.push({[key]:f.value})
+            if(f.op === 'between') {
+                let fo = {[key]:{[Op.between] : [f.value.from, f.value.to]}}
+                filterings.push(fo)
+            }
+            if(f.op === 'in'){
+                let fo = {[key]:{[Op.in] : f.value}}
+                filterings.push(fo)
+            }
         }
 
         const lesson_classes = await db.lesson_class.findAndCountAll({
@@ -52,6 +67,7 @@ exports.get = async (req, res) => {
             raw: true,
 
             where: {
+                [Op.and] : filterings,
                 [Op.or]: [
                     { '$classroom.name$': { [Op.like]: '%' + search + '%' } },
                     { '$eduyear.name$': { [Op.like]: '%' + search + '%' } },

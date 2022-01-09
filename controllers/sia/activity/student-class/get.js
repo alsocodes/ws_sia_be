@@ -14,6 +14,7 @@ exports.get = async (req, res) => {
         const limit = page_size;
         const orderby = !req.query.orderby ? 'id' : req.query.orderby
         const order = !req.query.order ? 'desc' : req.query.order
+        const filter = !req.query.filter ? {} : JSON.parse(decodeURIComponent(req.query.filter))
 
         let ordering = [orderby, order];
 
@@ -22,6 +23,21 @@ exports.get = async (req, res) => {
             let od0 = od[0];
             ordering = [db[od0], od[1], order]
         }
+
+        let filterings = []
+        for(var key in filter){
+            let f = filter[key]
+            if(f.op === 'equal') filterings.push({[key]:f.value})
+            if(f.op === 'between') {
+                let fo = {[key]:{[Op.between] : [f.value.from, f.value.to]}}
+                filterings.push(fo)
+            }
+            if(f.op === 'in'){
+                let fo = {[key]:{[Op.in] : f.value}}
+                filterings.push(fo)
+            }
+        }
+
 
         const student_classes = await db.student_class.findAndCountAll({
             attributes: [
@@ -50,24 +66,49 @@ exports.get = async (req, res) => {
                 }
             ],
 
-            // where: {
-            //     [Op.or]: [
-            //         { name: { [Op.like]: '%' + search + '%' } },
-            //         { room: { [Op.like]: '%' + search + '%' } },
-            //     ]
-            // },
+            where: {
+                [Op.and] : filterings,
+                [Op.or]: [
+                    { '$classroom.name$': { [Op.like]: '%' + search + '%' } },
+                    { '$eduyear.name$': { [Op.like]: '%' + search + '%' } },
+                    { '$student.name$': { [Op.like]: '%' + search + '%' } },
+                ]
+            },
+            raw: true,
             distinct: true,
             offset: offset,
             limit: limit,
             order: [ordering]
         })
 
+        const classroom_filterable = await db.classroom.findAll({
+            attributes: ['id', 'code', 'room', 'name'],
+            include: { model: db.lesson_class, required: true, attributes: [] },
+            group: ['id', 'code', 'room', 'name']
+        })
+
+        const eduyear_filterable = await db.eduyear.findAll({
+            attributes: ['id', 'code', 'name'],
+            include: { model: db.lesson_class, required: true, attributes: [] },
+            group: ['id', 'code', 'name']
+        })
+ 
+        const student_filterable = await db.student.findAll({
+            attributes: ['id', 'name'],
+            include: { model: db.student_class, required: true, attributes: [] },
+            group: ['id', 'name']
+        })
         const result = {
+            filterable: {
+                classroom: classroom_filterable,
+                eduyear: eduyear_filterable,
+                student: student_filterable
+            },
             total_count: student_classes.count,
             total_page: Math.ceil(student_classes.count / page_size),
             rows: student_classes.rows
         }
-
+        
         return response.success("Get siswa menduduki kelas sukses", res, result, 200);
     } catch (err) {
         console.log(err);
