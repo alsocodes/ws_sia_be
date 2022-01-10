@@ -7,6 +7,7 @@ module.exports = (app) => {
     app.post("/sia/activity/student-class", authAccessToken, student_class.create);
     // app.post("/sia/activity/student-class", authAccessToken, student_class.create);
     // app.put("/sia/activity/student-class/:id", authAccessToken, student_class.update);
-    // app.delete("/sia/activity/student-class/:id", authAccessToken, student_class.del);
+    app.delete("/sia/activity/student-class/:id", authAccessToken, student_class.del);
+    app.get("/sia/activity/student-class/by-class-year", authAccessToken, student_class.getClassYear);
     // app.get("/sia/activity/student-class/:id", authAccessToken, student_class.getOne);
 };

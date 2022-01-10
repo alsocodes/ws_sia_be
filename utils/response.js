@@ -16,7 +16,7 @@ module.exports = {
   },
 
   error(message, res, flag = 500) {
-    res.status(500).json({
+    res.status(flag).json({
       success: false,
       flag,
       message

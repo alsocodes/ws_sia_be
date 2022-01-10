@@ -25,15 +25,15 @@ exports.get = async (req, res) => {
         }
 
         let filterings = []
-        for(var key in filter){
+        for (var key in filter) {
             let f = filter[key]
-            if(f.op === 'equal') filterings.push({[key]:f.value})
-            if(f.op === 'between') {
-                let fo = {[key]:{[Op.between] : [f.value.from, f.value.to]}}
+            if (f.op === 'equal') filterings.push({ [key]: f.value })
+            if (f.op === 'between') {
+                let fo = { [key]: { [Op.between]: [f.value.from, f.value.to] } }
                 filterings.push(fo)
             }
-            if(f.op === 'in'){
-                let fo = {[key]:{[Op.in] : f.value}}
+            if (f.op === 'in') {
+                let fo = { [key]: { [Op.in]: f.value } }
                 filterings.push(fo)
             }
         }
@@ -49,29 +49,22 @@ exports.get = async (req, res) => {
                     attributes: ['id', 'code', 'room', 'name']
                 },
                 {
-                    model: db.student,
-                    attributes: [
-                        'id', 'user_id', 'nis', 'nisn',
-                        'name', 'gender', 'place_birth', 'day_birth',
-                        'religion', 'address', 'email', 'phone', 'entry_year', 'out_year', 'out_reason',
-                        'child_no', 'father_name', 'mother_name', 'father_job', 'mother_job',
-                        'father_education', 'mother_education', 'father_address',
-                        'mother_address', 'father_email', 'mother_email', 'father_phone', 'mother_phone',
-                        'guardian_name', 'guardian_address', 'guardian_phone', 'guardian_relation', 'created_at'
-                    ]
-                },
-                {
                     model: db.eduyear,
                     attributes: ['id', 'code', 'name']
-                }
-            ],
+                },
 
+                {
+                    model: db.student,
+                    attributes: [
+                        'id', 'user_id', 'nis', 'nisn', 'name'
+                    ]
+                },
+            ],
             where: {
-                [Op.and] : filterings,
+                [Op.and]: filterings,
                 [Op.or]: [
                     { '$classroom.name$': { [Op.like]: '%' + search + '%' } },
                     { '$eduyear.name$': { [Op.like]: '%' + search + '%' } },
-                    { '$student.name$': { [Op.like]: '%' + search + '%' } },
                 ]
             },
             raw: true,
@@ -92,23 +85,23 @@ exports.get = async (req, res) => {
             include: { model: db.lesson_class, required: true, attributes: [] },
             group: ['id', 'code', 'name']
         })
- 
+
         const student_filterable = await db.student.findAll({
             attributes: ['id', 'name'],
             include: { model: db.student_class, required: true, attributes: [] },
             group: ['id', 'name']
         })
         const result = {
+            total_count: student_classes.count,
+            total_page: Math.ceil(student_classes.count / page_size),
+            rows: student_classes.rows,
             filterable: {
                 classroom: classroom_filterable,
                 eduyear: eduyear_filterable,
                 student: student_filterable
             },
-            total_count: student_classes.count,
-            total_page: Math.ceil(student_classes.count / page_size),
-            rows: student_classes.rows
         }
-        
+
         return response.success("Get siswa menduduki kelas sukses", res, result, 200);
     } catch (err) {
         console.log(err);
