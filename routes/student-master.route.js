@@ -7,4 +7,5 @@ module.exports = (app) => {
     app.put("/sia/student-master/:id", authAccessToken, student.update);
     app.delete("/sia/student-master/:id", authAccessToken, student.del);
     app.get("/sia/student-master/:id", authAccessToken, student.getOne);
+    app.post("/sia/student-master-import", authAccessToken, student.importData);
 };
