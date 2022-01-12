@@ -12,7 +12,7 @@ const LessonClassStudent = (sequelize, Sequelize) =>
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            student_class_id: {
+            student_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
