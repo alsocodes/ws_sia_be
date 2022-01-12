@@ -25,14 +25,26 @@ exports.get = async (req, res) => {
 
         const students = await db.student.findAndCountAll({
             attributes: [
-                'id', 'user_id', 'nis', 'nisn',
+                'id', 'user_id', 'nis', 'nisn', 'nik', 'no_akta',
                 'name', 'gender', 'place_birth', 'day_birth',
-                'religion', 'address', 'email', 'phone', 'entry_year', 'out_year', 'out_reason',
-                'child_no', 'father_name', 'mother_name', 'father_job', 'mother_job',
-                'father_education', 'mother_education', 'father_address',
-                'mother_address', 'father_email', 'mother_email', 'father_phone', 'mother_phone',
-                'guardian_name', 'guardian_address', 'guardian_phone', 'guardian_relation', 'created_at'
+                'religion', 'address', 'email', 'phone', 'rt', 'rw', 'urban', 'sub_district', 'city', 'postal_code',
+                'father_name', 'father_job', 'father_education', 'father_email', 'father_phone',
+                'mother_name', 'mother_job', 'mother_education', 'mother_email', 'mother_phone',
+                'guardian_name',
+                'entry_year', 'out_year', 'out_reason',
+                'created_at'
             ],
+            include: {
+                required: false,
+                as: 'active_class',
+                model: db.student_class,
+                attributes: ['id', 'status'],
+                where: { status: 'active' },
+                include: {
+                    model: db.classroom,
+                    attributes: ['id', 'code', 'room', 'name'],
+                }
+            },
 
             where: {
                 [Op.or]: [

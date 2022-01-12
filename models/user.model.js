@@ -16,10 +16,12 @@ const User = (sequelize, Sequelize) =>
                     message: 'Username sudah terdaftar'
                 }
             },
+            nisn: { type: Sequelize.STRING },
+            nip: { type: Sequelize.STRING },
             password: { type: Sequelize.STRING, allowNull: true },
 
             name: { type: Sequelize.STRING },
-            email: { type: Sequelize.STRING, allowNull: false },
+            email: { type: Sequelize.STRING },
             user_type: { type: Sequelize.ENUM('administrator', 'teacher', 'student'), allowNull: false },
             role_id: {
                 type: Sequelize.INTEGER,

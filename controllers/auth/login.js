@@ -22,7 +22,7 @@ exports.login = async (req, res) => {
     user = await db.user.findOne({
       where: {
         // email: email
-        [Op.or]: [{ email: email }, { username: email }],
+        [Op.or]: [{ email: email }, { username: email }, { nisn: email }, { nip: email }],
       },
       include: [
         {

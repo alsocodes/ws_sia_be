@@ -85,7 +85,8 @@ db.menu.hasMany(db.menu, { foreignKey: 'parent_id', as: 'children', constraints:
 db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'post_meta' })
 db.post.hasMany(db.post_meta, { foreignKey: 'post_id', as: 'req_post_meta' })
 
-db.student.hasMany(db.student_class, { foreignKey: 'student_id' })
+db.student.hasMany(db.student_class, { foreignKey: 'student_id', as: 'classes' })
+db.student.hasOne(db.student_class, { foreignKey: 'student_id', as: 'active_class' })
 db.student_class.belongsTo(db.student, { foreignKey: 'student_id' })
 db.classroom.hasMany(db.student_class, { foreignKey: 'classroom_id' })
 db.student_class.belongsTo(db.classroom, { foreignKey: 'classroom_id' })

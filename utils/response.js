@@ -15,6 +15,10 @@ module.exports = {
     })
   },
 
+  successWithDownload(message, res, data, flag = 200, file) {
+    res.download(file, 'import-faild-' + new Date().getTime())
+  },
+
   error(message, res, flag = 500) {
     res.status(flag).json({
       success: false,
