@@ -15,7 +15,6 @@ const LessonClassStudent = (sequelize, Sequelize) =>
 
             student_class_id: {
                 type: Sequelize.INTEGER,
-                allowNull: false
             },
 
             student_id: {

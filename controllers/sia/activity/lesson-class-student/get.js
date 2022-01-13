@@ -25,55 +25,64 @@ exports.get = async (req, res) => {
         }
 
         let filterings = []
-        for(var key in filter){
+        for (var key in filter) {
             let f = filter[key]
-            if(f.op === 'equal') filterings.push({[key]:f.value})
-            if(f.op === 'between') {
-                let fo = {[key]:{[Op.between] : [f.value.from, f.value.to]}}
+            if (f.op === 'equal') filterings.push({ [key]: f.value })
+            if (f.op === 'between') {
+                let fo = { [key]: { [Op.between]: [f.value.from, f.value.to] } }
                 filterings.push(fo)
             }
-            if(f.op === 'in'){
-                let fo = {[key]:{[Op.in] : f.value}}
+            if (f.op === 'in') {
+                let fo = { [key]: { [Op.in]: f.value } }
                 filterings.push(fo)
             }
         }
 
-        const lesson_classes = await db.lesson_class.findAndCountAll({
+        const lesson_class_student = await db.lesson_class_student.findAndCountAll({
             attributes: [
                 'id', 'status', 'created_at', 'passed_by', 'passed_at'
             ],
             include: [
                 {
-                    model: db.classroom,
-                    attributes: ['id', 'code', 'room', 'name']
+                    model: db.student,
+                    attributes: ['id', 'nisn', 'nis', 'name']
                 },
                 {
-                    model: db.eduyear,
-                    attributes: ['id', 'code', 'name']
-                },
-                {
-                    model: db.lesson,
-                    attributes: ['id', 'code', 'name']
-                },
-                {
-                    model: db.teacher,
-                    attributes: ['id', 'nip', 'name']
-                },
-                {
-                    model: db.semester,
-                    attributes: ['id', 'code', 'name']
+                    model: db.lesson_class,
+                    attributes: ['id', 'status'],
+                    include: [
+                        {
+                            model: db.classroom,
+                            attributes: ['id', 'code', 'room', 'name']
+                        },
+                        {
+                            model: db.lesson,
+                            attributes: ['id', 'code', 'name']
+                        },
+                        {
+                            model: db.eduyear,
+                            attributes: ['id', 'code', 'name']
+                        },
+                        {
+                            model: db.semester,
+                            attributes: ['id', 'code', 'name']
+                        },
+                        {
+                            model: db.teacher,
+                            attributes: ['id', 'nip', 'name']
+                        }
+                    ]
                 }
+
             ],
             raw: true,
 
             where: {
-                [Op.and] : filterings,
+                [Op.and]: filterings,
                 [Op.or]: [
-                    { '$classroom.name$': { [Op.like]: '%' + search + '%' } },
-                    { '$eduyear.name$': { [Op.like]: '%' + search + '%' } },
-                    { '$semester.name$': { [Op.like]: '%' + search + '%' } },
-                    { '$teacher.name$': { [Op.like]: '%' + search + '%' } },
-                    { '$lesson.name$': { [Op.like]: '%' + search + '%' } },
+                    { '$student.name$': { [Op.like]: '%' + search + '%' } },
+                    { '$lesson_class.teacher.name$': { [Op.like]: '%' + search + '%' } },
+                    { '$lesson_class.lesson.name$': { [Op.like]: '%' + search + '%' } },
                 ]
             },
             distinct: true,
@@ -82,52 +91,46 @@ exports.get = async (req, res) => {
             order: [ordering]
         })
 
-        const classroom_filterable = await db.classroom.findAll({
-            attributes: ['id', 'code', 'room', 'name'],
-            include: { model: db.lesson_class, required: true, attributes: [] },
-            group: ['id', 'code', 'room', 'name']
-        })
+        // const classroom_filterable = await db.classroom.findAll({
+        //     attributes: ['id', 'code', 'room', 'name'],
+        //     include: { model: db.lesson_class, required: true, attributes: [] },
+        //     group: ['id', 'code', 'room', 'name']
+        // })
 
-        const eduyear_filterable = await db.eduyear.findAll({
-            attributes: ['id', 'code', 'name'],
-            include: { model: db.lesson_class, required: true, attributes: [] },
-            group: ['id', 'code', 'name']
-        })
+        // const eduyear_filterable = await db.eduyear.findAll({
+        //     attributes: ['id', 'code', 'name'],
+        //     include: { model: db.lesson_class, required: true, attributes: [] },
+        //     group: ['id', 'code', 'name']
+        // })
 
-        const semester_filterable = await db.semester.findAll({
-            attributes: ['id', 'code', 'name'],
-            include: { model: db.lesson_class, required: true, attributes: [] },
-            group: ['id', 'code', 'name']
-        })
+        // const semester_filterable = await db.semester.findAll({
+        //     attributes: ['id', 'code', 'name'],
+        //     include: { model: db.lesson_class, required: true, attributes: [] },
+        //     group: ['id', 'code', 'name']
+        // })
 
-        const teacher_filterable = await db.teacher.findAll({
-            attributes: ['id', 'nip', 'name'],
-            include: { model: db.lesson_class, required: true, attributes: [] },
-            group: ['id', 'nip', 'name']
-        })
-
-        const lesson_filterable = await db.lesson.findAll({
-            attributes: ['id', 'code', 'name'],
-            include: { model: db.lesson_class, required: true, attributes: [] },
-            group: ['id', 'code', 'name']
-        })
+        // const lesson_filterable = await db.lesson.findAll({
+        //     attributes: ['id', 'code', 'name'],
+        //     include: { model: db.lesson_class, required: true, attributes: [] },
+        //     group: ['id', 'code', 'name']
+        // })
 
         const result = {
             filterable: {
-                classroom: classroom_filterable,
-                eduyear: eduyear_filterable,
-                semester: semester_filterable,
-                teacher: teacher_filterable,
-                lesson: lesson_filterable,
+                classroom: [],
+                eduyear: [],
+                semester: [],
+                teacher: [],
+                lesson: [],
             },
-            total_count: lesson_classes.count,
-            total_page: Math.ceil(lesson_classes.count / page_size),
-            rows: lesson_classes.rows,
+            total_count: lesson_class_student.count,
+            total_page: Math.ceil(lesson_class_student.count / page_size),
+            rows: lesson_class_student.rows,
         }
 
-        return response.success("Get pembelajaran kelas sukses", res, result, 200);
+        return response.success("Get pembelajaran siswa sukses", res, result, 200);
     } catch (err) {
         console.log(err);
-        return response.error(err.message || "Gagal get pembelajaran kelas", res);
+        return response.error(err.message || "Gagal get pembelajaran siswa", res);
     }
 };

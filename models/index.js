@@ -64,6 +64,9 @@ db.lesson_class_task = require('./lesson-class-task.model')(sequelize, Sequelize
 db.lesson_class_task_submit = require('./lesson-class-task-submit.model')(sequelize, Sequelize);
 db.lesson_class_material = require('./lesson-class-material.model')(sequelize, Sequelize);
 db.lesson_class_student = require('./lesson-class-student.model')(sequelize, Sequelize);
+db.sia_menu = require('./sia-menu.model')(sequelize, Sequelize);
+db.sia_menu_action = require('./sia-menu-action.model')(sequelize, Sequelize);
+db.role_menu_action = require('./role-menu-action.model')(sequelize, Sequelize);
 
 //sia
 db.student = require('./student.model')(sequelize, Sequelize);
@@ -103,5 +106,13 @@ db.teacher.hasMany(db.lesson_class, { foreignKey: 'teacher_id' })
 db.lesson_class.belongsTo(db.teacher, { foreignKey: 'teacher_id' })
 db.semester.hasMany(db.lesson_class, { foreignKey: 'semester_id' })
 db.lesson_class.belongsTo(db.semester, { foreignKey: 'semester_id' })
+
+db.student.hasMany(db.lesson_class_student, { foreignKey: 'student_id' })
+db.lesson_class_student.belongsTo(db.student, { foreignKey: 'student_id' })
+db.lesson_class.hasMany(db.lesson_class_student, { foreignKey: 'lesson_class_id' })
+db.lesson_class_student.belongsTo(db.lesson_class, { foreignKey: 'lesson_class_id' })
+
+// db.student.belongsTo(db.lesson_class_student, { foreignKey: 'lesson_class_id' })
+// db.lesson_class_student.hasMany(db.student, { foreignKey: 'lesson_class_id' })
 
 module.exports = db;

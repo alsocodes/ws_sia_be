@@ -5,7 +5,7 @@ const sequelize = require('../../../../models').sequelize;
 const { Op, Sequelize } = require("sequelize");
 
 exports.create = async (req, res) => {
-    // const t = await sequelize.transaction();
+    const t = await sequelize.transaction();
     try {
 
         /**
@@ -18,35 +18,39 @@ exports.create = async (req, res) => {
             students
         } = req.body
         const user = req.user
-
-        let check = await db.semester.findOne({ where: { id: semester_id } })
-        if (check?.status === 'inactive') return response.invalidInput("Tidak bisa menambahkan pelajaran pada semester yang tidak aktif", res)
-
-        // lesson, class, eduyear, semester hanya boleh ada satu
-        check = await db.lesson_class.findOne({
-            where: {
-                [Op.and]: [
-                    { lesson_id: lesson_id }, { classroom_id: classroom_id }, { eduyear_id: eduyear_id }, , { semester_id: semester_id }
-                ]
+        let result = {}
+        await Promise.all(students.map(async (item) => {
+            const { id, student_id, is_delete } = item;
+            const student = await db.student.findOne({ where: { id: student_id } })
+            if (!id) {
+                if (is_delete !== true) {
+                    let check = await db.lesson_class_student.findOne({
+                        where: { [Op.and]: [{ lesson_class_id: lesson_class_id }, { student_id: student_id }] }
+                    })
+                    if (check) {
+                        const error = new Error(`${student.name} sudah mengikuti kelas pelajaran ini`)
+                        error.code = 400
+                        throw error
+                    }
+                    await db.lesson_class_student.create({
+                        lesson_class_id: lesson_class_id,
+                        student_id: student_id,
+                        created_by: user.id,
+                        updated_by: user.id
+                    }, { transaction: t })
+                }
+            } else {
+                const lesson_class_student = await db.lesson_class_student.findOne({ where: { id: id } })
+                if (lesson_class_student && is_delete === true) await lesson_class_student.destroy({ transaction: t })
             }
-        })
-        if (check) return response.invalidInput("Pelajaran sudah ditambahkan pada kelas, tahun, dan semester yang dipilih.", res)
+        }))
 
-        const lesson_class = await db.lesson_class.create({
-            lesson_id: lesson_id,
-            classroom_id: classroom_id,
-            eduyear_id: eduyear_id,
-            semester_id: semester_id,
-            teacher_id: teacher_id,
-            created_by: user.id,
-            updated_by: user.id,
-        })
+        await t.commit()
 
-        return response.success("Menambhkan pembelajaran kelas berhasil", res, {
-            id: lesson_class.id
-        }, 201);
+        return response.success("Menambhkan pelajaran siswa berhasil", res, result, 201);
     } catch (err) {
+        await t.rollback()
         console.log(err);
-        return response.error(err.message || "Gagal menambhkan pembelajaran kelas", res);
+        return response.error(err.message || "Gagal", res);
     }
 };
