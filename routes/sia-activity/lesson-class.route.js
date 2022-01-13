@@ -3,6 +3,7 @@ const { authAccessToken } = require('../../middlewares/authToken.middleware');
 
 module.exports = (app) => {
     app.get("/sia/activity/lesson-class", authAccessToken, lesson_class.get);
+    app.get("/sia/activity/lesson-class/by-class-year", authAccessToken, lesson_class.getClassYear);
     app.post("/sia/activity/lesson-class", authAccessToken, lesson_class.create);
     app.get("/sia/activity/lesson-class-opt", authAccessToken, lesson_class.getOpt);
     app.get("/sia/activity/lesson-class/:id", authAccessToken, lesson_class.getOne);

@@ -17,12 +17,15 @@ exports.get = async (req, res) => {
         const filter = !req.query.filter ? {} : JSON.parse(decodeURIComponent(req.query.filter))
 
         let ordering = [orderby, order];
-
-        if (orderby.includes('.')) {
+        if (orderby === 'student.name') {
+            console.log('iam here', orderby)
+            ordering = [sequelize.literal('student.name'), order];
+        } else if (orderby.includes('.')) {
             let od = orderby.split('.')
             let od0 = od[0];
             ordering = [db[od0], od[1], order]
         }
+        console.log(orderby)
 
         let filterings = []
         for (var key in filter) {
@@ -54,6 +57,8 @@ exports.get = async (req, res) => {
                 },
 
                 {
+                    as: 'student',
+                    required: true,
                     model: db.student,
                     attributes: [
                         'id', 'user_id', 'nis', 'nisn', 'name'
@@ -72,6 +77,7 @@ exports.get = async (req, res) => {
             offset: offset,
             limit: limit,
             order: [ordering]
+            // order: [[sequelize.literal('student.name'), 'ASC']]
         })
 
         const classroom_filterable = await db.classroom.findAll({

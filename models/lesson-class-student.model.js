@@ -12,9 +12,20 @@ const LessonClassStudent = (sequelize, Sequelize) =>
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
+
+            student_class_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false
+            },
+
             student_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
+            },
+
+            final_value: {
+                type: Sequelize.DOUBLE,
+                defaultValue: 0
             },
 
             status: {
