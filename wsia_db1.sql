@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : localhost
+ Source Server         : LOCAL 26
  Source Server Type    : MySQL
- Source Server Version : 50733
- Source Host           : localhost:3306
+ Source Server Version : 50724
+ Source Host           : localhost:3307
  Source Schema         : wsia_db1
 
  Target Server Type    : MySQL
- Target Server Version : 50733
+ Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 14/01/2022 06:50:39
+ Date: 14/01/2022 15:52:48
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `album-galleries`  (
   INDEX `gallery_id`(`gallery_id`) USING BTREE,
   CONSTRAINT `album-galleries_ibfk_1` FOREIGN KEY (`album_id`) REFERENCES `albums` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `album-galleries_ibfk_2` FOREIGN KEY (`gallery_id`) REFERENCES `galleries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of album-galleries
@@ -53,7 +53,7 @@ CREATE TABLE `albums`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of albums
@@ -77,7 +77,7 @@ CREATE TABLE `categories`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `categories_name_unique`(`name`) USING BTREE,
   UNIQUE INDEX `categories_slug_unique`(`slug`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of categories
@@ -95,7 +95,7 @@ CREATE TABLE `category_posts`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category_posts
@@ -114,7 +114,7 @@ CREATE TABLE `classrooms`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of classrooms
@@ -163,7 +163,7 @@ CREATE TABLE `eduyears`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of eduyears
@@ -185,7 +185,7 @@ CREATE TABLE `galleries`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of galleries
@@ -207,7 +207,7 @@ CREATE TABLE `generals`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of generals
@@ -240,7 +240,7 @@ CREATE TABLE `lesson_class_materials`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lesson_class_materials
@@ -266,7 +266,7 @@ CREATE TABLE `lesson_class_students`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 227 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 227 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lesson_class_students
@@ -474,7 +474,7 @@ CREATE TABLE `lesson_class_task_submits`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lesson_class_task_submits
@@ -498,7 +498,7 @@ CREATE TABLE `lesson_class_tasks`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lesson_class_tasks
@@ -535,7 +535,7 @@ CREATE TABLE `lesson_classes`  (
   CONSTRAINT `lesson_classes_ibfk_3` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `lesson_classes_ibfk_4` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `lesson_classes_ibfk_5` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lesson_classes
@@ -581,7 +581,7 @@ CREATE TABLE `lessons`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of lessons
@@ -618,7 +618,7 @@ CREATE TABLE `menus`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menus
@@ -645,7 +645,7 @@ CREATE TABLE `post_meta`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`post_id`) USING BTREE,
   CONSTRAINT `post_meta_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of post_meta
@@ -685,7 +685,7 @@ CREATE TABLE `posts`  (
   UNIQUE INDEX `posts_slug_unique`(`slug`) USING BTREE,
   INDEX `author_id`(`author_id`) USING BTREE,
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of posts
@@ -715,18 +715,34 @@ INSERT INTO `posts` VALUES (18, 'Ullamco laboris nisi ut aliquip ex ea commodo c
 DROP TABLE IF EXISTS `role_menu_actions`;
 CREATE TABLE `role_menu_actions`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sia_menu_id` int(11) NOT NULL,
+  `sia_menu_id` int(11) NULL DEFAULT NULL,
   `sia_menu_action_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `created_at` datetime(0) NOT NULL,
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_menu_actions
 -- ----------------------------
+INSERT INTO `role_menu_actions` VALUES (1, 1, 1, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (2, 2, 2, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (3, 3, 3, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (4, 4, 4, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (5, 5, 5, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (6, 6, 6, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (7, 7, 7, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (8, 8, 8, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (9, 9, 9, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (10, 10, 10, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (11, 11, 11, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (12, 12, 12, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (13, 13, 13, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
+INSERT INTO `role_menu_actions` VALUES (14, 1, 14, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
+INSERT INTO `role_menu_actions` VALUES (15, 1, 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
+INSERT INTO `role_menu_actions` VALUES (16, 1, 1, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for roles
@@ -740,7 +756,7 @@ CREATE TABLE `roles`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of roles
@@ -762,7 +778,7 @@ CREATE TABLE `semesters`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of semesters
@@ -782,11 +798,25 @@ CREATE TABLE `sia_menu_actions`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sia_menu_actions
 -- ----------------------------
+INSERT INTO `sia_menu_actions` VALUES (1, 1, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (2, 2, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (3, 3, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (4, 4, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (5, 5, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (6, 6, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (7, 7, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (8, 8, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (9, 9, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (10, 10, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (11, 11, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (12, 12, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (13, 13, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
+INSERT INTO `sia_menu_actions` VALUES (14, 1, 'view_report_dashboard', '2022-01-14 08:16:35', '2022-01-14 08:16:35', NULL);
 
 -- ----------------------------
 -- Table structure for sia_menus
@@ -809,12 +839,12 @@ CREATE TABLE `sia_menus`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sia_menus
 -- ----------------------------
-INSERT INTO `sia_menus` VALUES (1, 'dashboard', 0, 'Dashboard', 'Dasboard', NULL, NULL, NULL, NULL, NULL, 0, '00', '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
+INSERT INTO `sia_menus` VALUES (1, 'dashboard', 0, 'Dashboard', 'Dasboard', NULL, '/', NULL, NULL, NULL, 0, '00', '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
 INSERT INTO `sia_menus` VALUES (2, 'sia', 0, '(SIA) Sistem Informasi Akademik', 'SIA', NULL, '/sia', 1, 0, NULL, 0, NULL, '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
 INSERT INTO `sia_menus` VALUES (3, 'sia-master', 0, 'Master', 'Master', NULL, '/sia/master', 1, 0, NULL, 0, NULL, '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
 INSERT INTO `sia_menus` VALUES (4, 'sia-master-lesson', 3, 'Pelajaran', 'Pelajaran', NULL, '/sia/master/lesson', 1, 0, NULL, 0, NULL, '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
@@ -844,7 +874,7 @@ CREATE TABLE `slides`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of slides
@@ -879,7 +909,7 @@ CREATE TABLE `student_classes`  (
   CONSTRAINT `student_classes_ibfk_1` FOREIGN KEY (`classroom_id`) REFERENCES `classrooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `student_classes_ibfk_2` FOREIGN KEY (`eduyear_id`) REFERENCES `eduyears` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `student_classes_ibfk_3` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of student_classes
@@ -1241,7 +1271,7 @@ CREATE TABLE `students`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of students
@@ -1582,7 +1612,7 @@ CREATE TABLE `teachers`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of teachers
@@ -1640,7 +1670,7 @@ CREATE TABLE `users`  (
   UNIQUE INDEX `users_username_unique`(`username`) USING BTREE,
   INDEX `role_id`(`role_id`) USING BTREE,
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 389 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 389 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
