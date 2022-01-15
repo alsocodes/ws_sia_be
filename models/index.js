@@ -68,6 +68,9 @@ db.sia_menu = require('./sia-menu.model')(sequelize, Sequelize);
 db.sia_menu_action = require('./sia-menu-action.model')(sequelize, Sequelize);
 db.role_menu_action = require('./role-menu-action.model')(sequelize, Sequelize);
 
+db.access = require('./access.model')(sequelize, Sequelize);
+db.role_access = require('./role-access.model')(sequelize, Sequelize);
+
 //sia
 db.student = require('./student.model')(sequelize, Sequelize);
 db.teacher = require('./teacher.model')(sequelize, Sequelize);
@@ -114,5 +117,9 @@ db.lesson_class_student.belongsTo(db.lesson_class, { foreignKey: 'lesson_class_i
 
 // db.student.belongsTo(db.lesson_class_student, { foreignKey: 'lesson_class_id' })
 // db.lesson_class_student.hasMany(db.student, { foreignKey: 'lesson_class_id' })
+
+
+db.role.hasMany(db.role_access, { foreignKey: 'role_id' })
+db.role_access.belongsTo(db.role, { foreignKey: 'role_id' })
 
 module.exports = db;
