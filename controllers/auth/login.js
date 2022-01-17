@@ -41,59 +41,24 @@ exports.login = async (req, res) => {
       return response.forbidden("Wrong username or password", res);
     }
 
-    // const raw_role_actions = await db.role.findAll({
-    //     attributes: ['name'],
-    //     // raw:true,
-    //     include:[
-    //         {
-    //             model: db.role_menu_action,
-    //             attributes:['id'],
-    //             include:[
-    //                 {
-    //                     model: db.sia_menu,
-    //                     attributes:['name','label','title', 'path'],
-    //                     include:{
-    //                         model: db.sia_menu_action,
-    //                         attributes:['id', 'name'],
-    //                     },
-    //                 }
-                    
-    //             ]
-    //         }
-    //     ],
-    //     where: {
-    //         id: user.role.id
-    //     }
-    // })
-
-    const raws = await db.sia_menu.findAll({
-        attributes:['name','label','title', 'path'],
-        include:[
-            {
-                model: db.sia_menu_action,
-                attributes:['id', 'name'],
-                include:{
-                    model: db.role_menu_action,
-                    attributes: [],
-                    where: {role_id: user.role.id}
-                }
-            },
-        ]
+    const raw_access = await db.role_access.findAll({
+      raw: true,
+      attributes: [],
+      include: {
+        model: db.access,
+        attributes: ['id', 'name']
+      },
+      where: { role_id: user.role_id }
     })
 
-    // const role_actions = raw_role_actions.map(item=>{
-    //     let menu = {}
-    //     menu[item.name] = item.name
-    //     if(!menu[item.name]['menu']) menu[item.name]['menu']=[]
-    //     // menu[item.name]['menu'].push(item['role_menu_actions.sia_menu.name'])
-    //     return menu
-    // })
+    const role_access = raw_access.map(item => item['access.name'])
 
     accessToken = jwt.sign(
       {
         email: user.email,
         username: user.username,
-        id: user.id
+        id: user.id,
+        role_access: role_access
       },
       config.accessSecret,
       {
@@ -116,15 +81,14 @@ exports.login = async (req, res) => {
     res.cookie("token", refreshToken, { httpOnly: true });
 
     return response.success("Login is successfull", res, {
-        // role_actions,
-        raws,
-        access_token: accessToken,
-        refresh_token: refreshToken,
-        user: {
-            name: user.name,
-            email: user.email,
-            role: user.role,
-        },
+      access_token: accessToken,
+      refresh_token: refreshToken,
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        role_access: role_access,
+      },
     }, 200);
   } catch (err) {
     console.log(err);

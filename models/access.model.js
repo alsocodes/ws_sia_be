@@ -8,14 +8,19 @@ const Access = (sequelize, Sequelize) =>
                 autoIncrement: true,
                 allowNull: false,
             },
-
+            parent_id: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 0
+            },
             name: {
                 type: Sequelize.STRING,
                 allowNull: false,
                 unique: true,
             },
-            description: {
+            label: {
                 type: Sequelize.STRING,
+                allowNull: false,
             }
 
         },

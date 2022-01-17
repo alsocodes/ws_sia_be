@@ -1,21 +1,74 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : LOCAL 26
+ Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50724
- Source Host           : localhost:3307
+ Source Server Version : 50733
+ Source Host           : localhost:3306
  Source Schema         : wsia_db1
 
  Target Server Type    : MySQL
- Target Server Version : 50724
+ Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 14/01/2022 15:52:48
+ Date: 17/01/2022 08:22:25
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for accesses
+-- ----------------------------
+DROP TABLE IF EXISTS `accesses`;
+CREATE TABLE `accesses`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `label` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `created_at` datetime(0) NOT NULL,
+  `updated_at` datetime(0) NOT NULL,
+  `deleted_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of accesses
+-- ----------------------------
+INSERT INTO `accesses` VALUES (1, 0, 'dashboard', 'Dashboard', '2022-01-15 21:05:57', '2022-01-15 21:06:00', NULL);
+INSERT INTO `accesses` VALUES (2, 0, 'manage-content', 'Manage Content', '2022-01-15 21:10:41', '2022-01-15 21:10:41', NULL);
+INSERT INTO `accesses` VALUES (3, 2, 'publish-content', 'Publish Content', '2022-01-15 21:10:41', '2022-01-15 21:10:41', NULL);
+INSERT INTO `accesses` VALUES (4, 2, 'edit-content-others', 'Edit Content Others', '2022-01-15 21:10:41', '2022-01-15 21:10:41', NULL);
+INSERT INTO `accesses` VALUES (5, 2, 'delete-content-others', 'Delete Content Others', '2022-01-15 21:10:41', '2022-01-15 21:10:41', NULL);
+INSERT INTO `accesses` VALUES (6, 2, 'add-content', 'Add Content', '2022-01-15 21:10:41', '2022-01-15 21:10:41', NULL);
+INSERT INTO `accesses` VALUES (7, 0, 'general-setting', 'General Setting', '2022-01-15 21:10:41', '2022-01-15 21:10:41', NULL);
+INSERT INTO `accesses` VALUES (8, 0, 'menu-setting', 'Menu Setting', '2022-01-15 21:17:33', '2022-01-15 21:17:37', NULL);
+INSERT INTO `accesses` VALUES (9, 8, 'add-menu', 'Add Menu', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (10, 8, 'edit-menu', 'Edit Menu', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (11, 8, 'delete-menu', 'Delete Menu', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (14, 2, 'edit-content', 'Edit Content', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (15, 2, 'delete-content', 'Delete Content', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (16, 0, 'sia-dashboard', 'SIA Dashboard', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (17, 0, 'sia-master', 'SIA Master', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (18, 17, 'add-sia-master', 'Add SIA Master', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (19, 17, 'edit-sia-master', 'Edit SIA Master', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (20, 17, 'delete-sia-master', 'Delete SIA Master', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (21, 0, 'sia-activity', 'SIA Activity', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (22, 21, 'sia-student-class-activity', 'SIA Student class Activity', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (23, 21, 'sia-lesson-class-acivity', 'SIA Lesson Class Activity', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (24, 21, 'sia-lesson-class-student-activity', 'SIA Lesson Class Student Activity', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (25, 21, 'add-sia-lesson-class-student-activity', 'Add SIA Lesson Class Student Activity', '2022-01-15 21:17:58', '2022-01-15 21:17:58', NULL);
+INSERT INTO `accesses` VALUES (26, 0, 'master-user', 'Master User', '2022-01-16 06:58:12', '2022-01-16 06:58:12', NULL);
+INSERT INTO `accesses` VALUES (27, 26, 'add-master-user', 'Add Master User', '2022-01-16 06:58:12', '2022-01-16 06:58:12', NULL);
+INSERT INTO `accesses` VALUES (28, 26, 'edit-master-user', 'Edit Master User', '2022-01-16 06:58:12', '2022-01-16 06:58:12', NULL);
+INSERT INTO `accesses` VALUES (29, 26, 'delete-master-user', 'Delete Master User', '2022-01-16 06:58:12', '2022-01-16 06:58:12', NULL);
+INSERT INTO `accesses` VALUES (30, 26, 'edit-master-user-others', 'Edit Master User Others', '2022-01-16 06:58:12', '2022-01-16 06:58:12', NULL);
+INSERT INTO `accesses` VALUES (31, 26, 'delete-master-user-others', 'Delete Master User Others', '2022-01-16 06:58:12', '2022-01-16 06:58:12', NULL);
+INSERT INTO `accesses` VALUES (32, 0, 'master-role', 'Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
+INSERT INTO `accesses` VALUES (33, 32, 'add-master-role', 'Add Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
+INSERT INTO `accesses` VALUES (34, 32, 'edit-master-role', 'Edit Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
+INSERT INTO `accesses` VALUES (35, 32, 'delete-master-role', 'Delete Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
 
 -- ----------------------------
 -- Table structure for album-galleries
@@ -33,7 +86,7 @@ CREATE TABLE `album-galleries`  (
   INDEX `gallery_id`(`gallery_id`) USING BTREE,
   CONSTRAINT `album-galleries_ibfk_1` FOREIGN KEY (`album_id`) REFERENCES `albums` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `album-galleries_ibfk_2` FOREIGN KEY (`gallery_id`) REFERENCES `galleries` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of album-galleries
@@ -53,7 +106,7 @@ CREATE TABLE `albums`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of albums
@@ -77,7 +130,7 @@ CREATE TABLE `categories`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `categories_name_unique`(`name`) USING BTREE,
   UNIQUE INDEX `categories_slug_unique`(`slug`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categories
@@ -95,7 +148,7 @@ CREATE TABLE `category_posts`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of category_posts
@@ -114,7 +167,7 @@ CREATE TABLE `classrooms`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of classrooms
@@ -163,12 +216,13 @@ CREATE TABLE `eduyears`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of eduyears
 -- ----------------------------
 INSERT INTO `eduyears` VALUES (1, '2021', '2021/2022', 'active', '2022-01-12 19:51:14', '2022-01-12 19:51:17', NULL);
+INSERT INTO `eduyears` VALUES (2, '2022', '2022/2023', 'draft', '2022-01-16 23:48:51', '2022-01-16 23:48:58', '2022-01-16 23:48:58');
 
 -- ----------------------------
 -- Table structure for galleries
@@ -185,7 +239,7 @@ CREATE TABLE `galleries`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of galleries
@@ -207,7 +261,7 @@ CREATE TABLE `generals`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of generals
@@ -240,7 +294,7 @@ CREATE TABLE `lesson_class_materials`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_materials
@@ -266,7 +320,7 @@ CREATE TABLE `lesson_class_students`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 227 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 227 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_students
@@ -474,7 +528,7 @@ CREATE TABLE `lesson_class_task_submits`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_task_submits
@@ -498,7 +552,7 @@ CREATE TABLE `lesson_class_tasks`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_tasks
@@ -535,7 +589,7 @@ CREATE TABLE `lesson_classes`  (
   CONSTRAINT `lesson_classes_ibfk_3` FOREIGN KEY (`lesson_id`) REFERENCES `lessons` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `lesson_classes_ibfk_4` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `lesson_classes_ibfk_5` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_classes
@@ -581,7 +635,7 @@ CREATE TABLE `lessons`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lessons
@@ -618,7 +672,7 @@ CREATE TABLE `menus`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menus
@@ -645,7 +699,7 @@ CREATE TABLE `post_meta`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `post_id`(`post_id`) USING BTREE,
   CONSTRAINT `post_meta_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of post_meta
@@ -685,7 +739,7 @@ CREATE TABLE `posts`  (
   UNIQUE INDEX `posts_slug_unique`(`slug`) USING BTREE,
   INDEX `author_id`(`author_id`) USING BTREE,
   CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of posts
@@ -693,7 +747,7 @@ CREATE TABLE `posts`  (
 INSERT INTO `posts` VALUES (1, 'Mencoba membuat tulisan baru', '<p><strong><em>tulisan ini dicetak tebal dan miring serta </em></strong><strong><em><ins>underlined</ins></em></strong></p>\n', 'Ini ringkasannya', 'img-1639983416272.jpg', 1, 'article', 'publish', 'public', 'close', 'mencoba-membuat-tulisan-baru', 'k1,k2', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
 INSERT INTO `posts` VALUES (2, 'Mencoba membuat tulisan baru lagi', '<p><strong>xlwjdwdjdjwdjwldjwl</strong></p>\n', 'lalalalalasdsw', 'img-1639983840015.jpg', 1, 'article', 'publish', 'public', 'close', 'mencoba-membuat-tulisan-baru-lagi', 'k1,k2', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
 INSERT INTO `posts` VALUES (3, 'Dimana aku disini dan kemana aku disana', '<p><strong>dwkdjwkwssxwwdwdwdwdwdwdwdwdw111111111</strong></p>\n<p><strong><img style=\"display: block; margin-left: auto; margin-right: auto;\" title=\"IMG-20170410-WA0005.jpg\" src=\"http://localhost:3007/public/images/img-1640126359665.jpg\" alt=\"\" width=\"300\" height=\"215\" /></strong></p>\n<p><strong><img title=\"ss_notif_KC.JPG\" src=\"http://localhost:3007/public/images/img-1640126440108.jpg\" alt=\"\" width=\"625\" height=\"286\" /></strong></p>', 'dwkdwhkssss', 'img-1640089556587.jpg', 1, 'article', 'publish', 'public', 'close', 'dimana-aku-disinixx', 'kk11k1k1', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
-INSERT INTO `posts` VALUES (4, 'Profil SMPN 33 Surabaya', '<p>A school is an educational institution designed to provide learning spaces and learning environments for the teaching of students under the direction of teachers. Most countries have systems of formal education, which is sometimes compulsory. In these systems...</p>\n<p>&nbsp;</p>', '', 'img-1641209764890.jpg', 1, 'page', 'publish', 'public', 'close', 'profil-smpn-33-surabaya', '', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
+INSERT INTO `posts` VALUES (4, 'Profil SMPN 33 Surabaya', '<p>A school is an educational institution designed to provide learning spaces and learning environments for the teaching of students under the direction of teachers. Most countries have systems of formal education, which is sometimes compulsory. In these systems...</p>\n<p>&nbsp;</p>', '', 'img-1641209764890.jpg', 1, 'page', 'publish', 'public', 'close', 'profil-smpn-33-surabaya', '', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-16 21:36:28', NULL);
 INSERT INTO `posts` VALUES (5, 'Hasil seleksi peserta olimiade', '<p>ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor inullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in</p>\n<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" title=\"New Project (3).png\" src=\"http://localhost:3007/public/images/img-1640130592509.png\" alt=\"\" width=\"358\" height=\"409\" /></p>', 'Telah dibuka hasil selesksi peserta olimiapde dari SMPN 33 yang akan mengikuti pertandingan pada 17 Agustus 2022.', 'img-1640971481880.jpg', 1, 'news', 'publish', 'public', 'close', 'hasil-seleksi-peserta-olimiade', '', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
 INSERT INTO `posts` VALUES (6, 'Informasi daftar ulang', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'img-1640971383749.jpg', 1, 'news', 'publish', 'public', 'close', 'informasi-daftar-ulang', '', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
 INSERT INTO `posts` VALUES (7, 'Pelantikan pengurus osis 2021', '<p>Pelantikan pengurus osis 2021</p>', 'Pelantikan pengurus osis 2021', 'img-1640131102831.jpeg', 1, 'agenda', 'publish', 'public', 'close', 'pelantikan-pengurus-osis-2021', 'Pelantikan pengurus osis 2021', 0, NULL, '2022-03-24 07:00:00', 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
@@ -710,39 +764,121 @@ INSERT INTO `posts` VALUES (17, 'Sunt in culpa qui officia deserunt mollit anim 
 INSERT INTO `posts` VALUES (18, 'Ullamco laboris nisi ut aliquip ex ea commodo consequat', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 'img-1640972589152.jpg', 1, 'news', 'publish', 'public', 'close', 'ullamco-laboris-nisi-ut-aliquip-ex-ea-commodo-consequat', '', 0, NULL, NULL, 1, NULL, NULL, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
 
 -- ----------------------------
+-- Table structure for role_accesses
+-- ----------------------------
+DROP TABLE IF EXISTS `role_accesses`;
+CREATE TABLE `role_accesses`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `access_id` int(11) NOT NULL,
+  `created_at` datetime(0) NOT NULL,
+  `updated_at` datetime(0) NOT NULL,
+  `deleted_at` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `role_id`(`role_id`) USING BTREE,
+  CONSTRAINT `role_accesses_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of role_accesses
+-- ----------------------------
+INSERT INTO `role_accesses` VALUES (1, 1, 1, '2022-01-16 00:24:26', '2022-01-16 00:24:26', '2022-01-16 01:31:41');
+INSERT INTO `role_accesses` VALUES (4, 1, 2, '2022-01-16 01:31:41', '2022-01-16 01:31:41', NULL);
+INSERT INTO `role_accesses` VALUES (5, 1, 1, '2022-01-16 01:33:50', '2022-01-16 01:33:50', NULL);
+INSERT INTO `role_accesses` VALUES (6, 4, 1, '2022-01-16 01:38:55', '2022-01-16 01:38:55', NULL);
+INSERT INTO `role_accesses` VALUES (7, 4, 2, '2022-01-16 01:38:55', '2022-01-16 01:38:55', NULL);
+INSERT INTO `role_accesses` VALUES (8, 4, 3, '2022-01-16 01:38:55', '2022-01-16 01:38:55', NULL);
+INSERT INTO `role_accesses` VALUES (9, 4, 4, '2022-01-16 01:38:55', '2022-01-16 01:38:55', NULL);
+INSERT INTO `role_accesses` VALUES (10, 4, 9, '2022-01-16 01:38:55', '2022-01-16 01:38:55', NULL);
+INSERT INTO `role_accesses` VALUES (11, 4, 11, '2022-01-16 01:38:55', '2022-01-16 01:38:55', NULL);
+INSERT INTO `role_accesses` VALUES (12, 4, 10, '2022-01-16 01:38:55', '2022-01-16 01:38:55', NULL);
+INSERT INTO `role_accesses` VALUES (13, 5, 1, '2022-01-16 01:39:38', '2022-01-16 01:39:38', NULL);
+INSERT INTO `role_accesses` VALUES (14, 5, 2, '2022-01-16 01:39:38', '2022-01-16 01:39:38', NULL);
+INSERT INTO `role_accesses` VALUES (15, 5, 3, '2022-01-16 01:39:38', '2022-01-16 01:39:38', NULL);
+INSERT INTO `role_accesses` VALUES (16, 5, 4, '2022-01-16 01:39:38', '2022-01-16 01:39:38', NULL);
+INSERT INTO `role_accesses` VALUES (17, 5, 5, '2022-01-16 01:39:38', '2022-01-16 01:39:38', NULL);
+INSERT INTO `role_accesses` VALUES (18, 5, 6, '2022-01-16 01:39:38', '2022-01-16 01:39:38', NULL);
+INSERT INTO `role_accesses` VALUES (19, 6, 1, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (20, 6, 2, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (21, 6, 3, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (22, 6, 4, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (23, 6, 5, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (24, 6, 6, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (25, 6, 8, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (26, 6, 14, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (27, 6, 7, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (28, 6, 9, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (29, 6, 15, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (30, 6, 21, '2022-01-16 01:40:15', '2022-01-16 01:40:15', NULL);
+INSERT INTO `role_accesses` VALUES (31, 1, 3, '2022-01-16 07:03:16', '2022-01-16 07:03:16', '2022-01-16 12:14:10');
+INSERT INTO `role_accesses` VALUES (32, 1, 4, '2022-01-16 07:03:16', '2022-01-16 07:03:16', '2022-01-16 12:14:10');
+INSERT INTO `role_accesses` VALUES (33, 1, 5, '2022-01-16 07:03:16', '2022-01-16 07:03:16', '2022-01-16 12:14:10');
+INSERT INTO `role_accesses` VALUES (34, 1, 6, '2022-01-16 07:03:16', '2022-01-16 07:03:16', '2022-01-16 10:46:18');
+INSERT INTO `role_accesses` VALUES (35, 1, 14, '2022-01-16 07:03:16', '2022-01-16 07:03:16', '2022-01-16 12:14:10');
+INSERT INTO `role_accesses` VALUES (36, 1, 15, '2022-01-16 07:03:16', '2022-01-16 07:03:16', '2022-01-16 12:14:10');
+INSERT INTO `role_accesses` VALUES (37, 1, 26, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (38, 1, 27, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (39, 1, 28, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (40, 1, 29, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (41, 1, 30, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (42, 1, 31, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (43, 1, 32, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (44, 1, 33, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (45, 1, 34, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (46, 1, 35, '2022-01-16 07:03:16', '2022-01-16 07:03:16', NULL);
+INSERT INTO `role_accesses` VALUES (47, 1, 17, '2022-01-16 09:55:47', '2022-01-16 09:55:47', '2022-01-16 23:36:46');
+INSERT INTO `role_accesses` VALUES (48, 1, 18, '2022-01-16 09:55:47', '2022-01-16 09:55:47', '2022-01-16 23:36:46');
+INSERT INTO `role_accesses` VALUES (49, 1, 19, '2022-01-16 09:55:47', '2022-01-16 09:55:47', '2022-01-16 23:36:46');
+INSERT INTO `role_accesses` VALUES (50, 1, 20, '2022-01-16 09:55:47', '2022-01-16 09:55:47', '2022-01-16 23:36:46');
+INSERT INTO `role_accesses` VALUES (51, 1, 16, '2022-01-16 09:57:13', '2022-01-16 09:57:13', NULL);
+INSERT INTO `role_accesses` VALUES (52, 1, 7, '2022-01-16 10:00:11', '2022-01-16 10:00:11', '2022-01-16 10:23:31');
+INSERT INTO `role_accesses` VALUES (53, 1, 8, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (54, 1, 9, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (55, 1, 10, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (56, 1, 11, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (57, 1, 21, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (58, 1, 22, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (59, 1, 23, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (60, 1, 24, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (61, 1, 25, '2022-01-16 10:00:11', '2022-01-16 10:00:11', NULL);
+INSERT INTO `role_accesses` VALUES (62, 1, 7, '2022-01-16 10:35:36', '2022-01-16 10:35:36', '2022-01-16 12:08:45');
+INSERT INTO `role_accesses` VALUES (63, 1, 6, '2022-01-16 11:03:04', '2022-01-16 11:03:04', '2022-01-16 11:03:34');
+INSERT INTO `role_accesses` VALUES (64, 1, 6, '2022-01-16 11:05:54', '2022-01-16 11:05:54', '2022-01-16 13:24:04');
+INSERT INTO `role_accesses` VALUES (65, 1, 7, '2022-01-16 12:13:09', '2022-01-16 12:13:09', NULL);
+INSERT INTO `role_accesses` VALUES (66, 1, 14, '2022-01-16 13:21:42', '2022-01-16 13:21:42', '2022-01-16 13:25:56');
+INSERT INTO `role_accesses` VALUES (67, 1, 15, '2022-01-16 13:21:42', '2022-01-16 13:21:42', NULL);
+INSERT INTO `role_accesses` VALUES (68, 1, 6, '2022-01-16 21:27:36', '2022-01-16 21:27:36', NULL);
+INSERT INTO `role_accesses` VALUES (69, 1, 14, '2022-01-16 21:27:36', '2022-01-16 21:27:36', NULL);
+INSERT INTO `role_accesses` VALUES (70, 1, 3, '2022-01-16 21:27:48', '2022-01-16 21:27:48', NULL);
+INSERT INTO `role_accesses` VALUES (71, 1, 4, '2022-01-16 21:27:48', '2022-01-16 21:27:48', NULL);
+INSERT INTO `role_accesses` VALUES (72, 1, 5, '2022-01-16 21:27:48', '2022-01-16 21:27:48', NULL);
+INSERT INTO `role_accesses` VALUES (73, 1, 17, '2022-01-16 23:40:07', '2022-01-16 23:40:07', NULL);
+INSERT INTO `role_accesses` VALUES (74, 1, 18, '2022-01-16 23:40:07', '2022-01-16 23:40:07', NULL);
+INSERT INTO `role_accesses` VALUES (75, 1, 19, '2022-01-16 23:40:07', '2022-01-16 23:40:07', NULL);
+INSERT INTO `role_accesses` VALUES (76, 1, 20, '2022-01-16 23:40:07', '2022-01-16 23:40:07', NULL);
+INSERT INTO `role_accesses` VALUES (77, 3, 1, '2022-01-16 23:52:24', '2022-01-16 23:52:24', '2022-01-16 23:53:17');
+INSERT INTO `role_accesses` VALUES (78, 3, 16, '2022-01-16 23:53:17', '2022-01-16 23:53:17', NULL);
+INSERT INTO `role_accesses` VALUES (79, 3, 21, '2022-01-16 23:53:17', '2022-01-16 23:53:17', NULL);
+INSERT INTO `role_accesses` VALUES (80, 3, 1, '2022-01-16 23:54:13', '2022-01-16 23:54:13', NULL);
+
+-- ----------------------------
 -- Table structure for role_menu_actions
 -- ----------------------------
 DROP TABLE IF EXISTS `role_menu_actions`;
 CREATE TABLE `role_menu_actions`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sia_menu_id` int(11) NULL DEFAULT NULL,
+  `sia_menu_id` int(11) NOT NULL,
   `sia_menu_action_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
   `created_at` datetime(0) NOT NULL,
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_menu_actions
 -- ----------------------------
-INSERT INTO `role_menu_actions` VALUES (1, 1, 1, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (2, 2, 2, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (3, 3, 3, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (4, 4, 4, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (5, 5, 5, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (6, 6, 6, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (7, 7, 7, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (8, 8, 8, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (9, 9, 9, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (10, 10, 10, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (11, 11, 11, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (12, 12, 12, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (13, 13, 13, 1, '2022-01-14 08:19:50', '2022-01-14 08:19:50', NULL);
-INSERT INTO `role_menu_actions` VALUES (14, 1, 14, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
-INSERT INTO `role_menu_actions` VALUES (15, 1, 1, 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
-INSERT INTO `role_menu_actions` VALUES (16, 1, 1, 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for roles
@@ -756,14 +892,17 @@ CREATE TABLE `roles`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of roles
 -- ----------------------------
-INSERT INTO `roles` VALUES (1, 'super admin', '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
+INSERT INTO `roles` VALUES (1, 'adminsuper', '2022-01-12 19:23:46', '2022-01-16 01:01:17', NULL);
 INSERT INTO `roles` VALUES (2, 'student', '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
 INSERT INTO `roles` VALUES (3, 'teacher', '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
+INSERT INTO `roles` VALUES (4, 'Op1', '2022-01-16 01:38:55', '2022-01-16 01:41:02', '2022-01-16 01:41:02');
+INSERT INTO `roles` VALUES (5, 'Op2', '2022-01-16 01:39:38', '2022-01-16 01:40:56', '2022-01-16 01:40:56');
+INSERT INTO `roles` VALUES (6, 'Op3', '2022-01-16 01:40:15', '2022-01-16 01:40:52', '2022-01-16 01:40:52');
 
 -- ----------------------------
 -- Table structure for semesters
@@ -778,7 +917,7 @@ CREATE TABLE `semesters`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of semesters
@@ -798,25 +937,11 @@ CREATE TABLE `sia_menu_actions`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sia_menu_actions
 -- ----------------------------
-INSERT INTO `sia_menu_actions` VALUES (1, 1, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (2, 2, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (3, 3, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (4, 4, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (5, 5, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (6, 6, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (7, 7, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (8, 8, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (9, 9, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (10, 10, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (11, 11, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (12, 12, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (13, 13, 'view', '2022-01-14 08:16:35', '2022-01-14 08:16:38', NULL);
-INSERT INTO `sia_menu_actions` VALUES (14, 1, 'view_report_dashboard', '2022-01-14 08:16:35', '2022-01-14 08:16:35', NULL);
 
 -- ----------------------------
 -- Table structure for sia_menus
@@ -839,12 +964,12 @@ CREATE TABLE `sia_menus`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sia_menus
 -- ----------------------------
-INSERT INTO `sia_menus` VALUES (1, 'dashboard', 0, 'Dashboard', 'Dasboard', NULL, '/', NULL, NULL, NULL, 0, '00', '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
+INSERT INTO `sia_menus` VALUES (1, 'dashboard', 0, 'Dashboard', 'Dasboard', NULL, NULL, NULL, NULL, NULL, 0, '00', '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
 INSERT INTO `sia_menus` VALUES (2, 'sia', 0, '(SIA) Sistem Informasi Akademik', 'SIA', NULL, '/sia', 1, 0, NULL, 0, NULL, '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
 INSERT INTO `sia_menus` VALUES (3, 'sia-master', 0, 'Master', 'Master', NULL, '/sia/master', 1, 0, NULL, 0, NULL, '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
 INSERT INTO `sia_menus` VALUES (4, 'sia-master-lesson', 3, 'Pelajaran', 'Pelajaran', NULL, '/sia/master/lesson', 1, 0, NULL, 0, NULL, '2022-01-14 06:28:18', '2022-01-14 06:28:18', NULL);
@@ -874,7 +999,7 @@ CREATE TABLE `slides`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `title`(`title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of slides
@@ -909,7 +1034,7 @@ CREATE TABLE `student_classes`  (
   CONSTRAINT `student_classes_ibfk_1` FOREIGN KEY (`classroom_id`) REFERENCES `classrooms` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `student_classes_ibfk_2` FOREIGN KEY (`eduyear_id`) REFERENCES `eduyears` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `student_classes_ibfk_3` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of student_classes
@@ -1271,7 +1396,7 @@ CREATE TABLE `students`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 343 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of students
@@ -1585,7 +1710,7 @@ INSERT INTO `students` VALUES (338, 384, '218841', '0081066180', '35782719090800
 INSERT INTO `students` VALUES (339, 385, '218871', '0092696109', '3578277007090002', '3523-LT-26102011-0081', 'RIZKI AMELIA', 'P', 'TUBAN', '2009-07-30', 'Islam', 155, 45, 0, '', '083831519598', 'JL.PUTAT GEDE BARAT 3/7', '4', '1', 'Putat Gede', 'Kec. Sukomanunggal', 'SURABAYA', '60188', 'IRA YUNAWAR', 'KARYAWAN SWASTA', 'SMP/SEDERAJAT', '', '', 'TUMINAH', 'MENGURUS RUMAH TANGGA', 'SD/SEDERAJAT', '', '', '', '2021-06-01', NULL, NULL, '2022-01-14 06:09:29', '2022-01-14 06:09:29', NULL);
 INSERT INTO `students` VALUES (340, 386, '218875', '0088745655', '3578275408080001', '15970/JU/KL/2008', 'SALMA SALSABILA', 'P', 'JAKARTA', '2008-08-14', 'Islam', 150, 36, 0, '', '081315433893', 'DARMO PERMAI UTARA 2/11', '2', '1', 'Tanjungsari', 'Kec. Sukomanunggal', 'SURABAYA', '60187', 'SIGIT SANTOSO', 'PEGAWAI NEGERI SIPIL(PNS)', 'DIPLOMA III (D3)', '', '', 'LISTIYANTI DAMARWATI, SE', 'MENGURUS RUMAH TANGGA', 'DIPLOMA IV (D4)/STRATA I (S1)', '', '', '', '2021-06-01', NULL, NULL, '2022-01-14 06:09:29', '2022-01-14 06:09:29', NULL);
 INSERT INTO `students` VALUES (341, 387, '218878', '3087847528', '3578316005080001', '3578-LT-03042018-0032', 'SALWA KEIN SATRYA', 'P', 'KARANGANYAR', '2008-05-20', 'Islam', 160, 65, 0, '', '081231616141', 'DK. BULU NO. 9', '4', '4', 'Lontar', 'Kec. Sambikerep', 'SURABAYA', '60216', 'ALUWI', 'KARYAWAN SWASTA', 'SD/SEDERAJAT', '', '', 'SITI MOCHA', '', 'SMA/SEDERAJAT', '', '', '', '2021-06-01', NULL, NULL, '2022-01-14 06:09:29', '2022-01-14 06:09:29', NULL);
-INSERT INTO `students` VALUES (342, 388, '218886', '0092665943', '3527074404090002', '49155/DIS/2011', 'SINTA BELA', 'P', 'SAMPANG', '2009-04-04', 'Islam', 130, 25, 0, '', '085649298355', 'DUKUH KALIKENDAL ', '3', '2', 'Pradah Kalikendal', 'Kec. Dukuh Pakis', 'SURABAYA', '60226', 'ALWI', 'WIRASWASTA', 'SD/SEDERAJAT', '', '', 'HOZAIMAH', 'MENGURUS RUMAH TANGGA', 'SD/SEDERAJAT', '', '', '', '2021-06-01', NULL, NULL, '2022-01-14 06:09:29', '2022-01-14 06:09:29', NULL);
+INSERT INTO `students` VALUES (342, 388, '218886', '0092665943', '3527074404090002', '49155/DIS/2011', 'SINTA BELA', 'P', 'SAMPANG', '2009-04-04', 'Islam', 130, 25, 0, 'alalala@gmail.com', '085649298355', 'DUKUH KALIKENDAL ', '3', '2', 'Pradah Kalikendal', '', 'SURABAYA', '60226', 'ALWI', 'WIRASWASTA', 'SD/SEDERAJAT', 'jj', 'oi', 'HOZAIMAH', 'MENGURUS RUMAH TANGGA', 'SD/SEDERAJAT', 'oi', 'io', 'koo', '2021-06-01', NULL, NULL, '2022-01-14 06:09:29', '2022-01-16 23:50:04', NULL);
 
 -- ----------------------------
 -- Table structure for teachers
@@ -1612,7 +1737,7 @@ CREATE TABLE `teachers`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of teachers
@@ -1670,14 +1795,14 @@ CREATE TABLE `users`  (
   UNIQUE INDEX `users_username_unique`(`username`) USING BTREE,
   INDEX `role_id`(`role_id`) USING BTREE,
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 389 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 390 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (1, 'also', NULL, NULL, '$2b$10$ujBjKku3Qgu9f8jt/OIbD.MOp4PZmM2ni7WBakdFfSi7xGdwFGJ1G', 'Also codes', 'alsocodes@gmail.com', 'administrator', 1, '2022-01-12 19:23:46', '2022-01-12 19:23:46', NULL);
 INSERT INTO `users` VALUES (15, NULL, NULL, '197105242006041000', '$2b$10$cNzNZ/fciQf.stAzAi4ejOj0u7jm3L99y0morhjGBv6bF4hxXRFTG', 'HERNAWAN BUDWI SETIONO', '', 'teacher', 3, '2022-01-12 20:10:45', '2022-01-12 20:10:45', NULL);
-INSERT INTO `users` VALUES (16, NULL, NULL, '196611071991032000', '$2b$10$i02KpjMxAPSU5IgJj9cjQuuMCZp.m8bWhx2KiqwoCr4662zQlB9sS', 'PURWANDARI DYAH P. N.', '', 'teacher', 3, '2022-01-12 20:10:45', '2022-01-12 20:10:45', NULL);
+INSERT INTO `users` VALUES (16, 'guru1', NULL, '196611071991032000', '$2b$10$i02KpjMxAPSU5IgJj9cjQuuMCZp.m8bWhx2KiqwoCr4662zQlB9sS', 'PURWANDARI DYAH P. N.', '', 'teacher', 3, '2022-01-12 20:10:45', '2022-01-12 20:10:45', NULL);
 INSERT INTO `users` VALUES (17, NULL, NULL, '196505241990032000', '$2b$10$mfzx3ma2tHIBPtpqClo3yOFyXCut8ZFiagyUTC4IuxvgVEbwLCVyC', 'SUKINAH', '', 'teacher', 3, '2022-01-12 20:10:45', '2022-01-12 20:10:45', NULL);
 INSERT INTO `users` VALUES (18, NULL, NULL, '196504121990031000', '$2b$10$PZpYgkcSxqg850O3CMhcoOjQ.wasb7vP4.cQYU516rzKtqZnhBV8O', 'SOMOJO HERSADHONO', '', 'teacher', 3, '2022-01-12 20:10:45', '2022-01-12 20:10:45', NULL);
 INSERT INTO `users` VALUES (19, NULL, NULL, '197205222014122000', '$2b$10$fO6gBv1Csqo4sJyYkPj6BeHRxUgG.eoZ95TvFWd3Wjx2XJzuNjEXq', 'AINUL MARDIANA', '', 'teacher', 3, '2022-01-12 20:10:45', '2022-01-12 20:10:45', NULL);
@@ -2017,5 +2142,6 @@ INSERT INTO `users` VALUES (385, NULL, '218871', NULL, '$2b$10$olsubZxntX20rzFX5
 INSERT INTO `users` VALUES (386, NULL, '218875', NULL, '$2b$10$k.9P3LHNfLchreCOdhXaSeuM17pF9OZ4P1T.1z/m7LjManWG4VQ2G', 'SALMA SALSABILA', '', 'student', 2, '2022-01-14 06:09:29', '2022-01-14 06:09:29', NULL);
 INSERT INTO `users` VALUES (387, NULL, '218878', NULL, '$2b$10$3FGzXoDaCSB5va0syRKmJOYLrSG0p6Pp5GpvxeeAkFDB4YEBh96tW', 'SALWA KEIN SATRYA', '', 'student', 2, '2022-01-14 06:09:29', '2022-01-14 06:09:29', NULL);
 INSERT INTO `users` VALUES (388, NULL, '218886', NULL, '$2b$10$aXF/2U45swgNijdkbbQ/LunPJlQxO06YFUEbtLLunNuSXtR21WEkO', 'SINTA BELA', '', 'student', 2, '2022-01-14 06:09:29', '2022-01-14 06:09:29', NULL);
+INSERT INTO `users` VALUES (389, 'admin01x', '', '', NULL, 'XAdmin Kosong Satu', 'xadmin01@gmail.com', 'administrator', 1, '2022-01-16 06:41:24', '2022-01-16 06:50:06', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

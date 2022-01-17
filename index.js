@@ -81,6 +81,9 @@ routes.student_class_activity(app);
 routes.lesson_class_activity(app);
 routes.lesson_class_student_activity(app);
 
+routes.usermaster(app);
+routes.rolemaster(app);
+
 const port = process.env.PORT || 3009;
 const host = process.env.HOST || "localhost";
 
