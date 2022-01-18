@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 17/01/2022 08:22:25
+ Date: 18/01/2022 08:23:16
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `accesses`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of accesses
@@ -69,6 +69,7 @@ INSERT INTO `accesses` VALUES (32, 0, 'master-role', 'Master Role', '2022-01-16 
 INSERT INTO `accesses` VALUES (33, 32, 'add-master-role', 'Add Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
 INSERT INTO `accesses` VALUES (34, 32, 'edit-master-role', 'Edit Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
 INSERT INTO `accesses` VALUES (35, 32, 'delete-master-role', 'Delete Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
+INSERT INTO `accesses` VALUES (36, 21, 'sia-teacher-class-lesson-activity', 'Teacher Class Lesson', '2022-01-18 04:06:06', '2022-01-18 04:06:06', NULL);
 
 -- ----------------------------
 -- Table structure for album-galleries
@@ -777,7 +778,7 @@ CREATE TABLE `role_accesses`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `role_id`(`role_id`) USING BTREE,
   CONSTRAINT `role_accesses_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_accesses
@@ -859,7 +860,10 @@ INSERT INTO `role_accesses` VALUES (76, 1, 20, '2022-01-16 23:40:07', '2022-01-1
 INSERT INTO `role_accesses` VALUES (77, 3, 1, '2022-01-16 23:52:24', '2022-01-16 23:52:24', '2022-01-16 23:53:17');
 INSERT INTO `role_accesses` VALUES (78, 3, 16, '2022-01-16 23:53:17', '2022-01-16 23:53:17', NULL);
 INSERT INTO `role_accesses` VALUES (79, 3, 21, '2022-01-16 23:53:17', '2022-01-16 23:53:17', NULL);
-INSERT INTO `role_accesses` VALUES (80, 3, 1, '2022-01-16 23:54:13', '2022-01-16 23:54:13', NULL);
+INSERT INTO `role_accesses` VALUES (80, 3, 1, '2022-01-16 23:54:13', '2022-01-16 23:54:13', '2022-01-17 18:06:18');
+INSERT INTO `role_accesses` VALUES (81, 2, 16, '2022-01-17 18:07:00', '2022-01-17 18:07:00', NULL);
+INSERT INTO `role_accesses` VALUES (82, 2, 21, '2022-01-17 18:07:00', '2022-01-17 18:07:00', NULL);
+INSERT INTO `role_accesses` VALUES (83, 3, 36, '2022-01-18 04:06:23', '2022-01-18 04:06:23', NULL);
 
 -- ----------------------------
 -- Table structure for role_menu_actions
