@@ -139,4 +139,9 @@ db.role_access.belongsTo(db.role, { foreignKey: 'role_id' })
 db.access.hasMany(db.role_access, { foreignKey: 'access_id' })
 db.role_access.belongsTo(db.access, { foreignKey: 'access_id' })
 
+db.user.hasOne(db.teacher, { foreignKey: 'user_id' })
+db.teacher.belongsTo(db.user, { foreignKey: 'user_id' })
+db.user.hasOne(db.student, { foreignKey: 'user_id' })
+db.student.belongsTo(db.user, { foreignKey: 'user_id' })
+
 module.exports = db;

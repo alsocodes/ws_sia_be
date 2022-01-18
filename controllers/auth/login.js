@@ -80,13 +80,14 @@ exports.login = async (req, res) => {
 
     res.cookie("token", refreshToken, { httpOnly: true });
 
-    return response.success("Login is successfull", res, {
+    return response.success("Login is successfullxxx", res, {
       access_token: accessToken,
       refresh_token: refreshToken,
       user: {
         name: user.name,
         email: user.email,
         role: user.role,
+        user_type: user.user_type,
         role_access: role_access,
       },
     }, 200);
