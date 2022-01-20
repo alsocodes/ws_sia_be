@@ -19,5 +19,6 @@ routes.lesson_class_student_activity = require('./sia-activity/lesson-class-stud
 routes.usermaster = require('./master/user.route');
 routes.rolemaster = require('./master/role.route');
 routes.teacher_class_lesson_activity = require('./sia-activity/teacher-class-lesson.route');
+routes.student_class_lesson_activity = require('./sia-activity/student-class-lesson.route');
 
 module.exports = routes;

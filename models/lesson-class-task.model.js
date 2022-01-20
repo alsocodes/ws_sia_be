@@ -28,13 +28,14 @@ const LessonClassTask = (sequelize, Sequelize) =>
             },
 
             deadline_at: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: false
             },
 
             status: {
                 type: Sequelize.ENUM('draft', 'open', 'close'),
-                allowNull: false
+                allowNull: false,
+                defaultValue: 'draft',
             },
 
             open_at: {

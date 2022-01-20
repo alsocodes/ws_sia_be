@@ -115,6 +115,12 @@ db.lesson_class_student.belongsTo(db.student, { foreignKey: 'student_id' })
 db.lesson_class.hasMany(db.lesson_class_student, { foreignKey: 'lesson_class_id' })
 db.lesson_class_student.belongsTo(db.lesson_class, { foreignKey: 'lesson_class_id' })
 
+db.student.hasOne(db.lesson_class_task_submit, { foreignKey: 'student_id' })
+db.lesson_class_task_submit.belongsTo(db.student, { foreignKey: 'student_id' })
+
+db.lesson_class.hasMany(db.student_class, { foreignKey: 'classroom_id' })
+db.student_class.belongsTo(db.lesson_class, { foreignKey: 'classroom_id' })
+
 
 db.role.hasMany(db.sia_menu_action, { foreignKey: 'role_id' })
 db.sia_menu_action.belongsTo(db.role, { foreignKey: 'role_id' })

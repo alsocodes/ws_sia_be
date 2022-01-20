@@ -28,9 +28,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const GALLERY_DIR = '/public/images'
-app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
+const ATTACHMENT_DIR = '/public/attachments'
 const TEMP_DIR = '/public/temp'
+app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
 app.use(TEMP_DIR, express.static(path.join(__dirname, TEMP_DIR)));
+app.use(ATTACHMENT_DIR, express.static(path.join(__dirname, ATTACHMENT_DIR)));
 
 db.sequelize.sync({ force: false })
 if (process.env.RESEED == 1) {
@@ -81,6 +83,7 @@ routes.student_class_activity(app);
 routes.lesson_class_activity(app);
 routes.lesson_class_student_activity(app);
 routes.teacher_class_lesson_activity(app);
+routes.student_class_lesson_activity(app);
 
 routes.usermaster(app);
 routes.rolemaster(app);
