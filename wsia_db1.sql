@@ -11,7 +11,7 @@
  Target Server Version : 50733
  File Encoding         : 65001
 
- Date: 18/01/2022 08:23:16
+ Date: 21/01/2022 07:31:27
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `accesses`  (
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of accesses
@@ -70,6 +70,8 @@ INSERT INTO `accesses` VALUES (33, 32, 'add-master-role', 'Add Master Role', '20
 INSERT INTO `accesses` VALUES (34, 32, 'edit-master-role', 'Edit Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
 INSERT INTO `accesses` VALUES (35, 32, 'delete-master-role', 'Delete Master Role', '2022-01-16 07:01:01', '2022-01-16 07:01:01', NULL);
 INSERT INTO `accesses` VALUES (36, 21, 'sia-teacher-class-lesson-activity', 'Teacher Class Lesson', '2022-01-18 04:06:06', '2022-01-18 04:06:06', NULL);
+INSERT INTO `accesses` VALUES (37, 21, 'sia-student-class-lesson-activity', 'Student Class Lesson', '2022-01-20 05:44:08', '2022-01-20 05:44:11', NULL);
+INSERT INTO `accesses` VALUES (38, 21, 'sia-one-student-class-lesson-activity', 'One Student Class Lesson', '2022-01-20 07:27:40', '2022-01-20 07:27:40', NULL);
 
 -- ----------------------------
 -- Table structure for album-galleries
@@ -295,11 +297,19 @@ CREATE TABLE `lesson_class_materials`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_materials
 -- ----------------------------
+INSERT INTO `lesson_class_materials` VALUES (1, 21, 'Materi1', 'lalalalalalal', NULL, 16, 16, 16, '2022-01-18 19:31:56', '2022-01-18 20:32:15', '2022-01-18 20:32:15');
+INSERT INTO `lesson_class_materials` VALUES (2, 21, 'Lololo', 'lolololoo', 'attachment-1642511390347.JPG', 16, 16, 16, '2022-01-18 19:38:53', '2022-01-18 20:32:19', '2022-01-18 20:32:19');
+INSERT INTO `lesson_class_materials` VALUES (3, 21, 'MM122', 'kjkjkwdjw', NULL, 16, 16, 16, '2022-01-18 20:10:44', '2022-01-18 20:32:11', '2022-01-18 20:32:11');
+INSERT INTO `lesson_class_materials` VALUES (4, 21, 'Lalalalalalala', 'alalala', 'attachment-1642511727696.PNG', 16, 16, 16, '2022-01-18 20:15:30', '2022-01-18 20:32:08', '2022-01-18 20:32:08');
+INSERT INTO `lesson_class_materials` VALUES (5, 21, 'hhhhhhhhhh', 'hhhhhhhhhhhhhh', 'attachment-1642512050005.JPG', 16, 16, 16, '2022-01-18 20:21:07', '2022-01-18 20:32:04', '2022-01-18 20:32:04');
+INSERT INTO `lesson_class_materials` VALUES (6, 21, 'dfghjkl', 'fghjkl;', 'attachment-1642512133638.jpg', 16, 16, 16, '2022-01-18 20:22:20', '2022-01-18 20:31:55', '2022-01-18 20:31:55');
+INSERT INTO `lesson_class_materials` VALUES (7, 21, 'Materi 1', 'Materi satu yang ke satu', 'attachment-1642512900746.xlsx', 16, 16, NULL, '2022-01-18 20:35:08', '2022-01-18 20:36:36', NULL);
+INSERT INTO `lesson_class_materials` VALUES (8, 21, '111', 'nn', 'attachment-1642513733784.jpg', 16, 16, 16, '2022-01-18 20:48:56', '2022-01-19 20:13:58', '2022-01-19 20:13:58');
 
 -- ----------------------------
 -- Table structure for lesson_class_students
@@ -321,7 +331,7 @@ CREATE TABLE `lesson_class_students`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 227 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 309 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_students
@@ -512,6 +522,88 @@ INSERT INTO `lesson_class_students` VALUES (223, 15, NULL, 99, 0, 'active', NULL
 INSERT INTO `lesson_class_students` VALUES (224, 15, NULL, 100, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-14 06:13:12', '2022-01-14 06:13:12', NULL);
 INSERT INTO `lesson_class_students` VALUES (225, 15, NULL, 101, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-14 06:13:12', '2022-01-14 06:13:12', NULL);
 INSERT INTO `lesson_class_students` VALUES (226, 15, NULL, 102, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-14 06:13:12', '2022-01-14 06:13:12', NULL);
+INSERT INTO `lesson_class_students` VALUES (227, 22, NULL, 2, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (228, 22, NULL, 4, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (229, 22, NULL, 3, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (230, 22, NULL, 1, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (231, 22, NULL, 5, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (232, 22, NULL, 6, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (233, 22, NULL, 8, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (234, 22, NULL, 7, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (235, 22, NULL, 9, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (236, 22, NULL, 10, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (237, 22, NULL, 11, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (238, 22, NULL, 14, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (239, 22, NULL, 15, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (240, 22, NULL, 13, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (241, 22, NULL, 12, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (242, 22, NULL, 16, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (243, 22, NULL, 17, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (244, 22, NULL, 18, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (245, 22, NULL, 19, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (246, 22, NULL, 20, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (247, 22, NULL, 21, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (248, 22, NULL, 22, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (249, 22, NULL, 23, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (250, 22, NULL, 24, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (251, 22, NULL, 25, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (252, 22, NULL, 26, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (253, 22, NULL, 27, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (254, 22, NULL, 28, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (255, 22, NULL, 29, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (256, 22, NULL, 30, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (257, 22, NULL, 31, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (258, 22, NULL, 32, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (259, 22, NULL, 33, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (260, 22, NULL, 34, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (261, 22, NULL, 35, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (262, 22, NULL, 36, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (263, 22, NULL, 37, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (264, 22, NULL, 38, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (265, 22, NULL, 39, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (266, 22, NULL, 40, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (267, 22, NULL, 41, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:45:54', '2022-01-20 06:45:54', NULL);
+INSERT INTO `lesson_class_students` VALUES (268, 24, NULL, 1, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (269, 24, NULL, 3, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (270, 24, NULL, 2, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (271, 24, NULL, 4, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (272, 24, NULL, 5, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (273, 24, NULL, 6, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (274, 24, NULL, 7, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (275, 24, NULL, 8, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (276, 24, NULL, 9, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (277, 24, NULL, 10, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (278, 24, NULL, 11, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (279, 24, NULL, 13, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (280, 24, NULL, 14, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (281, 24, NULL, 12, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (282, 24, NULL, 16, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (283, 24, NULL, 17, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (284, 24, NULL, 18, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (285, 24, NULL, 15, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (286, 24, NULL, 19, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (287, 24, NULL, 20, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (288, 24, NULL, 21, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (289, 24, NULL, 22, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (290, 24, NULL, 23, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (291, 24, NULL, 24, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (292, 24, NULL, 25, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (293, 24, NULL, 26, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (294, 24, NULL, 27, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (295, 24, NULL, 28, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (296, 24, NULL, 29, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (297, 24, NULL, 30, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (298, 24, NULL, 31, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (299, 24, NULL, 32, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (300, 24, NULL, 33, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (301, 24, NULL, 34, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (302, 24, NULL, 35, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (303, 24, NULL, 36, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (304, 24, NULL, 37, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (305, 24, NULL, 38, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (306, 24, NULL, 39, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (307, 24, NULL, 40, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
+INSERT INTO `lesson_class_students` VALUES (308, 24, NULL, 41, 0, 'active', NULL, NULL, 1, 1, NULL, '2022-01-20 06:46:15', '2022-01-20 06:46:15', NULL);
 
 -- ----------------------------
 -- Table structure for lesson_class_task_submits
@@ -529,11 +621,15 @@ CREATE TABLE `lesson_class_task_submits`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_task_submits
 -- ----------------------------
+INSERT INTO `lesson_class_task_submits` VALUES (1, 1, 2, 'yayya syaa kerjakan\ndemnhwdwkjd\ndkwldw]\n', 'attachment-1642691597297.xlsx', 'submit', '2022-01-20 22:14:10', '2022-01-19 22:19:57', '2022-01-20 22:14:10', '2022-01-20 22:14:10');
+INSERT INTO `lesson_class_task_submits` VALUES (2, 1, 2, 'Jawaban saya', 'attachment-1642692570554.xlsx', 'submit', NULL, '2022-01-20 22:33:41', '2022-01-20 22:33:41', '2022-01-20 22:14:10');
+INSERT INTO `lesson_class_task_submits` VALUES (3, 1, 2, 'JAwaban saya lagi', 'attachment-1642692995099.xlsx', 'submit', NULL, '2022-01-20 22:36:37', '2022-01-20 22:36:37', '2022-01-20 22:14:10');
+INSERT INTO `lesson_class_task_submits` VALUES (4, 1, 2, 'Jawaban saya', 'attachment-1642693136639.jpg', 'submit', '2022-01-20 22:39:09', '2022-01-20 22:39:01', '2022-01-20 22:39:09', NULL);
 
 -- ----------------------------
 -- Table structure for lesson_class_tasks
@@ -545,19 +641,21 @@ CREATE TABLE `lesson_class_tasks`  (
   `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `description` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `attachment` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `deadline_at` datetime(0) NOT NULL,
-  `status` enum('draft','open','close') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `deadline_at` date NOT NULL,
+  `status` enum('draft','open','close') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'draft',
   `open_at` datetime(0) NULL DEFAULT NULL,
   `close_at` datetime(0) NULL DEFAULT NULL,
   `created_at` datetime(0) NOT NULL,
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lesson_class_tasks
 -- ----------------------------
+INSERT INTO `lesson_class_tasks` VALUES (1, 21, 'Tugas 1', 'Kerjakan dengan metode apa saja, lalu upload ke sini dalam bentuk soft copy file pdf,. terimakasih', 'attachment-1642594422296.jpg', '2022-01-29', 'open', '2022-01-19 22:44:15', NULL, '2022-01-19 18:59:53', '2022-01-19 22:44:15', NULL);
+INSERT INTO `lesson_class_tasks` VALUES (2, 21, 'Tugas 2', 'jkdjwkdwjk', 'attachment-1642594884015.jpg', '2022-01-29', 'open', '2022-01-19 19:24:53', NULL, '2022-01-19 19:21:25', '2022-01-19 19:27:08', '2022-01-19 19:27:08');
 
 -- ----------------------------
 -- Table structure for lesson_classes
@@ -778,7 +876,7 @@ CREATE TABLE `role_accesses`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `role_id`(`role_id`) USING BTREE,
   CONSTRAINT `role_accesses_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 84 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 88 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_accesses
@@ -864,6 +962,10 @@ INSERT INTO `role_accesses` VALUES (80, 3, 1, '2022-01-16 23:54:13', '2022-01-16
 INSERT INTO `role_accesses` VALUES (81, 2, 16, '2022-01-17 18:07:00', '2022-01-17 18:07:00', NULL);
 INSERT INTO `role_accesses` VALUES (82, 2, 21, '2022-01-17 18:07:00', '2022-01-17 18:07:00', NULL);
 INSERT INTO `role_accesses` VALUES (83, 3, 36, '2022-01-18 04:06:23', '2022-01-18 04:06:23', NULL);
+INSERT INTO `role_accesses` VALUES (84, 2, 37, '2022-01-20 05:44:27', '2022-01-20 05:44:27', NULL);
+INSERT INTO `role_accesses` VALUES (85, 2, 25, '2022-01-20 06:54:21', '2022-01-20 06:54:21', '2022-01-20 06:55:44');
+INSERT INTO `role_accesses` VALUES (86, 2, 24, '2022-01-20 06:55:44', '2022-01-20 06:55:44', '2022-01-20 07:28:51');
+INSERT INTO `role_accesses` VALUES (87, 2, 38, '2022-01-20 07:28:00', '2022-01-20 07:28:00', NULL);
 
 -- ----------------------------
 -- Table structure for role_menu_actions
@@ -1837,8 +1939,8 @@ INSERT INTO `users` VALUES (43, NULL, NULL, '3578036401980000', '$2b$10$DO7U2VaH
 INSERT INTO `users` VALUES (44, NULL, NULL, '3510060106950000', '$2b$10$JGriZRIJTgMtNi42smzCVO8SNLJHaO0ruatfkywgUc8h.h7TMvd2y', 'WAHYU DWI SETIAWAN', '', 'teacher', 3, '2022-01-12 20:10:46', '2022-01-12 20:10:46', NULL);
 INSERT INTO `users` VALUES (45, NULL, NULL, '3578214907940000', '$2b$10$fSTHVJ61kTFc1.q0tJ0xV.fu55FU.gr5rjP/sKwLGX1qXARC8mFV.', 'YULIANA DWI SURYA ATMAJA', '', 'teacher', 3, '2022-01-12 20:10:46', '2022-01-12 20:10:46', NULL);
 INSERT INTO `users` VALUES (46, NULL, '0064545784', NULL, '$2b$10$Mez6pzoywETD8XiXksBkCeuMcYuQ6ZBRstDzWLmMgrm0IMxhk6RAS', 'ACHMAD RAFLI MAULANA', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);
-INSERT INTO `users` VALUES (47, NULL, '0078604383', NULL, '$2b$10$s6o87EZjoo..i72CkOo4HO2wmvj8PY.y1RcZqSbQPhUmD8MAnIp/.', 'AGNESIA MERYNATALIVIA', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);
-INSERT INTO `users` VALUES (48, NULL, '0062663957', NULL, '$2b$10$3NwOfLgD4bINUpFwpSq2fO08chTHJ6wyIKVemNx.mKuLZpI5gjiE2', 'ANGELINA AGNES SOEGIARTO INKIRIWANG', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);
+INSERT INTO `users` VALUES (47, 'siswa1', '0078604383', NULL, '$2b$10$i02KpjMxAPSU5IgJj9cjQuuMCZp.m8bWhx2KiqwoCr4662zQlB9sS', 'AGNESIA MERYNATALIVIA', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);
+INSERT INTO `users` VALUES (48, 'siswa2', '0062663957', NULL, '$2b$10$i02KpjMxAPSU5IgJj9cjQuuMCZp.m8bWhx2KiqwoCr4662zQlB9sS', 'ANGELINA AGNES SOEGIARTO INKIRIWANG', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);
 INSERT INTO `users` VALUES (49, NULL, '0068061182', NULL, '$2b$10$agcK9jj1HB0kMx.z1Z0Nq.LFMbRmNIUEM9PFEADLBLOsoaF9ez8jS', 'ABIYAN NAUFAL ADITYA', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);
 INSERT INTO `users` VALUES (50, NULL, '0084013021', NULL, '$2b$10$P0wNKCtilojPOEJJNXXyEOxrW5l1hStMziL5yDcC0VzpBPmsXDl3m', 'ANINDYA RAHMA NOVIANANDA', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);
 INSERT INTO `users` VALUES (51, NULL, '0065098688', NULL, '$2b$10$ltp5LhvLDJzsjtUfDZdwf.pMCTHp67iWNpUdWgTGiYP6MSCEcADHG', 'ANGGUN ADELIA FRISCA HARYANTO', '', 'student', 2, '2022-01-12 20:13:26', '2022-01-12 20:13:26', NULL);

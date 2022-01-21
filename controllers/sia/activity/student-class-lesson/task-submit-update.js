@@ -13,39 +13,34 @@ exports.taskSubmitUpdate = async (req, res) => {
     try {
 
         const {
-            name,
-            description,
+            answer,
             attachment,
-            deadline_at,
             status,
         } = req.body
 
-        const { lesson_class_id, id } = req.params
+        const { lesson_class_id, task_id, id } = req.params
         const user = req.user
-        const lesson_class_task = await db.lesson_class_task.findOne({
-            where: { [Op.and]: [{ id: id }, { lesson_class_id: lesson_class_id }] }
+        const lesson_class_task_submit = await db.lesson_class_task_submit.findOne({
+            where: { [Op.and]: [{ id: id }, { lesson_class_task_id: task_id }] }
         })
-        if (!lesson_class_task) return response.invalidInput("Tidak ditemukan", res)
-        if (lesson_class_task.attachment && attachment) {
-            if (fs.existsSync(dir_attachment + lesson_class_task.attachment)) fs.unlinkSync(dir_attachment + lesson_class_task.attachment)
+        if (!lesson_class_task_submit) return response.invalidInput("Tidak ditemukan", res)
+        if (lesson_class_task_submit.attachment && attachment) {
+            if (fs.existsSync(dir_attachment + lesson_class_task_submit.attachment)) fs.unlinkSync(dir_attachment + lesson_class_task_submit.attachment)
         }
 
-        if (status === 'close' && lesson_class_task.status === 'draft') {
-            return response.invalidInput("Tugas belum dibuka", res)
+        if (status === 'draft' && lesson_class_task_submit.status === 'submit') {
+            return response.invalidInput("Tugas yang sudah disubmit tidak bisa diubah", res)
         }
 
-        lesson_class_task.name = name;
-        lesson_class_task.description = description;
-        lesson_class_task.attachment = attachment;
-        lesson_class_task.deadline_at = deadline_at;
-        lesson_class_task.status = status;
-        lesson_class_task.open_at = status === 'open' ? Sequelize.literal('CURRENT_TIMESTAMP') : null
-        lesson_class_task.close_at = status === 'close' ? Sequelize.literal('CURRENT_TIMESTAMP') : null
+        lesson_class_task_submit.answer = answer;
+        lesson_class_task_submit.attachment = attachment;
+        lesson_class_task_submit.status = status;
+        lesson_class_task_submit.submitted_at = status === 'submit' ? Sequelize.literal('CURRENT_TIMESTAMP') : null
 
-        await lesson_class_task.save({ transaction: t })
+        await lesson_class_task_submit.save({ transaction: t })
 
         await t.commit()
-        return response.success("Berhasil", res, { id: lesson_class_task.id }, 200);
+        return response.success("Berhasil", res, { id: lesson_class_task_submit.id }, 200);
     } catch (err) {
         console.log(err);
         await t.rollback()

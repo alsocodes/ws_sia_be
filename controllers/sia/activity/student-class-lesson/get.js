@@ -7,7 +7,6 @@ const { Op, Sequelize } = require("sequelize");
 exports.get = async (req, res) => {
     try {
         const { user } = req
-        const { id: lesson_class_id } = req.params // lesson_class_id
         const page = parseInt(!req.query.page ? 1 : req.query.page)
         const page_size = parseInt(!req.query.page_size ? 20 : req.query.page_size)
         const search = !req.query.search ? '' : req.query.search
@@ -26,7 +25,6 @@ exports.get = async (req, res) => {
             let od0 = od[0];
             ordering = [db[od0], od[1], order]
         }
-        console.log(orderby)
 
         let filterings = []
         for (var key in filter) {
@@ -50,11 +48,8 @@ exports.get = async (req, res) => {
             }
         })
 
-        const lesson_class = await db.lesson_class.findOne({
-            attributes: ['classroom_id', 'semester_id', 'eduyear_id'],
-            where: { id: lesson_class_id }
-        })
-        const student_class_lessons = await db.lesson_class_student.findAndCountAll({
+        const { classroom_id, eduyear_id, semester_id } = req.params // lesson_class_id
+        const student_class_lessons = await db.lesson_class_student.findAll({
             attributes: ['id', 'status', 'passed_by', 'passed_at'],
             // required: true,
             include: {
@@ -68,17 +63,17 @@ exports.get = async (req, res) => {
                     {
                         model: db.classroom,
                         attributes: ['id', 'code', 'room', 'name'],
-                        where: { id: lesson_class.classroom_id }
+                        where: { id: classroom_id }
                     },
                     {
                         model: db.eduyear,
                         attributes: ['id', 'code', 'name'],
-                        where: { id: { [Op.eq]: lesson_class.eduyear_id } }
+                        where: { id: { [Op.eq]: eduyear_id } }
                     },
                     {
                         model: db.semester,
                         attributes: ['id', 'code', 'name'],
-                        where: { id: lesson_class.semester_id }
+                        where: { id: semester_id }
                     },
                     {
                         model: db.lesson,
@@ -93,48 +88,15 @@ exports.get = async (req, res) => {
             where: {
                 student_id: student.id,
                 // [Op.and]: filterings,
-                // [Op.or]: [
-                //     { '$classroom.name$': { [Op.like]: '%' + search + '%' } },
-                //     { '$eduyear.name$': { [Op.like]: '%' + search + '%' } },
-                // ]
+                [Op.or]: [
+                    { '$lesson_class.teacher.name$': { [Op.like]: '%' + search + '%' } },
+                    { '$lesson_class.lesson.name$': { [Op.like]: '%' + search + '%' } },
+                ]
             },
             raw: true,
-            distinct: true,
-            offset: offset,
-            limit: limit,
-            order: [ordering]
-            // order: [[sequelize.literal('student.name'), 'ASC']]
         })
 
-        const classroom_filterable = await db.classroom.findAll({
-            attributes: ['id', 'code', 'room', 'name'],
-            include: { model: db.lesson_class, required: true, attributes: [] },
-            group: ['id', 'code', 'room', 'name']
-        })
-
-        const eduyear_filterable = await db.eduyear.findAll({
-            attributes: ['id', 'code', 'name'],
-            include: { model: db.lesson_class, required: true, attributes: [] },
-            group: ['id', 'code', 'name']
-        })
-
-        // const student_filterable = await db.student.findAll({
-        //     attributes: ['id', 'name'],
-        //     include: { model: db.lesson_class, required: true, attributes: [] },
-        //     group: ['id', 'name']
-        // })
-        const result = {
-            total_count: student_class_lessons.count,
-            total_page: Math.ceil(student_class_lessons.count / page_size),
-            rows: student_class_lessons.rows,
-            filterable: {
-                classroom: classroom_filterable,
-                eduyear: eduyear_filterable,
-                // student: student_filterable
-            },
-        }
-
-        return response.success("Get kelas pelajaran siswa sukses", res, result, 200);
+        return response.success("Get kelas pelajaran siswa sukses", res, student_class_lessons, 200);
     } catch (err) {
         console.log(err);
         return response.error(err.message || "Gagal get kelas pelajaran siswa", res);

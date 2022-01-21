@@ -9,7 +9,7 @@ const { get: getTasks } = require("./tasks");
 const { taskSubmitCreate } = require("./task-submit-create");
 const { taskSubmitUpdate } = require("./task-submit-update");
 const { taskSubmitDelete } = require("./task-submit-delete");
-const { taskSubmits } = require("./task-submits");
+const { taskSubmit } = require("./task-submit");
 
 // material
 const { get: getMaterials } = require("./materials");
@@ -17,6 +17,6 @@ module.exports = {
     get, getOne, getOneStudent,
     getStudents,
     getMaterials,
-    getTasks, taskSubmitCreate, taskSubmitUpdate, taskSubmitDelete, taskSubmits,
+    getTasks, taskSubmitCreate, taskSubmitUpdate, taskSubmitDelete, taskSubmit,
     uploadAttachment
 };

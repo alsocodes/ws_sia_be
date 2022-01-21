@@ -12,7 +12,7 @@ exports.get = async (req, res) => {
                 'id', 'name', 'description',
                 'created_at',
                 'attachment',
-                [Sequelize.literal(`CASE WHEN attachment IS NOT NULL THEN CONCAT('/public/attachments/',attachment) ELSE null END`), 'attachment_url'],
+                [Sequelize.fn('concat', helper.attachmentUrl, Sequelize.col('attachment')), 'attachment_url']
             ],
             where: {
                 lesson_class_id: lesson_class_id,

@@ -9,7 +9,10 @@ exports.get = async (req, res) => {
         const { lesson_class_id } = req.params
         const lesson_class_tasks = await db.lesson_class_task.findAll({
             attributes: [
-                'id', 'name', 'description', 'attachment', 'status', 'deadline_at', 'open_at', 'close_at', 'created_at'
+                'id', 'name', 'description',
+                'attachment',
+                [Sequelize.fn('concat', helper.attachmentUrl, Sequelize.col('attachment')), 'attachment_url'],
+                'status', 'deadline_at', 'open_at', 'close_at', 'created_at'
             ],
             where: {
                 lesson_class_id: lesson_class_id,

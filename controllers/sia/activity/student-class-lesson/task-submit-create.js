@@ -10,25 +10,28 @@ exports.taskSubmitCreate = async (req, res) => {
     try {
 
         const {
-            name,
-            description,
+            answer,
             attachment,
-            deadline_at,
             status,
         } = req.body
 
-        const { lesson_class_id } = req.params
+        const { task_id } = req.params
         const user = req.user
-        if (status === 'close') return response.invalidInput("Tugas belum dibuka", res)
+        const student = await db.student.findOne({
+            attributes: ['id', 'name'],
+            include: {
+                model: db.user,
+                where: { id: user.id }
+            }
+        })
 
-        const create = await db.lesson_class_task.create({
-            lesson_class_id: lesson_class_id,
-            name: name,
-            description: description,
+        const create = await db.lesson_class_task_submit.create({
+            lesson_class_task_id: task_id,
+            student_id: student.id,
+            answer: answer,
             attachment: attachment,
-            deadline_at: deadline_at,
             status: status,
-            open_at: status === 'open' ? Sequelize.NOW : null,
+            open_at: status === 'submit' ? Sequelize.literal('CURRENT_TIMESTAMP') : null,
         }, { transaction: t })
 
         await t.commit()
