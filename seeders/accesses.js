@@ -1,4 +1,4 @@
-export const accesses = [
+const accesses = [
     {value: 'dashboard', label:'Dashboard'},
     {value: 'manage-content', label:'Manage Content', 
         children : [
@@ -54,3 +54,5 @@ export const accesses = [
         ]
     }
 ]
+
+module.exports = accesses

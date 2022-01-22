@@ -34,7 +34,7 @@ app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
 app.use(TEMP_DIR, express.static(path.join(__dirname, TEMP_DIR)));
 app.use(ATTACHMENT_DIR, express.static(path.join(__dirname, ATTACHMENT_DIR)));
 
-db.sequelize.sync({ force: false })
+// db.sequelize.sync({ force: false })
 if (process.env.RESEED == 1) {
   db.sequelize
     .sync({ force: process.env.NODE_ENV !== "production" ? true : false })
