@@ -32,7 +32,7 @@ const attachmentFilter = (req, file, cb) => {
 }
 
 exports.uploadAttachment = async (req, res) => {
-    let uploadAttachment = multer({ storage: storage(), fileFilter: attachmentFilter, limits: { fileSize: 500000, }, }).single("attachment")
+    let uploadAttachment = multer({ storage: storage(), fileFilter: attachmentFilter, limits: { fileSize: 2000000, }, }).single("attachment")
     uploadAttachment(req, res, async (err) => {
         try {
             if (err) {

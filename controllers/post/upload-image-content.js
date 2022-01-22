@@ -31,7 +31,7 @@ const imageFilter = (req, file, cb) => {
 }
 
 exports.uploadImageContent = async (req, res) => {
-    let uploadImage = multer({ storage: storage(), fileFilter: imageFilter, limits: { fileSize: 500000, }, }).single("img")
+    let uploadImage = multer({ storage: storage(), fileFilter: imageFilter, limits: { fileSize: 2000000, }, }).single("img")
 
     uploadImage(req, res, async (err) => {
         try {

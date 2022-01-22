@@ -87,6 +87,8 @@ routes.student_class_lesson_activity(app);
 
 routes.usermaster(app);
 routes.rolemaster(app);
+routes.download(app);
+routes.siadashboard(app);
 
 const port = process.env.PORT || 3009;
 const host = process.env.HOST || "localhost";

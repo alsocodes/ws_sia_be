@@ -36,7 +36,7 @@ const imageFilter = (req, file, cb) => {
 exports.importData = async (req, res) => {
     const t = await sequelize.transaction();
     try {
-        let uploadImage = multer({ storage: storage(), fileFilter: imageFilter, limits: { fileSize: 500000, }, }).single("file")
+        let uploadImage = multer({ storage: storage(), fileFilter: imageFilter, limits: { fileSize: 2000000, }, }).single("file")
         uploadImage(req, res, async (err) => {
             if (err) {
                 return response.invalidInput(err.message, res)

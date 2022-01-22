@@ -40,7 +40,7 @@ const rollbackUploaded = async (files) => {
 }
 
 exports.create = async (req, res) => {
-    let uploadImage = multer({ storage: storage(), fileFilter: imageFilter, limits: { fileSize: 500000, }, }).single("image")
+    let uploadImage = multer({ storage: storage(), fileFilter: imageFilter, limits: { fileSize: 2000000, }, }).single("image")
     uploadImage(req, res, async (err) => {
         const t = await sequelize.transaction();
         let uploadeds = []

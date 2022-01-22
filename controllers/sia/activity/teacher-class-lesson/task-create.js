@@ -28,7 +28,7 @@ exports.taskCreate = async (req, res) => {
             attachment: attachment,
             deadline_at: deadline_at,
             status: status,
-            open_at: status === 'open' ? Sequelize.NOW : null,
+            open_at: status === 'open' ? Sequelize.literal("CURRENT_TIMESTAMP") : null,
         }, { transaction: t })
 
         await t.commit()

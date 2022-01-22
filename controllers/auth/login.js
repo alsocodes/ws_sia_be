@@ -53,6 +53,11 @@ exports.login = async (req, res) => {
 
     const role_access = raw_access.map(item => item['access.name'])
 
+    const last_login = user.current_login
+    user.last_login = last_login
+    user.current_login = Sequelize.literal("CURRENT_TIMESTAMP")
+    await user.save()
+
     accessToken = jwt.sign(
       {
         email: user.email,
@@ -80,7 +85,7 @@ exports.login = async (req, res) => {
 
     res.cookie("token", refreshToken, { httpOnly: true });
 
-    return response.success("Login is successfullxxx", res, {
+    return response.success("Login is successfull", res, {
       access_token: accessToken,
       refresh_token: refreshToken,
       user: {
@@ -89,6 +94,7 @@ exports.login = async (req, res) => {
         role: user.role,
         user_type: user.user_type,
         role_access: role_access,
+        last_login: last_login
       },
     }, 200);
   } catch (err) {

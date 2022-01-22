@@ -27,6 +27,12 @@ const User = (sequelize, Sequelize) =>
                 type: Sequelize.INTEGER,
                 allowNull: false,
             },
+            last_login: {
+                type: Sequelize.DATE
+            },
+            current_login: {
+                type: Sequelize.DATE
+            }
         }
     )
 
