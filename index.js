@@ -43,11 +43,17 @@ if (process.env.RESEED == 1) {
         (async () => {
           try {
             await seederUser.create();
+            console.log('seed user done')
             await seederGenral.create();
+            console.log('seed general done')
             await seederPost.create();
+            console.log('seed post done')
             await seederSlide.create();
+            console.log('seed slide done')
             await seederGallery.create();
+            console.log('seed gallery done')
             await seederMenu.create();
+            console.log('seed menu done')
           } catch (err) {
             console.log(err);
           }
