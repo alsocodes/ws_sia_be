@@ -1,7 +1,7 @@
-const db = require("../../../models");
-const helper = require("../../../utils/helper");
-const response = require("../../../utils/response");
-const sequelize = require('../../../models').sequelize;
+const db = require("../../models");
+const helper = require("../../utils/helper");
+const response = require("../../utils/response");
+const sequelize = require('../../models').sequelize;
 const { Op, Sequelize } = require("sequelize");
 
 exports.get = async (req, res) => {
@@ -11,6 +11,7 @@ exports.get = async (req, res) => {
         let result = {
             id: user.id,
             name: user.name,
+            username: user.username,
             email: user.email,
         }
         if (user.user_type === 'teacher') {

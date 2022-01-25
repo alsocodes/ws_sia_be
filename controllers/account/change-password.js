@@ -9,14 +9,14 @@ exports.changePassword = async (req, res) => {
     const t = await sequelize.transaction();
     try {
         const {
-            old_password, new_password
+            password_lama, password_baru
         } = req.body
 
         const user = await db.user.findOne({ where: { id: req.user.id } })
-        const compare = await bcrypt.compare(old_password, user.password);
+        const compare = await bcrypt.compare(password_lama, user.password);
         if (!compare) return response.invalidInput("Password lama tidak sesuai", res)
 
-        user.password = await bcrypt.hash(new_password, 10)
+        user.password = await bcrypt.hash(password_baru, 10)
         await user.save({ transaction: t })
 
         await t.commit()

@@ -49,6 +49,7 @@ exports.importData = async (req, res) => {
             let dataFails = []
             if (req.file) {
                 csvData = await readCsv(dir_temp + '/' + req.file.filename)
+                const role = await db.role.findOne({ where: { name: "student" } })
                 await Promise.all(csvData.map(async (data) => {
                     const eduyear = await db.eduyear.findOne({ where: { code: data.eduyear } })
                     const classroom = await db.classroom.findOne({ where: { [Op.and]: [{ code: data.grade }, { room: data.room }] } })
@@ -74,7 +75,7 @@ exports.importData = async (req, res) => {
                             email: data.email,
                             nisn: data.nisn,
                             password: await bcrypt.hash(data.day_birth, 10),
-                            role_id: 2,
+                            role_id: role.id,
                             user_type: 'student'
                         }, { transaction: t })
 

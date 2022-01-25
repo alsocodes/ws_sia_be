@@ -95,6 +95,7 @@ routes.usermaster(app);
 routes.rolemaster(app);
 routes.download(app);
 routes.siadashboard(app);
+routes.account(app);
 
 const port = process.env.PORT || 3009;
 const host = process.env.HOST || "localhost";

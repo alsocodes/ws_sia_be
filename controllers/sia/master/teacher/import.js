@@ -47,6 +47,7 @@ exports.importData = async (req, res) => {
             let countSuccess = 0;
             let countFailed = 0;
             let dataFails = []
+            const role = await db.role.findOne({ where: { name: "teacher" } })
             if (req.file) {
                 csvData = await readCsv(dir_temp + '/' + req.file.filename)
                 await Promise.all(csvData.map(async (data) => {
@@ -62,7 +63,7 @@ exports.importData = async (req, res) => {
                             email: data.email,
                             nip: data.nip ? data.nip : data.nik,
                             password: await bcrypt.hash('12345678', 10),
-                            role_id: 3,
+                            role_id: role.id,
                             user_type: 'teacher'
                         }, { transaction: t })
 

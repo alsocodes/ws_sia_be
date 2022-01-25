@@ -49,52 +49,6 @@ exports.getOneStudent = async (req, res) => {
             }
         })
 
-        // const student_class_lessons = await db.lesson_class_student.findAndCountAll({
-        //     attributes: ['id', 'status', 'passed_by', 'passed_at'],
-        //     include: {
-        //         model: db.lesson_class,
-        //         attributes: [
-        //             'id', 'status', 'created_at', 'passed_by', 'passed_at'
-        //         ],
-        //         include: [
-        //             {
-        //                 model: db.classroom,
-        //                 attributes: ['id', 'code', 'room', 'name']
-        //             },
-        //             {
-        //                 model: db.eduyear,
-        //                 attributes: ['id', 'code', 'name']
-        //             },
-        //             {
-        //                 model: db.semester,
-        //                 attributes: ['id', 'code', 'name']
-        //             },
-        //             {
-        //                 model: db.lesson,
-        //                 attributes: ['id', 'code', 'name']
-        //             },
-        //             {
-        //                 model: db.teacher,
-        //                 attributes: ['id', 'nip', 'name']
-        //             },
-        //         ],
-        //     },
-        //     where: {
-        //         // student_id: student.id,
-        //         // [Op.and]: filterings,
-        //         // [Op.or]: [
-        //         //     { '$classroom.name$': { [Op.like]: '%' + search + '%' } },
-        //         //     { '$eduyear.name$': { [Op.like]: '%' + search + '%' } },
-        //         // ]
-        //     },
-        //     raw: true,
-        //     distinct: true,
-        //     offset: offset,
-        //     limit: limit,
-        //     order: [ordering]
-        //     // order: [[sequelize.literal('student.name'), 'ASC']]
-        // })
-
         const one_students = await db.student_class.findAll({
             raw: true,
             attributes: ['id', 'status', 'passed_by', 'passed_at'],
