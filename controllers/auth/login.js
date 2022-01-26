@@ -36,8 +36,10 @@ exports.login = async (req, res) => {
       return response.forbidden("Email/Username atau password salah", res);
     }
 
-    const referer = 'a'; //req.headers.referer
-    if ((user.user_type === 'teacher' || user.user_type === 'student') && referer === 'a') {
+    const referer = req.headers.referer
+    const dashboard_url = process.env.DASHBOARD_URL
+    // console.log(referer, dashboard_url, user.user_type, referer === dashboard_url)
+    if ((user.user_type === 'teacher' || user.user_type === 'student') && referer === dashboard_url) {
       return response.success("Anda tidak bisa akses dari Dashboard. Silakan ke Halaman https://sia.smpn33-sby.sch.id", res, { redirect: 'https://sia.smpn33-sby.sch.id' }, 301);
     }
 
