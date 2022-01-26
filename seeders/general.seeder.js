@@ -2,6 +2,7 @@ const db = require('../models');
 
 const generals = [
     { name: 'site name', value: 'smpn33-sby.sch.id' },
+    { name: 'tagline', value: 'Sekolah dengan visi misi masa depan mencetak generasi maju dan unggul, kompetitif dalam persaingan global. Mewujudkan cita-cita bangsa merdeka belajar, merdeka seutuhnya.' },
     { name: 'logo', value: '' },
     { name: 'phone', value: '031-3456789' },
     { name: 'email', value: 'smpn33@gmail.com' },

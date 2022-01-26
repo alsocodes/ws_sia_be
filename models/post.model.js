@@ -71,7 +71,7 @@ const Post = (sequelize, Sequelize) =>
             },
 
             agenda_date: {
-                type: Sequelize.DATE,
+                type: Sequelize.DATEONLY,
                 allowNull: true,
             },
 

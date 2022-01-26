@@ -12,7 +12,7 @@ const Menu = (sequelize, Sequelize) =>
             name: {
                 type: Sequelize.STRING,
                 allowNull: false,
-                unique: true,
+
             },
             parent_id: {
                 type: Sequelize.INTEGER,

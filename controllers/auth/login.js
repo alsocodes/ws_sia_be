@@ -13,7 +13,7 @@ exports.login = async (req, res) => {
 
     if (!email || !password) {
       return response.invalidInput(
-        "email/username, password cannot be empty",
+        "Email/Username atau password tidak boleh kosong",
         res
       );
     }
@@ -33,12 +33,17 @@ exports.login = async (req, res) => {
     });
 
     if (!user) {
-      return response.forbidden("Wrong Email/Username or password", res);
+      return response.forbidden("Email/Username atau password salah", res);
+    }
+
+    const referer = 'a'; //req.headers.referer
+    if ((user.user_type === 'teacher' || user.user_type === 'student') && referer === 'a') {
+      return response.success("Anda tidak bisa akses dari Dashboard. Silakan ke Halaman https://sia.smpn33-sby.sch.id", res, { redirect: 'https://sia.smpn33-sby.sch.id' }, 301);
     }
 
     const compare = await bcrypt.compare(password, user.password);
     if (!compare) {
-      return response.forbidden("Wrong username or password", res);
+      return response.forbidden("Email/Username atau password salah", res);
     }
 
     const raw_access = await db.role_access.findAll({

@@ -178,7 +178,6 @@ exports.get = async (req, res) => {
             result['articles'] = articles
         }
 
-
         return response.success("Get all generals success", res, result, 200);
     } catch (err) {
         console.log(err);
