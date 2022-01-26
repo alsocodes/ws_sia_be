@@ -3,6 +3,7 @@ const helper = require("../../../utils/helper");
 const response = require("../../../utils/response");
 const sequelize = require('../../../models').sequelize;
 const { Op, Sequelize } = require("sequelize");
+const bcrypt = require('bcrypt');
 
 exports.create = async (req, res) => {
     try {
@@ -60,7 +61,8 @@ exports.create = async (req, res) => {
             username: username,
             email: email,
             nip: nip,
-            nisn: nisn
+            nisn: nisn,
+            password: await bcrypt.hash('12345678', 10),
         })
 
         return response.success("Menambahkan user berhasil", res, { id: user.id }, 201);
