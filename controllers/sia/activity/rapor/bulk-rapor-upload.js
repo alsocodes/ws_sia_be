@@ -35,71 +35,89 @@ const fileFilter = (req, file, cb) => {
 }
 
 exports.bulkRaporUpload = async (req, res) => {
-    // const t = await sequelize.transaction();
-    try {
-        let upload = multer({ storage: storage(), fileFilter: fileFilter, limits: { fileSize: 5000000, }, }).single("file")
-        upload(req, res, async (err) => {
-            if (err) {
-                return response.invalidInput(err.message, res)
-            }
-
+    let upload = multer({ storage: storage(), fileFilter: fileFilter, limits: { fileSize: 5000000, }, }).single("file")
+    upload(req, res, async (err) => {
+        if (err) {
+            return response.invalidInput(err.message, res)
+        }
+        try {
             if (req.file) {
                 const rapor = await helper.unZip(dir_temp + '/' + req.file.filename, dir_rapor)
-                if (rapor.success === false) return;
+                if (rapor.success === false) return response.error("Upload gagal", res)
 
-                // await Promise.all(rapor?.files?.map(async (item) => {
-                const file_split = rapor.files[0].name.replace(".pdf", "").split("_")
-                const nis = file_split[0]
-                const eduyear_code = file_split[1]
-                const semester_id = file_split[2]
-                const classroom = file_split[3].toUpperCase()
+                await Promise.all(rapor?.files?.map(async (item) => {
+                    const filename = item.name;
+                    const file_split = filename.replace(".pdf", "").split("_")
+                    const nis = file_split[0]
+                    const eduyear_code = file_split[1]
+                    const semester_id = parseInt(file_split[2])
+                    const classroom = file_split[3].toUpperCase()
+                    
+                    const student = await db.student.findOne({ where: { nis: nis } })
+                    if(!student){
+                        const error = new Error("Nis/Siswa tidak valid")
+                        error.code = 400
+                        throw error
+                    }
+                    const eduyear = await db.eduyear.findOne({ where: { code: eduyear_code } })
+                    if(!eduyear) {
+                        const error = new Error("Tahun ajaran tidak valid")
+                        error.code = 400
+                        throw error
+                    }
 
-
-                const student = await db.student.findOne({ where: { nis: nis } })
-                const eduyear = await db.eduyear.findOne({ where: { code: eduyear_code } })
-                const student_class = await db.student_class.findOne({
-                    include: {
-                        model: db.classroom,
-                        attributes: ['code', 'name', 'room'],
+                    const student_class = await db.student_class.findOne({
+                        include: {
+                            model: db.classroom,
+                            attributes: ['code', 'name', 'room'],
+                            where: {
+                                code: classroom
+                            }
+                        },
                         where: {
-                            code: classroom
+                            eduyear_id: eduyear.id,
+                            student_id: student.id,
+                            status: 'active'
                         }
-                    },
-                    where: {
-                        eduyear_id: eduyear.id,
-                        student_id: student.id
+                    })
+                    const rapor_siswa = await db.student_class_rapor.findOne({
+                        attributes: [
+                            'id', 'file'
+                        ],
+                        include: {
+                            model: db.student_class,
+                        },
+                        where: {
+                            semester_id: semester_id,
+                            student_class_id: student_class.id
+                        }
+                    })
+    
+                    if(!rapor_siswa){
+                        await db.student_class_rapor.create({
+                            student_class_id: student_class.id,
+                            semester_id: semester_id,
+                            file: filename,
+                            created_by: req.user.id,
+                            updated_by: req.user.id,
+                        })
+                    }else{
+                        rapor_siswa.file = filename
+                        rapor_siswa.updated_by = req.user.id
+                        await rapor_siswa.save()
                     }
-                })
-                const rapor_siswa = await db.student_class_rapor.findOne({
-                    attributes: [
-                        'id', 'file'
-                    ],
-                    include: {
-                        model: db.student_class,
-                    },
-                    where: {
-                        semester_id: semester_id
-                    }
-                })
+                    
+                }))
 
-                // if(!rapor_siswa){
-                //     await db.student_class_rapor.create({
-
-                //     })
-                // }
-                return response.success("Upload berhasil", res, { student_class, classroom, file_split, rapor })
-
-                // }))
-
+                if (fs.existsSync(dir_temp + '/' + req.file.filename)) fs.unlinkSync(dir_temp + '/' + req.file.filename)
+                return response.success("Upload berhasil", res, {})
             }
-            return response.error("Error", res)
-        })
+        } catch (error) {
+            if (fs.existsSync(dir_temp + '/' + req.file.filename)) fs.unlinkSync(dir_temp + '/' + req.file.filename)
+            return response.error(error.message || "Failed import", res);
+        }
 
-    } catch (error) {
-        console.log(err);
-        // await t.rollback()
-        return response.error(err.message || "Failed import", res);
-    }
+    })
 };
 
 const writeCsv = async (data) => {

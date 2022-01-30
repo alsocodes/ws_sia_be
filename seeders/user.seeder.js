@@ -5,19 +5,19 @@ const role_accesses = [
     {
         role: 'superadmin',
         accesses: [
-            'dashboard', 'manage-content', 'publish-content', 'edit-content-others', 'delete-content-others', 'add-content', 'edit-content', 'delete-content', 'general-setting', 'menu-setting', 'add-menu', 'edit-menu', 'delete-menu', 'sia-dashboard', 'sia-master', 'add-sia-master', 'edit-sia-master', 'delete-sia-master', 'sia-activity', 'sia-student-class-activity', 'sia-lesson-class-acivity', 'sia-lesson-class-student-activity', 'add-sia-lesson-class-student-activity', 'master-user', 'add-master-user', 'edit-master-user', 'delete-master-user', 'edit-master-user-others', 'delete-master-user-others', 'master-role', 'add-master-role', 'edit-master-role', 'delete-master-role'
+            'dashboard', 'manage-content', 'publish-content', 'edit-content-others', 'delete-content-others', 'add-content', 'edit-content', 'delete-content', 'general-setting', 'menu-setting', 'add-menu', 'edit-menu', 'delete-menu', 'sia-dashboard', 'sia-master', 'add-sia-master', 'edit-sia-master', 'delete-sia-master', 'sia-activity', 'sia-student-class-activity', 'sia-lesson-class-acivity', 'sia-lesson-class-student-activity', 'add-sia-lesson-class-student-activity', 'master-user', 'add-master-user', 'edit-master-user', 'delete-master-user', 'edit-master-user-others', 'delete-master-user-others', 'master-role', 'add-master-role', 'edit-master-role', 'delete-master-role', 'sia-rapor', 'sia-manage-rapor', 'manage-profile', 'change-password'
         ]
     },
     {
         role: 'teacher',
         accesses: [
-            'sia-activity', 'sia-dashboard', 'sia-teacher-class-lesson-activity'
+            'sia-activity', 'sia-dashboard', 'sia-teacher-class-lesson-activity', 'sia-rapor', 'manage-profile', 'change-password'
         ]
     },
     {
         role: 'student',
         accesses: [
-            'sia-activity', 'sia-dashboard', 'sia-student-class-lesson-activity', 'sia-one-student-class-lesson-activity'
+            'sia-activity', 'sia-dashboard', 'sia-student-class-lesson-activity', 'sia-one-student-class-lesson-activity', 'sia-rapor', 'manage-profile', 'change-password'
         ]
     }
 ]
@@ -63,6 +63,8 @@ const accesses = [
             { value: 'sia-teacher-class-lesson-activity', label: 'Teacher Class Lesson' },
             { value: 'sia-student-class-lesson-activity', label: 'Student Class Lesson' },
             { value: 'sia-one-student-class-lesson-activity', label: 'One Student Class Lesson' },
+            { value: 'sia-rapor', label: 'SIA Rapor' },
+            { value: 'sia-manage-rapor', label: 'SIA Manage Rapor' },
         ]
     },
     {
@@ -82,6 +84,12 @@ const accesses = [
             { value: 'edit-master-role', label: 'Edit Master Role' },
             { value: 'delete-master-role', label: 'Delete Master Role' },
         ]
+    },
+    {
+        value: 'manage-profile', label: 'Manage Profile',
+    },
+    {
+        value: 'change-password', label: 'Change Password',
     }
 ]
 

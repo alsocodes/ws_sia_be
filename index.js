@@ -30,9 +30,11 @@ app.use(express.urlencoded({ extended: true }));
 const GALLERY_DIR = '/public/images'
 const ATTACHMENT_DIR = '/public/attachments'
 const TEMP_DIR = '/public/temp'
+const RAPOR_DIR = '/public/rapor'
 app.use(GALLERY_DIR, express.static(path.join(__dirname, GALLERY_DIR)));
 app.use(TEMP_DIR, express.static(path.join(__dirname, TEMP_DIR)));
 app.use(ATTACHMENT_DIR, express.static(path.join(__dirname, ATTACHMENT_DIR)));
+app.use(RAPOR_DIR, express.static(path.join(__dirname, RAPOR_DIR)));
 
 // db.sequelize.sync({ force: false })
 if (process.env.RESEED == 1) {
