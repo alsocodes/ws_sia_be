@@ -23,5 +23,6 @@ routes.student_class_lesson_activity = require('./sia-activity/student-class-les
 routes.download = require('./download.route');
 routes.siadashboard = require('./sia-dashboard.route');
 routes.account = require('./account.route');
+routes.rapor = require('./sia-activity/rapor.route');
 
 module.exports = routes;

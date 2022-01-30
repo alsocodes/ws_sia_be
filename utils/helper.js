@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const response = require('./response.js');
+const AdmZip = require("adm-zip");
+const path = require("path");
 
 const hashPassword = async (res, password) => {
   if (password == null) {
@@ -65,6 +67,33 @@ const slugify = (str) => {
   return str;
 }
 
+const unZip = async (filepath, destination = null) => {
+  try {
+    const zip = new AdmZip(filepath);
+    const outputDir = destination || `${path.parse(filepath).name}_extracted`;
+    zip.extractAllTo(outputDir);
+
+    let files = []
+    for (const zipEntry of zip.getEntries()) {
+      files.push(zipEntry)
+    }
+
+    return {
+      success: true,
+      files: files
+    }
+    // console.log(`Extracted to "${outputDir}" successfully`);
+  } catch (e) {
+    // console.log(`Something went wrong. ${e}`);
+    return {
+      success: false,
+      message: e.message
+    }
+  }
+
+}
+
+
 const baseUrl = process.env.BASE_URL_API
 const imageUrl = process.env.IMAGE_URL
 const tempUrl = process.env.TEMP_URL
@@ -81,5 +110,6 @@ module.exports = {
   validateEmail,
   checkPassword,
   formatCurrency,
-  slugify
+  slugify,
+  unZip
 };

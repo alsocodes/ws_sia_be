@@ -90,6 +90,7 @@ routes.lesson_class_activity(app);
 routes.lesson_class_student_activity(app);
 routes.teacher_class_lesson_activity(app);
 routes.student_class_lesson_activity(app);
+routes.rapor(app);
 
 routes.usermaster(app);
 routes.rolemaster(app);

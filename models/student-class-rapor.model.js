@@ -1,6 +1,6 @@
-const StudentClass = (sequelize, Sequelize) =>
+const StudentClassRapor = (sequelize, Sequelize) =>
     sequelize.define(
-        'student_classes',
+        'student_class_rapors',
         {
             id: {
                 type: Sequelize.INTEGER,
@@ -8,35 +8,21 @@ const StudentClass = (sequelize, Sequelize) =>
                 autoIncrement: true,
                 allowNull: false,
             },
-            classroom_id: {
+            student_class_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            eduyear_id: {
+
+            semester_id: {
                 type: Sequelize.INTEGER,
                 allowNull: false
             },
-            student_id: {
-                type: Sequelize.INTEGER,
+
+            file: {
+                type: Sequelize.STRING,
                 allowNull: false
             },
-            status: {
-                type: Sequelize.ENUM('active', 'passed', 'repeat'),
-                allowNull: false,
-                defaultValue: 'active'
-            },
-            passed_at: {
-                type: Sequelize.DATE
-            },
-            passed_by: {
-                type: Sequelize.INTEGER,
-            },
-            repeat_at: {
-                type: Sequelize.DATE
-            },
-            repeat_by: {
-                type: Sequelize.INTEGER,
-            },
+
             created_by: {
                 type: Sequelize.INTEGER,
                 allowNull: false
@@ -51,4 +37,4 @@ const StudentClass = (sequelize, Sequelize) =>
         },
     )
 
-module.exports = StudentClass
+module.exports = StudentClassRapor

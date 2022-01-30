@@ -7,5 +7,6 @@ module.exports = (app) => {
     app.put("/master/user/:id", authAccessToken, user.update);
     app.delete("/master/user/:id", authAccessToken, user.del);
     app.get("/master/user/:id", authAccessToken, user.getOne);
+    app.patch("/master/user-reset-password/:id", authAccessToken, user.resetPassword);
     // app.post("/master/user-import", authAccessToken, user.importData);
 };
