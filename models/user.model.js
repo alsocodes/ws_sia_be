@@ -32,6 +32,9 @@ const User = (sequelize, Sequelize) =>
             },
             current_login: {
                 type: Sequelize.DATE
+            },
+            photo: {
+                type: Sequelize.STRING,
             }
         }
     )

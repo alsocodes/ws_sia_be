@@ -7,7 +7,7 @@ const multer = require('multer');
 const sharp = require('sharp');
 const path = require('path');
 const dir_temp = path.join(__dirname, "../../../../public/temp/")
-const dir_rapor = path.join(__dirname, "../../../../public/rapor/")
+const dir_rapor = path.join(__dirname, "../../../../public/attachments/")
 const csv = require('fast-csv');
 const { Op, Sequelize } = require("sequelize");
 const bcrypt = require('bcrypt');
@@ -52,15 +52,15 @@ exports.bulkRaporUpload = async (req, res) => {
                     const eduyear_code = file_split[1]
                     const semester_id = parseInt(file_split[2])
                     const classroom = file_split[3].toUpperCase()
-                    
+
                     const student = await db.student.findOne({ where: { nis: nis } })
-                    if(!student){
+                    if (!student) {
                         const error = new Error("Nis/Siswa tidak valid")
                         error.code = 400
                         throw error
                     }
                     const eduyear = await db.eduyear.findOne({ where: { code: eduyear_code } })
-                    if(!eduyear) {
+                    if (!eduyear) {
                         const error = new Error("Tahun ajaran tidak valid")
                         error.code = 400
                         throw error
@@ -92,8 +92,8 @@ exports.bulkRaporUpload = async (req, res) => {
                             student_class_id: student_class.id
                         }
                     })
-    
-                    if(!rapor_siswa){
+
+                    if (!rapor_siswa) {
                         await db.student_class_rapor.create({
                             student_class_id: student_class.id,
                             semester_id: semester_id,
@@ -101,12 +101,12 @@ exports.bulkRaporUpload = async (req, res) => {
                             created_by: req.user.id,
                             updated_by: req.user.id,
                         })
-                    }else{
+                    } else {
                         rapor_siswa.file = filename
                         rapor_siswa.updated_by = req.user.id
                         await rapor_siswa.save()
                     }
-                    
+
                 }))
 
                 if (fs.existsSync(dir_temp + '/' + req.file.filename)) fs.unlinkSync(dir_temp + '/' + req.file.filename)

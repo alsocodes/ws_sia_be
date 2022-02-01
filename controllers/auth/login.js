@@ -101,7 +101,8 @@ exports.login = async (req, res) => {
         role: user.role,
         user_type: user.user_type,
         role_access: role_access,
-        last_login: last_login
+        last_login: last_login,
+        photo: user.photo ? `${process.env.IMAGE_URL}100-${user.photo}` : null
       },
     }, 200);
   } catch (err) {

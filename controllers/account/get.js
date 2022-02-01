@@ -3,6 +3,7 @@ const helper = require("../../utils/helper");
 const response = require("../../utils/response");
 const sequelize = require('../../models').sequelize;
 const { Op, Sequelize } = require("sequelize");
+const path = require('path');
 
 exports.get = async (req, res) => {
     try {
@@ -13,6 +14,7 @@ exports.get = async (req, res) => {
             name: user.name,
             username: user.username,
             email: user.email,
+            photo: user.photo ? `${process.env.IMAGE_URL}${user.photo}` : null
         }
         if (user.user_type === 'teacher') {
             const teacher = await db.teacher.findOne({
