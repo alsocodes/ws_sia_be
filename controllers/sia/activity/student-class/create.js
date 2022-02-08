@@ -40,6 +40,7 @@ exports.create = async (req, res) => {
                 },
                 where: { id: student_id }
             })
+            // return response.success('aaaa', res, student)
             if (!id) { // create new
                 let check = await db.student_class.findOne({
                     where: {
@@ -53,9 +54,21 @@ exports.create = async (req, res) => {
                     flag = 400
                     throw new Error(`${student.name} sudah/sedang mengikuti kelas tahun ajaran ${eduyear.name}`)
                 }
-                // return response.invalidInput(, res)
-                if (classroom.code === 'VIII' || classroom.code === 'IX') {
-                    let has_class = student.student_classes.filter(item => item.classroom.code === classroom.code && item.classroom.status === 'passed')
+
+
+                // 20220208 dipisah kelas VIII dan IX
+                // if (classroom.code === 'VIII' || classroom.code === 'IX') {
+                //     let has_class = student.student_classes.filter(item => item.classroom.code === classroom.code && item.classroom.status === 'passed')
+                //     if (has_class.length === 0) return response.invalidInput(`${student.name} tidak bisa mengikuti kelas ${classroom.code} karena belum lulus kelas sebelumnya`, res)
+                // }
+
+                if (classroom.code === 'VIII') {
+                    let has_class = student.student_classes.filter(item => item.classroom.code === 'VII' && item.status === 'passed')
+                    if (has_class.length === 0) return response.invalidInput(`${student.name} tidak bisa mengikuti kelas ${classroom.code} karena belum lulus kelas sebelumnya`, res)
+                }
+
+                if (classroom.code === 'IX') {
+                    let has_class = student.student_classes.filter(item => item.classroom.code === 'VIII' && item.status === 'passed')
                     if (has_class.length === 0) return response.invalidInput(`${student.name} tidak bisa mengikuti kelas ${classroom.code} karena belum lulus kelas sebelumnya`, res)
                 }
 

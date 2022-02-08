@@ -5,5 +5,6 @@ const { getOpt } = require("./opt");
 const { del } = require("./delete");
 // const { getOne } = require("./get-one");
 const { getClassYear } = require("./get-class-year");
+const { updateStatus } = require("./update-status");
 
-module.exports = { get, create, getOpt, del, getClassYear };
+module.exports = { get, create, getOpt, del, getClassYear, updateStatus };

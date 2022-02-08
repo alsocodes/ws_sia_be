@@ -8,9 +8,9 @@ exports.getOpt = async (req, res) => {
     // const t = await sequelize.transaction();
     try {
 
-        const eduyears = await db.eduyear.findOne({
+        const eduyears = await db.eduyear.findAll({
             attributes: ['id', 'code', 'name', 'status'],
-            where: { status: 'active' }
+            // where: { status: 'active' }
         })
 
         const classrooms = await db.classroom.findAll({

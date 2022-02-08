@@ -39,11 +39,17 @@ exports.getClassYear = async (req, res) => {
                         'id', 'user_id', 'nis', 'nisn', 'name'
                     ]
                 },
+                {
+                    model: db.student_class_rapor,
+                    attributes: ['semester_id', 'file'],
+                    where: { file: { [Op.ne]: null } },
+                    required: false
+                }
             ],
             where: {
                 [Op.and]: [{ classroom_id: classroom_id }, { eduyear_id: eduyear_id }],
             },
-            raw: true
+            // raw: true
         })
 
         const classroom = await db.classroom.findOne({ where: { id: classroom_id } })
