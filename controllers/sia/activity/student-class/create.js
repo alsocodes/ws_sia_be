@@ -27,6 +27,7 @@ exports.create = async (req, res) => {
             const {
                 id, student_id, is_delete
             } = item
+            console.log(item)
 
             const student = await db.student.findOne({
                 attributes: ['id', 'name'],

@@ -68,6 +68,7 @@ db.sia_menu = require('./sia-menu.model')(sequelize, Sequelize);
 db.sia_menu_action = require('./sia-menu-action.model')(sequelize, Sequelize);
 db.role_menu_action = require('./role-menu-action.model')(sequelize, Sequelize);
 db.student_class_rapor = require('./student-class-rapor.model')(sequelize, Sequelize);
+db.graduation = require('./graduation.model')(sequelize, Sequelize);
 
 db.access = require('./access.model')(sequelize, Sequelize);
 db.role_access = require('./role-access.model')(sequelize, Sequelize);
@@ -126,6 +127,11 @@ db.student_class.hasMany(db.student_class_rapor, { foreignKey: 'student_class_id
 db.student_class_rapor.belongsTo(db.student_class, { foreignKey: 'student_class_id' })
 db.student_class_rapor.belongsTo(db.semester, { foreignKey: 'semester_id' })
 
+db.student.hasOne(db.graduation, { foreignKey: 'student_id' })
+db.graduation.belongsTo(db.student, { foreignKey: 'student_id' })
+
+db.graduation.belongsTo(db.eduyear, { foreignKey: 'eduyear_id' })
+db.eduyear.hasMany(db.graduation, { foreignKey: 'eduyear_id' })
 
 db.role.hasMany(db.sia_menu_action, { foreignKey: 'role_id' })
 db.sia_menu_action.belongsTo(db.role, { foreignKey: 'role_id' })

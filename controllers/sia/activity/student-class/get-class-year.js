@@ -58,6 +58,8 @@ exports.getClassYear = async (req, res) => {
         let where_class = {}
         let req_student_class = false
         let req_class = false
+
+        // const eduyear = await db.eduyear.findOne({where: {id: eduyear_id}})
         let where_where = {}
         if (classroom.code === 'VII') {
             where_where = {
@@ -94,10 +96,17 @@ exports.getClassYear = async (req, res) => {
                 {
                     model: db.student_class,
                     attributes: ['id', 'status'],
-                    include: {
-                        model: db.classroom,
-                        attributes: ['id', 'code'],
-                    }
+                    include: [
+                        {
+                            model: db.classroom,
+                            attributes: ['id', 'code'],
+                        },
+                        {
+                            model: db.eduyear,
+                            attributes: ['id', 'code'],
+                            where: { id: { [Op.ne]: eduyear_id } }
+                        },
+                    ]
                 }
             ],
             where: where_where

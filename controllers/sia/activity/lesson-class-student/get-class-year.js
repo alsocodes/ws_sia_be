@@ -45,11 +45,9 @@ exports.getClassYear = async (req, res) => {
                 attributes: ['id', 'nisn', 'nis', 'name']
             },
             where: {
-                [Op.and]: [
-                    { status: 'active' },
-                    { classroom_id: lesson_class.classroom_id },
-                    { eduyear_id: lesson_class.eduyear_id }
-                ]
+                status: 'active',
+                classroom_id: lesson_class.classroom_id,
+                eduyear_id: lesson_class.eduyear_id
             }
         })
 

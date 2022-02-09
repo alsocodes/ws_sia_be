@@ -34,7 +34,7 @@ const fileFilter = (req, file, cb) => {
     cb(null, true);
 }
 
-exports.bulkRaporUpload = async (req, res) => {
+exports.bulkGraduationUpload = async (req, res) => {
     let upload = multer({ storage: storage(), fileFilter: fileFilter, limits: { fileSize: 5000000, }, }).single("file")
     upload(req, res, async (err) => {
         if (err) {
@@ -59,10 +59,7 @@ exports.bulkRaporUpload = async (req, res) => {
                         error.code = 400
                         throw error
                     }
-                    const eduyear = await db.eduyear.findOne({
-                        // attributes: ['id', 'code', 'name', 'status', 'created_at', 'deleted_at'],
-                        where: { code: eduyear_code }
-                    })
+                    const eduyear = await db.eduyear.findOne({ where: { code: eduyear_code } })
                     if (!eduyear) {
                         const error = new Error("Tahun ajaran tidak valid")
                         error.code = 400

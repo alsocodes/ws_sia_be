@@ -24,5 +24,6 @@ routes.download = require('./download.route');
 routes.siadashboard = require('./sia-dashboard.route');
 routes.account = require('./account.route');
 routes.rapor = require('./sia-activity/rapor.route');
+routes.graduation = require('./sia-activity/graduation.route');
 
 module.exports = routes;

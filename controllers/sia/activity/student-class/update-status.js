@@ -10,10 +10,15 @@ exports.updateStatus = async (req, res) => {
     try {
 
         const {
+            classroom_id,
             students
         } = req.body
 
         const user = req.user
+
+        let classroom = null
+        if (classroom_id) classroom = await db.classroom.findOne({ where: { id: classroom_id } })
+        const eduyear = await db.eduyear.findOne({ where: { status: 'active' } })
 
         await Promise.all(students.map(async (item) => {
             const {
@@ -30,6 +35,21 @@ exports.updateStatus = async (req, res) => {
             if (status === 'passed') {
                 student_class.passed_by = user.id
                 student_class.passed_at = Sequelize.literal('CURRENT_TIMESTAMP')
+                if (classroom) {
+                    if (eduyear.id === student_class.eduyear_id) {
+                        const err = new Error("Tahun ajaran baru belum diatur", res)
+                        err.code = 400
+                        throw err
+                    }
+
+                    await db.student_class.create({
+                        classroom_id: classroom.id,
+                        eduyear_id: eduyear.id,
+                        student_id: student_id,
+                        created_by: user.id,
+                        updated_by: user.id,
+                    }, { transaction: t })
+                }
             }
 
             if (status === 'repeat') {
