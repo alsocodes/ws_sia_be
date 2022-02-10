@@ -45,20 +45,15 @@ exports.bulkGraduationUpload = async (req, res) => {
                 const rapor = await helper.unZip(dir_temp + '/' + req.file.filename, dir_rapor)
                 if (rapor.success === false) return response.error("Upload gagal", res)
 
+                // const classroom = await db.classroom.findOne({where: {code : 'IX'}})
                 await Promise.all(rapor?.files?.map(async (item) => {
                     const filename = item.name;
                     const file_split = filename.replace(".pdf", "").split("_")
                     const nis = file_split[0]
                     const eduyear_code = file_split[1]
-                    const semester_id = parseInt(file_split[2])
-                    const classroom = file_split[3].toUpperCase()
+                    const score = file_split[2]
+                    console.log(score)
 
-                    const student = await db.student.findOne({ where: { nis: nis } })
-                    if (!student) {
-                        const error = new Error("Nis/Siswa tidak valid")
-                        error.code = 400
-                        throw error
-                    }
                     const eduyear = await db.eduyear.findOne({ where: { code: eduyear_code } })
                     if (!eduyear) {
                         const error = new Error("Tahun ajaran tidak valid")
@@ -66,45 +61,54 @@ exports.bulkGraduationUpload = async (req, res) => {
                         throw error
                     }
 
-                    const student_class = await db.student_class.findOne({
-                        include: {
-                            model: db.classroom,
-                            attributes: ['code', 'name', 'room'],
-                            where: {
-                                code: classroom
+                    const student = await db.student.findOne({
+                        attributes: ['id', 'name', 'nisn', 'nis'],
+                        required: true,
+                        include: [
+                            {
+                                attributes: ['id', 'classroom_id', 'eduyear_id'],
+                                model: db.student_class,
+                                where: {
+                                    status: 'passed',
+                                    eduyear_id: eduyear.id
+                                },
+                                include: {
+                                    model: db.classroom,
+                                    attributes: ['id', 'code', 'name'],
+
+                                },
                             }
-                        },
-                        where: {
-                            eduyear_id: eduyear.id,
-                            student_id: student.id,
-                            status: 'active'
-                        }
-                    })
-                    const rapor_siswa = await db.student_class_rapor.findOne({
-                        attributes: [
-                            'id', 'file'
                         ],
-                        include: {
-                            model: db.student_class,
-                        },
                         where: {
-                            semester_id: semester_id,
-                            student_class_id: student_class.id
+                            nis: nis
                         }
                     })
 
-                    if (!rapor_siswa) {
-                        await db.student_class_rapor.create({
-                            student_class_id: student_class.id,
-                            semester_id: semester_id,
+                    // return response.success('xx', res, student, 200)
+
+                    if (!student || student?.student_classes?.length !== 1 || student?.student_classes?.[0]?.classroom?.code !== 'IX') {
+                        // console.log(!student, !student?.student_classes?.length !== 1, !student?.student_classes?.length, student?.student_classes?.[0]?.classroom?.code !== 'IX')
+                        const error = new Error("Nis/Siswa tidak valid")
+                        error.code = 400
+                        throw error
+                    }
+
+                    const graduation = await db.graduation.findOne({ where: { student_id: student.id } })
+
+                    if (!graduation) {
+                        await db.graduation.create({
+                            student_id: student.id,
+                            eduyear_id: eduyear.id,
                             file: filename,
+                            final_score: score,
                             created_by: req.user.id,
                             updated_by: req.user.id,
                         })
                     } else {
-                        rapor_siswa.file = filename
-                        rapor_siswa.updated_by = req.user.id
-                        await rapor_siswa.save()
+                        graduation.file = filename
+                        graduation.final_score = score
+                        graduation.updated_by = req.user.id
+                        await graduation.save()
                     }
 
                 }))

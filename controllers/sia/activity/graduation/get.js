@@ -65,7 +65,12 @@ exports.get = async (req, res) => {
                 },
                 {
                     model: db.graduation,
-                    attributes: ['id', 'file', 'final_score', 'created_at']
+                    attributes: [
+                        'id',
+                        'file',
+                        [Sequelize.fn('concat', helper.attachmentUrl, Sequelize.col('file')), 'file_url'],
+                        'final_score', 'created_at'
+                    ]
                 }
             ],
             where: where_student

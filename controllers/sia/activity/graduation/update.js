@@ -35,45 +35,68 @@ exports.update = async (req, res) => {
     upload(req, res, async (err) => {
 
         try {
+            if (err) throw err;
             if (req.file) {
-                const {
-                    id,
-                    student_id,
-                    semester_id,
-                    classroom_id,
-                    eduyear_id
-                } = req.body
 
-                const student = await db.student.findOne({ where: { id: student_id } })
-                const classroom = await db.classroom.findOne({ where: { id: classroom_id } })
+                const {
+                    student_id,
+                    eduyear_id,
+                    final_score
+                } = req.body
                 const eduyear = await db.eduyear.findOne({ where: { id: eduyear_id } })
-                const student_class = await db.student_class.findOne({
+                const student = await db.student.findOne({
+                    attributes: ['id', 'name', 'nisn', 'nis'],
+                    required: true,
+                    include: [
+                        {
+                            attributes: ['id', 'classroom_id', 'eduyear_id'],
+                            model: db.student_class,
+                            where: {
+                                status: 'passed',
+                                eduyear_id: eduyear.id
+                            },
+                            include: {
+                                model: db.classroom,
+                                attributes: ['id', 'code', 'name'],
+
+                            },
+                        }
+                    ],
                     where: {
-                        classroom_id: classroom.id,
-                        eduyear_id: eduyear.id,
-                        student_id: student.id
+                        id: student_id
                     }
                 })
 
-                const old_file = dir_rapor + req.file.filename
-                const new_file = `${student.nis}_${eduyear.code}_${semester_id}_${classroom.code.toLowerCase()}.pdf`
-
-                fs.renameSync(old_file, dir_rapor + new_file)
-                if (parseInt(id) === 0) {
-                    await db.student_class_rapor.create({
-                        student_class_id: student_class.id,
-                        semester_id: semester_id,
-                        file: new_file,
-                        created_by: req.user.id,
-                        updated_by: req.user.id
-                    })
-                } else {
-                    const rapor = await db.student_class_rapor.findOne({ where: { id: id } })
-                    rapor.file = new_file;
-                    await rapor.save()
+                if (!student || student?.student_classes?.length !== 1 || student?.student_classes?.[0]?.classroom?.code !== 'IX') {
+                    // console.log(!student, !student?.student_classes?.length !== 1, !student?.student_classes?.length, student?.student_classes?.[0]?.classroom?.code !== 'IX')
+                    const error = new Error("Nis/Siswa tidak valid")
+                    error.code = 400
+                    throw error
                 }
 
+                const old_file = dir_rapor + req.file.filename
+                const new_file = `${student.nis}_${eduyear.code}_${final_score}.pdf`
 
+                fs.renameSync(old_file, dir_rapor + new_file)
+
+
+                const graduation = await db.graduation.findOne({ where: { student_id: student.id } })
+
+                if (!graduation) {
+                    await db.graduation.create({
+                        student_id: student.id,
+                        eduyear_id: eduyear.id,
+                        file: new_file,
+                        final_score: final_score,
+                        created_by: req.user.id,
+                        updated_by: req.user.id,
+                    })
+                } else {
+                    graduation.file = new_file
+                    graduation.final_score = final_score
+                    graduation.updated_by = req.user.id
+                    await graduation.save()
+                }
             }
 
 
