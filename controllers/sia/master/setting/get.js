@@ -15,7 +15,7 @@ exports.get = async (req, res) => {
         const eduyears = await db.eduyear.findAll({
             attributes: ['id', 'code', 'name', 'status'],
             where: {
-                code: { [Op.gte]: year }
+                // code: { [Op.gte]: year }
             }
         })
 
